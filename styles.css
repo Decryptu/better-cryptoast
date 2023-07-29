@@ -48,6 +48,8 @@
     }
 }
 
+@media (min-width: 768px) {
+
 /* home-start */
 
 body{
@@ -400,6 +402,7 @@ div.main-content section a.see-all.blue{
 
 .last-news-card img.last-news-card-img{
     border-radius: 0.5rem 0.5rem 0 0!important;
+    object-fit: cover!important;
 }
 
 .last-news-card .last-news-card-img-ctn{
@@ -1337,3 +1340,5 @@ div.cryptos-grid .cryptos-card-img{
 }
 
 /* event-end */
+
+}
