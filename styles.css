@@ -27,8 +27,24 @@
         gap: 16px!important;
     }
 
-    .d-flex.flex-column{
+    .good-deals-grid-item.d-flex.flex-column.flex-md-row .d-flex.flex-column{
         max-width: 50%!important;
+    }
+
+    .good-deals-grid-item.d-flex.flex-column.flex-md-row .d-flex.flex-column{
+        max-width: 50%!important;
+    }
+
+    .grid-item.one.card-shadow.event_npr.lazy{
+        border-radius: 0.5rem!important;
+    }
+
+    .event_card.last-news-card.card-shadow.bitcoin > .position-relative.last-news-card-img-ctn > .last-news-card-category{
+        display: none!important;
+    }
+
+    img.last-news-card-img.lazy.loaded{
+        width: -webkit-fill-available!important;
     }
 }
 
@@ -1159,14 +1175,14 @@ div.cryptos-grid .cryptos-card-img{
 
 [data-theme="light"] .job-card{
     background-color: #FAFAFA!important;
-    border: 0.75px solid #EAEAEA;
+    border: 0.75px solid #EAEAEA!important;
     transition: all 0.3s ease-in-out!important;
     border-radius: 0.5rem!important;
 }
 
 [data-theme="dark"] .job-card{
     background-color: #111111!important;
-    border: 0.5px solid #333333;
+    border: 0.5px solid #333333!important;
     transition: all 0.3s ease-in-out!important;
     border-radius: 0.5rem!important;
 }
@@ -1184,3 +1200,140 @@ div.cryptos-grid .cryptos-card-img{
 }
 
 /* emploi-end */
+/* event-start */
+
+.add_event span{
+    font-weight: 400!important;
+}
+
+.event_npr_top, .event_npr_bot{
+    background: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 0.9) 100%)!important;
+    margin-right: 50vw!important;
+}
+
+.event_npr_top{
+    border-radius: 0.5rem 0.5rem 0 0!important;
+    height: -webkit-fill-available!important;
+}
+
+.event_npr_bot{
+    border-radius: 0 0 0.5rem 0.5rem!important;
+    max-height: 4rem!important;
+    padding: 1rem 1.5rem!important;
+}
+
+.event_npr_date{
+    position: absolute!important;
+    right: 2rem!important;
+    background-color: rgb(255 255 255 / 25%)!important;
+    border-radius: 0.5rem!important;
+    transition: all 0.5s ease-in-out!important;
+}
+
+.grid-item.one.card-shadow.event_npr.lazy:hover {
+    transform: none!important;
+}
+
+.event-card .description{
+    font-weight: 300!important;
+}
+
+.event_txt_bot{
+    justify-content: space-between!important;
+}
+
+.page-section.last-news > .mb-3{
+    display: none!important;
+}
+
+.main-content.home.event_single.mt-5 > .breadcrumb-desktop.cut-text{
+    display: none!important;
+}
+
+.date-and-read-time p{
+    font-weight: 400!important;
+}
+
+.event_btn_clair span{
+    font-weight: 400!important;
+}
+
+.event_description{
+    font-weight: 300!important;
+    padding: 0!important;
+}
+
+[data-theme="light"] .event_inf_col{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA!important;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .event_inf_col{
+    background-color: #111111!important;
+    border: 0.5px solid #333333!important;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+.event_inf_col .haut .infos{
+    font-weight: 600!important;
+}
+
+.list_prix{
+    font-weight: 300!important;
+    margin-bottom: 1rem!important;
+}
+
+.list_prix strong{
+    width: -webkit-fill-available!important;
+}
+
+[data-theme="light"] .event_prog_inter.grid.grid-cols-2.align-items-center.crypto-infos-main-name.mt-4.gap-4 > div{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA!important;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .event_prog_inter.grid.grid-cols-2.align-items-center.crypto-infos-main-name.mt-4.gap-4 > div{
+    background-color: #111111!important;
+    border: 0.5px solid #333333!important;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+.event_inf_bas {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    color: #333;
+    font-weight: 400;
+    margin: 20px 0;
+    text-align: justify;
+    font-weight: 300!important;
+}
+
+.event_inf_bas br {
+    content: " ";
+    margin-bottom: 15px;
+    display: block;
+    line-height: 15px;
+}
+
+[data-theme="light"] .event_inf_bas br{
+    border-bottom: 1px solid #EAEAEA!important;
+}
+
+[data-theme="dark"] .event_inf_bas br{
+    border-bottom: 1px solid #333333!important;
+}
+
+.d-flex.flex-column.align-items-center.crypto-infos-main-name.mt-2.mb-5 .mt-1.mb-4 {
+    font-weight: 300!important;
+    font-size: 1rem!important;
+    color: #585858!important;
+}
+
+/* event-end */
