@@ -464,6 +464,10 @@ p.crypto-change{
     margin-bottom: 0.5rem!important;
 }
 
+.last-news-snd-card p.last-news-snd-card-date{
+    font-weight: 300!important;
+}
+
 /* home-end */
 
 /* actu-start */
