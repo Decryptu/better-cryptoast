@@ -14,6 +14,12 @@
     transition: background-color 0.3s ease-in-out!important;
 }
 
+@media (max-width: 1200px) {
+    .article-main-ctn{
+        display: block!important;
+    }
+}
+
 /* home-start */
 
 body{
@@ -772,4 +778,101 @@ hustle-layout-body{
 
 div.cryptos-grid .cryptos-card-img{
     border-radius: 0.5rem !important;
+}
+
+/* fiches-end */
+/* cmc-coin-start */
+
+.d-flex.flex-column.crypto-infos-main-desc{
+    display: none !important;
+}
+
+.crypto-infos .graph-ctn{
+    margin: 0!important;
+    padding: 0!important;
+}
+
+[data-theme="light"] .crypto-infos .crypto-infos-terciary .crypto-infos-main-stats{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .crypto-infos .crypto-infos-terciary .crypto-infos-main-stats{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+.crypto-infos .crypto-infos-terciary .user-actions{
+    border-radius: 0.5rem!important;
+    padding: 1rem!important;
+}
+
+[data-theme="light"] .crypto-infos .crypto-infos-terciary .user-actions{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    transition: all 0.3s ease-in-out!important;
+}
+
+[data-theme="dark"] .crypto-infos .crypto-infos-terciary .user-actions{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+}
+
+.crypto-infos .crypto-infos-terciary .user-actions>.user-action{
+    border-radius: 0.25rem!important;
+}
+
+.crypto-infos .crypto-infos-terciary .crypto-infos-main-stats div>div>div>p{
+    font-weight: 300!important;
+}
+
+.crypto-infos .crypto-infos-terciary svg path{
+    fill: var(--gray-normal)!important;
+}
+
+.exchange-list-ctn, .prices-single .crypto-bottom-description-ctn{
+    padding: 0!important;
+}
+
+.price-utils{
+    padding: 0!important;
+}
+
+.crypto-infos .crypto-infos-terciary .user-actions>.user-action p{
+    font-weight: 400!important;
+}
+
+/* cmc-coin-end*/
+/* search-start */
+
+.newsletter-banner{
+    display: none!important;
+}
+
+[data-theme="light"] .banner-inner{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .banner-inner{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+.card-title.color-green-gradient{
+    font-weight: 400!important;
+}
+
+.banner-inner a.read-more{
+    margin-top: 1rem!important;
+    font-weight: 400!important;
 }

@@ -1,0 +1,75 @@
+<html>
+<meta charset="UTF-8">
+  <head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif !important;
+        }
+        html, body {
+            width: 20rem;
+            height: auto;
+            margin: 0;
+            padding: 0;
+            background: #FFFFFF;
+            box-sizing: border-box;
+        }
+
+        .popup-h1{
+            font-weight: 800;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-top: 1rem;
+            color: #121826;
+        }
+          
+        #searchForm {
+            padding: 20px;
+            margin: 0px;
+        }
+
+        .searchContainer {
+            display: flex;
+            align-items: center;
+            background-color: #FFFFFF;
+            border: 1px solid #E6E6E6;
+            border-radius: 0.5rem;
+            height: 40px;
+            transition: border-color 0.3s;
+        }
+
+        .searchContainer svg {
+            margin: 0 10px;
+        }
+
+        #searchInput {
+            width: 100%;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #searchInput:focus {
+            outline: none;
+        }
+
+        #searchInput:focus + .searchContainer{
+            border-color: #8A8A8A;
+        }
+    </style>
+  </head>
+  <body>
+    <h1 class="popup-h1">Search on Cryptoast✨</h1>
+    <form id="searchForm">
+      <div class="searchContainer">
+        <svg class="with-icon_icon__MHUeb" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24">
+          <path d="M11 17.25a6.25 6.25 0 110-12.5 6.25 6.25 0 010 12.5z"></path>
+          <path d="M16 16l4.5 4.5"></path>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Ethereum..." autocomplete="off">
+      </div>
+    </form>
+  </body>
+  <script src="popup.js"></script>
+</html>
