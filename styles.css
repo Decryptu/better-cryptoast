@@ -22,6 +22,14 @@
     .article-content img.main-illustration{
         max-width: -webkit-fill-available!important;
     }
+
+    .swiper-wrapper{
+        gap: 16px!important;
+    }
+
+    .d-flex.flex-column{
+        max-width: 50%!important;
+    }
 }
 
 /* home-start */
@@ -30,7 +38,18 @@ body{
     margin-top: 5rem!important;
 }
 
-a.buy-crypto, .popover-clickable-btn{
+a.buy-crypto{
+    /*display: none !important;*/
+    border: 1px solid var(--orange-primary)!important;
+    border-radius: 0.5rem!important;
+    transition: background-color 0.2 ease!important;
+}
+
+a.buy-crypto:hover{
+    background-color: #f6f6f6!important;
+}
+
+.popover-clickable-btn{
     display: none !important;
 }
 
@@ -78,9 +97,9 @@ header.page-header > div {
     flex-grow: 0!important;
 }
 
-.search-icon{
+/*.search-icon{
     margin-left: 1rem!important;
-}
+}*/
 
 header.page-header nav a.popover-hover-btn{
     font-weight: 400!important;
@@ -133,6 +152,18 @@ div.main-content h3.title{
 }
 
 [data-theme="dark"] .redaction-selection-card{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+}
+
+[data-theme="light"] .global-search-modal-ctn .input-ctn{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    transition: all 0.3s ease-in-out!important;
+}
+
+[data-theme="dark"] .global-search-modal-ctn .input-ctn{
     background-color: #111111!important;
     border: 0.5px solid #333333;
     transition: all 0.3s ease-in-out!important;
@@ -384,6 +415,10 @@ p.crypto-change{
 }
 
 .redaction-selection-card h4.redaction-selection-card-title{
+    padding: 0px!important;
+}
+
+.redaction-selection-card-title.ps-1.animated-underline{
     padding: 0px!important;
 }
 
