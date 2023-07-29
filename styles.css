@@ -18,6 +18,10 @@
     .article-main-ctn{
         display: block!important;
     }
+
+    .article-content img.main-illustration{
+        max-width: -webkit-fill-available!important;
+    }
 }
 
 /* home-start */
@@ -550,14 +554,10 @@ div.pagination-ctn .pagination-item{
 }
 
 .article-content img.main-illustration{
+    position: initial!important;
+    width: 100%!important;
+    margin: 0 0 1rem 0!important;
     border-radius: 0.5rem!important;
-    position: relative!important;
-    left: 0px!important;
-    width: -webkit-fill-available!important;
-    padding-bottom: 1em!important;
-    margin: 0!important;
-    aspect-ratio: auto!important;
-    max-width: -webkit-fill-available!important;
 }
 
 #podle-player{
@@ -570,10 +570,6 @@ div.pagination-ctn .pagination-item{
 
 .share-article-ctn a{
     padding: 0.5rem!important;
-}
-
-.main-illustration.lazy.loaded {
-    border-radius: 0rem!important;
 }
 
 .cta-gradient-2, .cta-gradient-1, .cta-gradient-3 {
