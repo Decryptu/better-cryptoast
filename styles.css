@@ -1,0 +1,737 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif !important;
+}
+
+[data-theme="light"] body, [data-theme="light"] div.main-content {
+    background-color: white !important;
+    transition: background-color 0.5s ease-in-out!important;
+}
+
+[data-theme="dark"] body, [data-theme="dark"] div.main-content {
+    background-color: black !important;
+    transition: background-color 0.5s ease-in-out!important;
+}
+
+/* home-start */
+
+body{
+    margin-top: 5rem!important;
+}
+
+a.buy-crypto, .popover-clickable-btn{
+    display: none !important;
+}
+
+header.page-header p.header-title{
+    margin-top:.1rem;
+}
+
+header.page-header{
+    position: fixed!important;
+    width: -webkit-fill-available!important;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+[data-theme="light"] header.page-header{
+    background-color: #FFFFFFd6!important;
+    border-bottom: 1px solid #E5E5E5!important;
+    transition: background-color 0.5s ease-in-out!important;
+    transition: border-bottom 0.5s ease-in-out!important;
+}
+
+[data-theme="dark"] header.page-header{
+    background-color: #000000d6!important;
+    border-bottom: 1px solid #1A1A1A!important;
+    transition: background-color 0.5s ease-in-out!important;
+    transition: border-bottom 0.5s ease-in-out!important;
+}
+
+.inner-ctn{
+    max-width: none;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+header.page-header > div {
+    display: flex!important;
+    justify-content: space-between!important;
+}
+
+.d-flex.flex-md-grow-1.align-items-center.justify-content-end {
+    margin-left: auto!important;
+    flex-grow: 0!important;
+}
+
+.search-icon{
+    margin-left: 1rem!important;
+}
+
+header.page-header nav a.popover-hover-btn{
+    font-weight: 400!important;
+    color: #666!important;
+}
+
+header.page-header .header-logo-ctn{
+    border-right-width: 1px!important;
+    border-right-style: solid!important;
+}
+
+[data-theme="light"] header.page-header .header-logo-ctn{
+    border-right-color: #E5E5E5!important;
+}
+
+[data-theme="dark"] header.page-header .header-logo-ctn{
+    border-right-color: #1A1A1A!important;
+}
+
+div.main-content h3.title{
+    font-size: 2.5rem!important;
+}
+
+.last-news-snd{
+    max-width: max-content!important;
+}
+
+.redaction-selection-card:not(:last-child){
+    max-width: 65%!important;
+}
+
+.redaction-selection-card{
+    border-radius: 0.75rem!important;
+    padding: 0!important;
+}
+
+[data-theme="light"] .redaction-selection-card{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+}
+
+[data-theme="dark"] .redaction-selection-card{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+}
+
+[data-theme="light"] .market-info{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .market-info{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="light"] .incoming-nft-collection-grid .grid-item .grid-item-infos{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .incoming-nft-collection-grid .grid-item .grid-item-infos{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="light"] .last-news-snd-card{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    border-bottom: 0.75px solid #EAEAEA;
+}
+
+[data-theme="dark"] .last-news-snd-card{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    border-bottom: 0.5px solid #333333;
+}
+
+[data-theme="light"] .last-news-snd-card:not(:last-child){
+    border-bottom: 0.75px solid #EAEAEA;
+}
+
+[data-theme="dark"] .last-news-snd-card:not(:last-child){
+    border-bottom: 0.5px solid #333333;
+}
+
+
+[data-theme="light"] .card-shadow{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+}
+
+[data-theme="dark"] .card-shadow{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+}
+
+[data-theme="light"] .good-deals-grid .good-deals-grid-item{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+}
+
+[data-theme="dark"] .good-deals-grid .good-deals-grid-item{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+}
+
+.redaction-selection-card img.redaction-selection-card-img{
+    border-radius: 0.5rem 0.5rem 0 0!important;
+}
+
+img.redaction-selection-card-img.lazy.loaded {
+    border-radius: 0.5rem 0.5rem 0 0!important;
+}
+
+.redaction-selection-card .redaction-selection-card-img-ctn{
+    border-radius: 0.5rem 0.5rem 0 0!important;
+}
+
+
+.redaction-selection-card .redaction-selection-card-texts{
+    margin: 0rem 1rem 1rem 1rem!important;
+}
+
+.last-news-snd-card:not(:last-child){
+    border-radius: 0.5rem !important;
+}
+
+.last-news-snd-card{
+    border-radius: 0.5rem!important;
+}
+
+.last-news-snd{
+    overflow: initial!important;
+}
+
+.last-news-snd-card .last-news-snd-card-title-ctn .last-news-snd-card-image{
+    border-radius: 0.25rem!important;
+    height: 6rem!important;
+    width: auto!important;
+}
+
+div.main-content section a.see-all.orange{
+    border: 1px solid var(--orange-gradient-to)!important;
+    border-radius: 0.5rem!important;
+}
+
+div.main-content section a.see-all.pink{
+    border: 1px solid var(--formation-gradient-to)!important;
+    border-radius: 0.5rem!important;
+    height: 50%!important;
+    align-self: center!important;
+}
+
+div.main-content section a.see-all.purple{
+    border: 1px solid var(--purple-gradient-to)!important;
+    border-radius: 0.5rem!important;
+}
+
+div.main-content section a.see-all.green{
+    border: 1px solid var(--green-gradient-to)!important;
+    border-radius: 0.5rem!important;
+}
+
+div.main-content section a.see-all.blue{
+    border: 1px solid var(--blue-gradient-to)!important;
+    border-radius: 0.5rem!important;
+}
+
+.card-shadow{
+    box-shadow: none !important;
+    transition: all 0.3s ease;
+}
+
+.card-shadow:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.1)!important;
+}
+
+.last-news-card{
+    padding: 0 !important;
+    border-radius: 0.5rem!important;
+}
+
+.last-news-card-texts{
+    padding: 0rem 1rem 0rem 1rem!important;
+}
+
+.good-deals-grid>.good-deals-grid-item{
+    border-radius: 0.5rem!important;
+}
+
+.arrow-curved-icon{
+    display: none !important;
+}
+
+.good-deals-card{
+    flex: 1!important;
+}
+
+.good-deals-card img.good-deals-card-img{
+    border-radius: 0.25rem!important;
+}
+
+.last-news-card p.last-news-card-category{
+    border-radius: 0.15rem!important;
+}
+
+.last-news-card img.last-news-card-img{
+    border-radius: 0.5rem 0.5rem 0 0!important;
+}
+
+.last-news-card .last-news-card-img-ctn{
+    border-radius: 0.5rem 0.5rem 0 0!important;
+}
+
+.btc-knowledge-grid .grid-item{
+    border-radius: 0.5rem!important;
+}
+
+p.crypto-change{
+    border-radius: 0.25rem!important;
+}
+
+.crypto-trend-card{
+    border-radius: 0.5rem!important;
+}
+
+.incoming-nft-collection-grid .grid-item .grid-item-infos .grid-item-infos-inner .quantity-time-price p{
+    font-weight: 400!important;
+}
+
+.chain{
+    border-radius: 0.25rem!important;
+}
+
+.guide-or-tutorial-card .guide-or-tutorial-bg{
+    border-radius: 0.5rem!important;
+}
+
+.redaction-selection-card h4.redaction-selection-card-title{
+    padding: 0px!important;
+}
+
+[data-theme="dark"] footer.page-footer{
+    background: #111111!important;
+    border-top: 1px solid #333333!important;
+}
+
+[data-theme="light"] footer.page-footer{
+    background: #FAFAFA!important;
+    border-top: 1px solid #EAEAEA!important;
+}
+
+.redaction-selection-card .redaction-selection-card-img-ctn{
+    overflow: auto!important;
+}
+
+.market-info .subtitle{
+    font-size: 1.5rem!important;
+}
+
+.crypto-trend-card p.crypto-rank{
+    font-weight: 400!important;
+}
+
+.publicite_avertissement{
+    display: none!important;
+}
+
+#distrib_e1 > * > * {
+    padding: 0rem!important;
+    border-radius: 0.5rem!important;
+}
+
+#distrib_e2 > * > * {
+    padding: 0rem!important;
+    border-radius: 0.5rem!important;
+}
+
+#distrib_e3 > * > * {
+    padding: 0rem!important;
+    border-radius: 0.5rem!important;
+}
+
+#distrib_e4 > * > * {
+    padding: 0rem!important;
+    border-radius: 0.5rem!important;
+}
+
+#distrib_e5 > * > * {
+    padding: 0rem!important;
+    border-radius: 0.5rem!important;
+}
+
+#distrib_e6 > * > * {
+    padding: 0rem!important;
+    border-radius: 0.5rem!important;
+}
+
+.hustle-slidein-content.hustle-animate-in{
+    display: none!important;
+}
+
+.cc_banner.cc_container.cc_container--open{
+    display: none!important;
+}
+
+/* home-end */
+
+/* actu-start */
+
+.fd_head{
+    display: none!important;
+}
+
+.page-news .chips-ctn{
+    display: none!important;
+}
+
+div.article-grid{
+    grid-gap: 1.5rem 1rem!important;
+}
+
+.title-left-border{
+    display: none!important;
+}
+
+.last-news-card h4.last-news-card-title{
+    padding-left: 0px!important;
+}
+
+div.pagination-ctn{
+    font-weight: 400!important;
+    margin-top: 2rem!important;
+}
+
+div.pagination-ctn .pagination-item{
+    border-radius: 0.25rem!important;
+}
+
+/* actu-end */
+/* article-start */
+
+.wpd-form-head{
+    display: none!important;
+}
+
+.article-content .article-date-and-author p{
+    font-weight: 300!important;
+}
+
+.article-author-module .author-links a.all-articles:hover {
+    color: white !important;
+}
+
+.article-aside .most-read-article-ctn>a.most-read-article>p.article-title{
+    font-size: 0.9rem!important;
+    font-weight: 600!important;
+}
+
+.lwptoc_i{
+    border-radius: 0.5rem!important;
+}
+
+#breadcrumbs{
+    display: none!important;
+}
+
+.article-subtitle{
+    font-weight: 300!important;
+    font-size: 1.3rem!important;
+    margin-bottom: 1rem!important;
+}
+
+.article-content .date-and-read-time .date{
+    margin-right: 0px!important;
+}
+
+.article-content img.main-illustration{
+    border-radius: 0.5rem!important;
+    position: relative!important;
+    left: 0px!important;
+    width: -webkit-fill-available!important;
+    padding-bottom: 1em!important;
+    margin: 0!important;
+    aspect-ratio: auto!important;
+    max-width: -webkit-fill-available!important;
+}
+
+#podle-player{
+    display: none!important;
+}
+
+#podle-player-container{
+    display: none!important;
+}
+
+.share-article-ctn a{
+    padding: 0.5rem!important;
+}
+
+.main-illustration.lazy.loaded {
+    border-radius: 0rem!important;
+}
+
+.cta-gradient-2, .cta-gradient-1, .cta-gradient-3 {
+    width:-webkit-fill-available!important;
+    border-radius: 0.5rem!important;
+}
+
+#btn_zengo_3 span.cta-gradient-2{
+    border-radius: 0.5rem!important;
+}
+
+#btn_meria_3 span.cta-gradient-2{
+    border-radius: 0.5rem!important;
+}
+
+#btn_etoro_3 span.cta-gradient-2{
+    border-radius: 0.5rem!important;
+}
+
+#btn_binance_3 span.cta-gradient-2{
+    border-radius: 0.5rem!important;
+}
+
+#btn_ledger_3 span.cta-gradient-2{
+    border-radius: 0.5rem!important;
+}
+
+.blcatt{
+    display: none !important;
+}
+
+.crytoast-pro-cta{
+    display: none !important;
+}
+
+#avertissement-crypto-monnaies-risques{
+    display: none !important;
+}
+
+hustle-layout-body{
+    border-radius: 0.5rem!important;
+}
+
+.article-author-module .author-links a{
+    border-radius: 0.5rem!important;
+    padding: 0rem 0.8rem!important;
+}
+
+.article-author-module img.author-profile-picture{
+    border-radius: 0.5rem;
+}
+
+.article-author-module img.author-profile-picture{
+    margin-right: 2rem!important;
+}
+
+.article-separator{
+    display: none!important;
+}
+
+#wpdcom{
+    margin: 0px!important;
+    max-width: -webkit-fill-available!important;
+}
+
+.article-aside .most-read-article-ctn>a.most-read-article>img{
+    border-radius: 0.25rem!important;
+}
+
+.read-time{
+    margin-left: 1.5rem!important;
+}
+
+.article-aside .what-is-cryptoast{
+    margin: 0rem 0 1.5rem!important;
+}
+
+.hustle-optin{
+    display: none!important;
+}
+
+.related-articles-swiper{
+    padding: 0.5rem 0 0rem 0!important;
+}
+
+.article-content .date-and-read-time .date{
+    padding-left: 0!important;
+}
+
+[data-theme="light"] .article-content blockquote{
+    border-left: 4px solid #EF8867!important;
+    background-color: #f3f3f3!important;
+    border-radius: 0.25rem!important;
+}
+
+[data-theme="dark"] .article-content blockquote{
+    border-left: 4px solid #EF8867!important;
+    background-color: #232323!important;
+    border-radius: 0.25rem!important;
+}
+
+.att_red{
+    display: none !important;
+}
+
+/* article-end */
+/* formation-start */
+
+.formation-banner{
+    display: none !important;
+}
+
+[data-theme="light"] .search-input-ctn{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .search-input-ctn{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    border-radius: 0.5rem!important;
+    max-width: 17.5rem!important;
+}
+
+[data-theme="light"] div.pagination-ctn .pagination-item{
+    margin-right: 0.5rem!important;
+    padding: 0.4rem 0.8rem!important;
+    border-radius: 0.25rem!important;
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA!important;
+    box-shadow:none!important;
+}
+
+[data-theme="dark"] div.pagination-ctn .pagination-item{
+    margin-right: 0.5rem!important;
+    padding: 0.4rem 0.8rem!important;
+    border-radius: 0.25rem!important;
+    background-color: #111111!important;
+    border: 0.75px solid #333333!important;
+    box-shadow:none!important;
+}
+
+/* formation-end */
+/* cmc-start */
+
+.prices-banner{
+    display:none!important;
+}
+
+.outro{
+    display:none!important;
+}
+
+#sort-icon-name, #sort-icon-price, #sort-icon-change_24h, #sort-icon-mk, #sort-icon-volume_24h{
+    display:none!important;
+}
+
+#sort-icon {
+    transform: rotate(180deg);
+}
+
+
+.prices-grid .crypto-infos .crypto-logo{
+    border-radius: 100%!important;
+}
+
+.prices-grid{
+    box-shadow: none!important;
+}
+
+.price-p.cut-text {
+    font-size: 1rem!important;
+}
+
+.mk-p.cut-text {
+    font-weight: 400!important;
+}
+
+.volume.volume-24h.cut-text {
+    font-weight: 400!important;
+}
+
+.prices-grid-row.row.px-2.px-md-4.py-3.py-md-4{
+    border-radius: 0.5rem 0.5rem 0 0!important;
+}
+
+.prices-grid-row.header{
+    padding-left: 1rem!important;
+    padding-right: 0rem!important;
+}
+
+/* cmc-end */
+
+/* nft-intro */
+
+.d-flex.flex-row.justify-content-center.mt-3.text-align-center.mb-4{
+    display: none !important;
+}
+
+#nfts-grid{
+    box-shadow: none!important;
+}
+
+#sort-icon-floor-price{
+    display: none !important;
+}
+
+#sort-icon-owner-amount{
+    display: none !important;
+}
+
+#sort-icon-quantity{
+    display: none !important;
+}
+
+#sort-icon-mk_24h{
+    display: none !important;
+}
+
+#sort-icon-sell{
+    display: none !important;
+}
+
+.nfts-banner{
+    display: none !important;
+}
+
+.nft-disclamer{
+    display: none !important;
+}
+
+/* nft-end */
+/* fiches-start */
+
+.cryptos-banner {
+    display: none !important;
+}
+
+.cryptos-section-second-title:first-of-type {
+    display: none !important;
+}
+
+
+.introduction-paragraph{
+    display: none !important;
+}
+
+.fiche_list_icon_crypto{
+    display: none !important;
+}
+
+.introduction-paragraph.clamped{
+    display: none !important;
+}
+
+div.cryptos-grid .cryptos-card-img{
+    border-radius: 0.5rem !important;
+}
