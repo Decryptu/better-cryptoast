@@ -83,6 +83,14 @@ header.page-header nav a.popover-hover-btn{
     color: #666!important;
 }
 
+.popover-hover-btn:hover{
+    transition: opacity 0.2s ease-in-out;
+}
+
+.popover-hover-btn:hover{
+    opacity: 50%!important;
+}
+
 header.page-header .header-logo-ctn{
     border-right-width: 1px!important;
     border-right-style: solid!important;
@@ -143,7 +151,7 @@ div.main-content h3.title{
 [data-theme="light"] .incoming-nft-collection-grid .grid-item .grid-item-infos{
     background-color: #FAFAFA!important;
     border: 0.75px solid #EAEAEA;
-    border-radius: 0.5rem!important;
+    border-radius: 0 0 0.5rem 0.5rem!important;
     transition: all 0.3s ease-in-out!important;
 }
 
@@ -200,6 +208,20 @@ div.main-content h3.title{
 [data-theme="dark"] .good-deals-grid .good-deals-grid-item{
     background-color: #111111!important;
     border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+}
+
+[data-theme="light"] .cmc-tooltip{
+    background-color: white!important;
+    border: 0.75px solid #EAEAEA;
+    border-radius: 0.25rem!important;
+    transition: all 0.3s ease-in-out!important;
+}
+
+[data-theme="dark"] .cmc-tooltip{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    border-radius: 0.25rem!important;
     transition: all 0.3s ease-in-out!important;
 }
 
@@ -289,6 +311,11 @@ div.main-content section a.see-all.blue{
 .card-shadow:hover{
     transform: translateY(-5px);
     box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.1)!important;
+}
+
+.crypto-trend-card.card-shadow{
+    margin-bottom: 1rem!important;
+    margin-top: 1rem!important;
 }
 
 .last-news-card{
@@ -420,6 +447,23 @@ p.crypto-change{
     display: none!important;
 }
 
+.crypto-trend-card p.crypto-full-name{
+    font-weight: 400!important;
+}
+
+.incoming-nft-collections .incoming-nft-collection .title{
+    display: none!important;
+}
+
+.incoming-nft-collections .incoming-nft-collection-grid{
+    margin-top: 1.5rem!important;
+}
+
+.incoming-nft-collection-grid .grid-item .grid-item-cover{
+    scale: 1.1!important;
+    margin-bottom: 0.5rem!important;
+}
+
 /* home-end */
 
 /* actu-start */
@@ -459,6 +503,12 @@ div.pagination-ctn .pagination-item{
 
 /* actu-end */
 /* article-start */
+
+.share-article-ctn svg{
+    width: 1rem;
+    height: 1rem;
+    margin: 0.1rem;
+}
 
 .wpd-form-head{
     display: none!important;
@@ -625,11 +675,24 @@ hustle-layout-body{
     display: none !important;
 }
 
+.article-author-module p.bio{
+    font-size: 1rem!important;
+    color: #666666;
+}
+
+.article-content .article-section{
+    margin-top: 1rem!important;
+}
+
 /* article-end */
 /* formation-start */
 
 .formation-banner{
     display: none !important;
+}
+
+.search-input-ctn{
+    max-width: 17.5rem!important;
 }
 
 [data-theme="light"] .search-input-ctn{
@@ -642,7 +705,6 @@ hustle-layout-body{
     background-color: #111111!important;
     border: 0.5px solid #333333;
     border-radius: 0.5rem!important;
-    max-width: 17.5rem!important;
 }
 
 [data-theme="light"] div.pagination-ctn .pagination-item{
@@ -710,6 +772,18 @@ hustle-layout-body{
 .prices-grid-row.header{
     padding-left: 1rem!important;
     padding-right: 0rem!important;
+}
+
+.prices-grid{
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="light"] .prices-grid{
+    border: 0.75px solid #EAEAEA!important;
+}
+
+[data-theme="dark"] .prices-grid{
+    border: 0.75px solid #333333!important;
 }
 
 /* cmc-end */
@@ -847,6 +921,83 @@ div.cryptos-grid .cryptos-card-img{
     font-weight: 400!important;
 }
 
+.main-content.prices-single .breadcrumb-desktop{
+    font-weight: 400!important;
+}
+
+.crypto-infos-secondary{
+    display: none!important;
+}
+
+[data-theme="light"] .buy-crypto-section-grid .buy-crypto-section-grid-item{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .buy-crypto-section-grid .buy-crypto-section-grid-item{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+.exchange-list{
+    padding: 1rem!important;
+}
+
+[data-theme="light"] .exchange-list{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .exchange-list{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="light"] .market-cap-tool .market-cap-tool-card{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+    box-shadow: none !important;
+}
+
+[data-theme="dark"] .market-cap-tool .market-cap-tool-card{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+    box-shadow: none !important;
+}
+
+.last-news-of{
+    padding-left: 0rem!important;
+}
+
+.exchange-list-item .pair > p{
+    font-weight: 400!important;
+}
+
+.exchange-list-item .volume > p{
+    font-weight: 400!important;
+}
+
+.exchange-list-item .exchange-logo-and-name>img{
+    width: auto!important;
+}
+
+.exchange-list-item.header{
+    border-top: none!important;
+    padding-top: 0!important;
+}
+
 /* cmc-coin-end*/
 /* search-start */
 
@@ -876,3 +1027,125 @@ div.cryptos-grid .cryptos-card-img{
     margin-top: 1rem!important;
     font-weight: 400!important;
 }
+
+/* search-end */
+/* team-start */
+.our-team .team-grid-item img{
+    border-radius: 0.5rem!important;
+}
+
+.our-team .team-grid-item .job{
+    font-weight: 400!important;
+    margin-bottom: 0.5rem!important;
+}
+
+.our-team .our-team-card header p{
+    font-weight: 300!important;
+}
+
+.our-team .our-partner-desc{
+    font-weight: 300!important;
+}
+
+.our-team .our-team-card{
+    padding: 4rem 8rem!important;
+}
+
+[data-theme="light"] .our-team .our-team-card{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .our-team .our-team-card{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+.hiring-and-press-kit.d-flex.flex-column.flex-md-row{
+    display: none!important;
+}
+
+/* team-end */
+/* contact-start */
+
+[data-theme="light"] .contact-us-card{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .contact-us-card{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+.contact-us-card footer>.rounded-gray-ctn p{
+    font-weight: 300!important;
+}
+
+.d-flex.rounded-gray-ctn > .position-relative{
+    align-self: center!important;
+}
+
+.contact-us-card .right-arrow-ctn{
+    border-radius: 0.5rem!important;
+}
+
+.contact-us-card p.description{
+    letter-spacing: 0!important;
+    font-weight: 300!important;
+}
+
+/* contact-end */
+/* emploi-start */
+
+.jobs .headline-texts p{
+    font-weight: 300!important;
+}
+
+.d-flex.align-items-center.orange.card-shadow {
+    background-color: var(--orange-primary)!important;
+}
+
+.jobs button.orange p{
+    font-weight: 300!important;
+}
+
+.jobs .headline-btns button.gray p{
+    font-weight: 300!important;
+}
+
+[data-theme="light"] .job-card{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+[data-theme="dark"] .job-card{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+    transition: all 0.3s ease-in-out!important;
+    border-radius: 0.5rem!important;
+}
+
+.job-cards-ctn .job-card p.quality-required:nth-child(3) {
+    display: none!important;
+}
+
+.timestamp{
+    font-weight: 300!important;
+}
+
+.quality-required{
+    border-radius: 0.25rem!important;
+}
+
+/* emploi-end */
