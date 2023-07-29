@@ -6,12 +6,12 @@
 
 [data-theme="light"] body, [data-theme="light"] div.main-content {
     background-color: white !important;
-    transition: background-color 0.5s ease-in-out!important;
+    transition: background-color 0.3s ease-in-out!important;
 }
 
 [data-theme="dark"] body, [data-theme="dark"] div.main-content {
     background-color: black !important;
-    transition: background-color 0.5s ease-in-out!important;
+    transition: background-color 0.3s ease-in-out!important;
 }
 
 /* home-start */
@@ -33,23 +33,23 @@ header.page-header{
     width: -webkit-fill-available!important;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="light"] header.page-header{
     background-color: #FFFFFFd6!important;
     border-bottom: 1px solid #E5E5E5!important;
-    transition: background-color 0.5s ease-in-out!important;
-    transition: border-bottom 0.5s ease-in-out!important;
-    transition: all 0.5s ease-in-out!important;
+    transition: background-color 0.3s ease-in-out!important;
+    transition: border-bottom 0.3s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="dark"] header.page-header{
     background-color: #000000d6!important;
     border-bottom: 1px solid #1A1A1A!important;
-    transition: background-color 0.5s ease-in-out!important;
-    transition: border-bottom 0.5s ease-in-out!important;
-    transition: all 0.5s ease-in-out!important;
+    transition: background-color 0.3s ease-in-out!important;
+    transition: border-bottom 0.3s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 .inner-ctn{
@@ -80,7 +80,7 @@ header.page-header nav a.popover-hover-btn{
 header.page-header .header-logo-ctn{
     border-right-width: 1px!important;
     border-right-style: solid!important;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="light"] header.page-header .header-logo-ctn{
@@ -111,94 +111,94 @@ div.main-content h3.title{
 [data-theme="light"] .redaction-selection-card{
     background-color: #FAFAFA!important;
     border: 0.75px solid #EAEAEA;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="dark"] .redaction-selection-card{
     background-color: #111111!important;
     border: 0.5px solid #333333;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="light"] .market-info{
     background-color: #FAFAFA!important;
     border: 0.75px solid #EAEAEA;
     border-radius: 0.5rem!important;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="dark"] .market-info{
     background-color: #111111!important;
     border: 0.5px solid #333333;
     border-radius: 0.5rem!important;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="light"] .incoming-nft-collection-grid .grid-item .grid-item-infos{
     background-color: #FAFAFA!important;
     border: 0.75px solid #EAEAEA;
     border-radius: 0.5rem!important;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="dark"] .incoming-nft-collection-grid .grid-item .grid-item-infos{
     background-color: #111111!important;
     border: 0.5px solid #333333;
     border-radius: 0.5rem!important;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="light"] .last-news-snd-card{
     background-color: #FAFAFA!important;
     border: 0.75px solid #EAEAEA;
     border-bottom: 0.75px solid #EAEAEA;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="dark"] .last-news-snd-card{
     background-color: #111111!important;
     border: 0.5px solid #333333;
     border-bottom: 0.5px solid #333333;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="light"] .last-news-snd-card:not(:last-child){
     border-bottom: 0.75px solid #EAEAEA;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="dark"] .last-news-snd-card:not(:last-child){
     border-bottom: 0.5px solid #333333;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 
 [data-theme="light"] .card-shadow{
     background-color: #FAFAFA!important;
     border: 0.75px solid #EAEAEA;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="dark"] .card-shadow{
     background-color: #111111!important;
     border: 0.5px solid #333333;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="light"] .good-deals-grid .good-deals-grid-item{
     background-color: #FAFAFA!important;
     border: 0.75px solid #EAEAEA;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 [data-theme="dark"] .good-deals-grid .good-deals-grid-item{
     background-color: #111111!important;
     border: 0.5px solid #333333;
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 .header-title.ms-2.me-1.bold{
-    transition: all 0.5s ease-in-out!important;
+    transition: all 0.3s ease-in-out!important;
 }
 
 .redaction-selection-card img.redaction-selection-card-img{
@@ -261,6 +261,18 @@ div.main-content section a.see-all.green{
 div.main-content section a.see-all.blue{
     border: 1px solid var(--blue-gradient-to)!important;
     border-radius: 0.5rem!important;
+}
+
+.good-deals-card.bitcoin p.good-deals-card-category{
+    border-radius: 0.15rem!important;
+}
+
+.crypto-trend-cards-ctn img.crypto-logo{
+    border-radius: 100%!important;
+}
+
+.video-card-img{
+    border-radius: 0.5rem !important;
 }
 
 .card-shadow{
@@ -408,6 +420,10 @@ p.crypto-change{
 
 .fd_head{
     display: none!important;
+}
+
+.last-news-card p.last-news-card-date, .last-news-card p.last-news-card-author{
+    font-weight: 300!important;
 }
 
 .page-news .chips-ctn{
