@@ -1,14 +1,10 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Better Cryptoast",
     "description": "This extension enhances the CSS of Cryptoast.fr, bug fixes, dark & light theme auto detect...",
     "version": "1.0",
     "icons": {
       "128": "icon.png"
-    },
-    "background": {
-      "scripts": ["background.js"],
-      "persistent": true
     },
     "content_scripts": [
       {
@@ -18,11 +14,13 @@
       }
     ],
     "permissions": [
-      "activeTab",
-      "webRequest",
-      "webRequestBlocking",
-      "*://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js",
-      "*://cdn.onesignal.com/sdks/OneSignalSDK.js",
-      "*://cryptoast.fr/wp-content/plugins/page-links-to/dist/new-tab.js"
-    ]
+      "activeTab"
+    ],
+    "action": {
+      "default_icon": {
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+      }
+    }
 }
