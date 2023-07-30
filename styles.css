@@ -652,6 +652,11 @@ div.pagination-ctn .pagination-item{
 
 #btn_zengo_3 span.cta-gradient-2{
     border-radius: 0.5rem!important;
+    font-size: initial!important;
+}
+
+#btn_alyra_3 span.cta-gradient-2{
+    border-radius: 0.5rem!important;
 }
 
 #btn_meria_3 span.cta-gradient-2{
@@ -762,7 +767,7 @@ hustle-layout-body{
     top: 0;
     left: 0;
     width: 0;
-    height: 3px;
+    height: 4px;
     background-color: #EF8867;
     z-index: 99;
   }  
