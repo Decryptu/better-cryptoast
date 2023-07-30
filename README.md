@@ -1,5 +1,7 @@
 # Better Cryptoast ✨
 
+![Screenshot](images/screen1.png)
+
 Description: 
 
 Enhance your browsing experience on Cryptoast.fr with the Better Cryptoast extension.
