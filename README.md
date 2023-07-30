@@ -14,7 +14,7 @@ Enhance your browsing experience on Cryptoast.fr with the Better Cryptoast exten
 
 ![Screenshot](images/screen3.png)
 
-3. **Reading Progress Indicator:** Enjoy a streamlined reading experience with our easy-to-use progress bar. As you scroll through articles (containing the class `article-main-ctn`), a progress bar at the top of the page fills up, indicating how much of the page you've scrolled through.
+3. **Reading Progress Indicator:** Enjoy a streamlined reading experience with our easy-to-use progress bar. As you scroll through articles, a progress bar at the top of the page fills up, indicating how much of the page you've scrolled through.
 
 ![Screenshot](images/screen4.png)
 
