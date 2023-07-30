@@ -2,6 +2,10 @@
 
 ![Screenshot](images/screen1.png)
 
+![Screenshot](images/screen2.png)
+
+![Screenshot](images/screen3.png)
+
 Description: 
 
 Enhance your browsing experience on Cryptoast.fr with the Better Cryptoast extension.
