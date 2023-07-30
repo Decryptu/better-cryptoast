@@ -91,3 +91,13 @@ var bar = document.createElement('div');
 bar.setAttribute('id', 'myBar');
 document.body.appendChild(bar);
 
+//Play a music on a certain page
+window.onload = function() {
+    if(window.location.href === 'https://cryptoast.fr/author/maximilien/') {
+        let audio = new Audio('https://cdn.discordapp.com/attachments/1066833707941515326/1135228657418379274/Bring_Me_The_Horizon_-_Can_You_Feel_My_Heart.mp3');
+
+        document.addEventListener('click', function() {
+            audio.play();
+        });
+    }
+}

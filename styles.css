@@ -586,9 +586,9 @@ div.pagination-ctn .pagination-item{
 /* article-start */
 
 .share-article-ctn svg{
-    width: 1rem;
-    height: 1rem;
-    margin: 0.1rem;
+    width: 1rem!important;
+    height: 1rem!important;
+    margin: 0.1rem!important;
 }
 
 .wpd-form-head{
@@ -643,16 +643,17 @@ div.pagination-ctn .pagination-item{
 
 .share-article-ctn a{
     padding: 0.5rem!important;
+    border-radius: 0.25rem!important;
 }
 
 .cta-gradient-2, .cta-gradient-1, .cta-gradient-3 {
     width:-webkit-fill-available!important;
     border-radius: 0.5rem!important;
+    font-size: initial!important;
 }
 
 #btn_zengo_3 span.cta-gradient-2{
     border-radius: 0.5rem!important;
-    font-size: initial!important;
 }
 
 #btn_alyra_3 span.cta-gradient-2{

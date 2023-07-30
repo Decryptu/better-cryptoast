@@ -1,4 +1,4 @@
-Name: Better Cryptoast
+#Better Cryptoast ✨
 
 Description: 
 
