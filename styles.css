@@ -92,6 +92,7 @@ header.page-header{
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     transition: all 0.3s ease-in-out!important;
+    padding: 0.8rem 1.5rem!important;
 }
 
 [data-theme="light"] header.page-header{
