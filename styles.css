@@ -966,6 +966,10 @@ div.cryptos-grid .cryptos-card-img{
     border: 0.75px solid #83D1C0!important;
 }
 
+.difficulty{
+    color: black !important;
+}
+
 /* fiches-end */
 /* cmc-coin-start */
 
@@ -1112,6 +1116,35 @@ div.cryptos-grid .cryptos-card-img{
 
 .d-flex.flex-column-reverse.flex-md-row.price-filters.align-items-md-center > .search-input-ctn.prices-search:hover {
     border: 0.75px solid #B48CCD!important;
+}
+
+.cmc_partner{
+    display: none!important;
+}
+
+.crypto-infos .crypto-infos-main .crypto-infos-main-price-and-mk .buy-crypto>button{
+    margin: 0!important;
+}
+
+.d-flex.flex-column.flex-md-row.align-items-md-center.crypto-infos-main-price-and-mk > .buy-crypto{
+    border: 0!important;
+    margin-left: 1rem!important;
+}
+
+.d-flex.flex-column.flex-md-row.align-items-md-center.crypto-infos-main-price-and-mk > .buy-crypto:hover{
+    background-color: transparent !important;
+}
+
+.buy-popover.visible{
+    z-index: 10!important;
+}
+
+.exchange-list-ctn, .prices-single .crypto-bottom-description-ctn{
+    background: transparent!important;
+}
+
+.crypto-infos .graph-ctn{
+    background: transparent!important;
 }
 
 /* cmc-coin-end*/
