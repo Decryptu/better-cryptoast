@@ -46,6 +46,16 @@
     img.last-news-card-img.lazy.loaded{
         width: -webkit-fill-available!important;
     }
+
+    .redaction-selection-card .redaction-selection-card-img-ctn{
+        height: -webkit-fill-available!important;
+
+    }
+
+    .redaction-selection-card img.redaction-selection-card-img{
+        height: -webkit-fill-available!important;
+        object-fit: cover!important;
+    }
 }
 
 @media (min-width: 768px) {
@@ -64,7 +74,8 @@ a.buy-crypto{
 }
 
 a.buy-crypto:hover{
-    background-color: #f6f6f6!important;
+    background-color: #ff815e24!important;
+    transition: background-color 0.2 ease!important;
 }
 
 .popover-clickable-btn{
@@ -129,7 +140,7 @@ header.page-header nav a.popover-hover-btn{
 }
 
 .popover-hover-btn:hover{
-    opacity: 50%!important;
+    opacity: 75%!important;
 }
 
 header.page-header .header-logo-ctn{
@@ -185,6 +196,10 @@ div.main-content h3.title{
     background-color: #111111!important;
     border: 0.5px solid #333333;
     transition: all 0.3s ease-in-out!important;
+}
+
+.global-search-modal-ctn .input-ctn{
+    border-radius: 0.25rem!important;
 }
 
 [data-theme="light"] .market-info{
@@ -526,6 +541,10 @@ p.crypto-change{
     font-weight: 300!important;
 }
 
+.video-card-img{
+    object-fit: cover!important;
+}
+
 /* home-end */
 
 /* actu-start */
@@ -737,6 +756,16 @@ hustle-layout-body{
 .article-content .article-section{
     margin-top: 1rem!important;
 }
+
+#myBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #EF8867;
+    z-index: 99;
+  }  
 
 /* article-end */
 /* formation-start */
@@ -1340,5 +1369,22 @@ div.cryptos-grid .cryptos-card-img{
 }
 
 /* event-end */
+/* author-end */
+
+.author-page .author-info .author-links a{
+    border-radius: 0.25rem!important;
+}
+
+.author-page .author-info p.author-desc{
+    font-size: 1.1rem!important;
+    max-width: 100%!important;
+    font-weight: 300!important;
+}
+
+.author-page .author-info .author-profile-picture{
+    border-radius: 0.5rem!important;
+}
+
+/* author-end */
 
 }
