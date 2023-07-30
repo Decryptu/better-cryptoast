@@ -659,6 +659,7 @@ div.pagination-ctn .pagination-item{
     width:-webkit-fill-available!important;
     border-radius: 0.5rem!important;
     font-size: initial!important;
+    margin-bottom: 1rem!important;
 }
 
 #btn_zengo_3 span.cta-gradient-2{
