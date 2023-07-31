@@ -140,3 +140,42 @@ if (title) {
         }
     });
 }
+
+// Check the author
+let authorElement = document.querySelector('.ms-2.author-name > a');
+if (authorElement && authorElement.href === 'https://cryptoast.fr/author/robin/') {
+    // Add CSS for the animation
+    let style = document.createElement('style');
+    style.textContent = `
+        @keyframes rainbow {
+            0% {background: red;}
+            14% {background: orange;}
+            28% {background: yellow;}
+            42% {background: lime;}
+            57% {background: cyan;}
+            71% {background: blue;}
+            85% {background: magenta;}
+            100% {background: red;}
+        }
+        .rainbow {
+            animation: rainbow 3s linear infinite !important;
+            background-size: 200% 200% !important;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Create a new div
+    let rainbowDiv = document.createElement('div');
+    rainbowDiv.classList.add('rainbow');
+
+    // Add the div to the body
+    document.body.appendChild(rainbowDiv);
+}
+
