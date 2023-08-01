@@ -678,6 +678,14 @@ div.pagination-ctn .pagination-item{
     border-radius: 0.5rem!important;
 }
 
+#btn_coinbase_3 span.cta-gradient-2{
+    border-radius: 0.5rem!important;
+}
+
+#btn_kraken_3 span.cta-gradient-2{
+    border-radius: 0.5rem!important;
+}
+
 #btn_binance_3 span.cta-gradient-2{
     border-radius: 0.5rem!important;
 }
@@ -1492,5 +1500,11 @@ div.cryptos-grid .cryptos-card-img{
 }
 
 /* author-end */
+/* video-start */
 
+section.videos-banner{
+    display: none!important;
+}
+
+/* video-end */
 }
