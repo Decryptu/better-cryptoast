@@ -26,8 +26,9 @@
         }
           
         #searchForm {
-            padding: 20px;
+            padding: 10px 20px;
             margin: 0px;
+            margin-bottom: 2rem;
         }
 
         .searchContainer:active {
@@ -85,6 +86,73 @@
         #buyBitcoin:hover{
             opacity: 75%;
         }
+
+        /* halving */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4rem;
+            width: -webkit-fill-available;
+            max-width: 100%;
+            padding: 10px 20px 0px 20px;
+          }
+          
+          .time-segment {
+            border: 1px solid #E6E6E6;
+            background-color: #fff;
+            padding: 0.5rem;
+            text-align: center;
+            position: relative;
+            border-radius: 0.5rem;
+          }
+          
+          .time-segment .number {
+            font-size: 1.6rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+        } 
+          
+          .time-segment .time-unit {
+            font-size: 0.6rem;
+            display: block;
+            text-align: center;
+            color: gray;
+          }
+          
+          .time-segment::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #E9983D;
+            border-radius: 0 0 0.5rem 0.5rem;
+          }  
+          .eta{
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            display: flex;
+            margin-bottom: 2rem;
+          }
+          /* btc price */
+          .popup-h1{
+            padding-bottom: 0.5rem;
+            margin-bottom: 0rem;
+          }
+          #bitcoin-price{
+            margin-bottom: 2rem;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            display: flex;
+            color: #E9983D;
+            margin-top: 0rem;
+            padding-top: 0rem;
+          }              
     </style>
   </head>
   <body>
@@ -98,6 +166,33 @@
         <input type="text" id="searchInput" placeholder="Ethereum..." autocomplete="off">
       </div>
     </form>
+    <!--
+    <h1 class="popup-h1">Prix du BTC</h1>
+        <p id="bitcoin-price">Loading Bitcoin price...</p>
+    -->
+    <h1 class="popup-h1">Bitcoin halving countdown</h1>
+    <div id="countdown" class="countdown">
+        <div class="time-segment">
+          <span class="number" id="days"></span>
+          <span class="time-unit">Days</span>
+        </div>
+        <span>:</span>
+        <div class="time-segment">
+          <span class="number" id="hours"></span>
+          <span class="time-unit">Hours</span>
+        </div>
+        <span>:</span>
+        <div class="time-segment">
+          <span class="number" id="minutes"></span>
+          <span class="time-unit">Minutes</span>
+        </div>
+        <span>:</span>
+        <div class="time-segment">
+          <span class="number" id="seconds"></span>
+          <span class="time-unit">Seconds</span>
+        </div>
+      </div>
+      <p class="eta"><span style="color:gray;">ETA: </span>11 avril 2024, 18:25</p>
     <a id="buyBitcoin" href="https://cryptoast.fr/go-binance/" target="_blank">Acheter du BTC ₿</a>
   </body>
   <script src="popup.js"></script>

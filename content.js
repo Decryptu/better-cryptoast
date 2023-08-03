@@ -50,17 +50,21 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=u
     })
     .catch(err => console.error(err));
 
-// Fetch all the images on the page.
-const images = document.getElementsByTagName('img');
-
-// Iterate over each image.
-for (let i = 0; i < images.length; i++) {
-    // Check if the image src matches the one you want to replace.
-    if (images[i].src === 'https://cryptoast.fr/wp-content/uploads/2023/01/Sans-titre-1-300x300.png') {
-        // Replace the image src with the new URL.
-        images[i].src = 'https://i.imgur.com/X4bya8i.png';
-    }
-}
+    const observer = new MutationObserver(function(mutationsList, observer) {
+        for(let mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                const images = document.getElementsByTagName('img');
+                for (let i = 0; i < images.length; i++) {
+                    if (images[i].src === 'https://cryptoast.fr/wp-content/uploads/2023/01/Sans-titre-1-300x300.png') {
+                        images[i].src = 'https://i.imgur.com/X4bya8i.png';
+                    }
+                }
+            }
+        }
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true });
+    
 
 // Iterate over all image elements on the page
 document.querySelectorAll('img').forEach(function(img) {
@@ -92,15 +96,25 @@ bar.setAttribute('id', 'myBar');
 document.body.appendChild(bar);
 
 //Play a music on a certain page
-window.onload = function() {
+window.addEventListener('load', function() {
     if(window.location.href === 'https://cryptoast.fr/author/maximilien/') {
         let audio = new Audio('https://cdn.discordapp.com/attachments/1066833707941515326/1135228657418379274/Bring_Me_The_Horizon_-_Can_You_Feel_My_Heart.mp3');
 
         document.addEventListener('click', function() {
-            audio.play();
+            let promise = audio.play();
+
+            if (promise !== undefined) {
+                promise.catch(error => {
+                    // Auto-play was prevented.
+                    console.log("Auto-play prevented:", error);
+                }).then(() => {
+                    // Auto-play started successfully.
+                    console.log("Auto-play started successfully");
+                });
+            }
         });
     }
-}
+});
 
 // Create search box
 let searchContainer = document.createElement('div');
@@ -179,3 +193,104 @@ if (authorElement && authorElement.href === 'https://cryptoast.fr/author/robin/'
     document.body.appendChild(rainbowDiv);
 }
 
+// Function to fetch coin details
+const tickerToId = {
+    'btc': 'bitcoin',
+    'eth': 'ethereum',
+    'ada': 'cardano',
+    'bch': 'bitcoin-cash',
+    'dot': 'polkadot',
+    'ltc': 'litecoin',
+    'shib': 'shiba-inu',
+    'steth': 'staked-ether',
+    'trx': 'tron',
+    'usdc': 'usd-coin',
+    'wbtc': 'wrapped-bitcoin',
+    'avax': 'avalanche-2',
+    'bnb': 'binancecoin',
+    'doge': 'dogecoin',
+    'matic': 'matic-network',
+    'sol': 'solana',
+    'ton': 'the-open-network',
+    'uni': 'uniswap',
+    'usdt': 'tether',
+    'xrp': 'ripple'
+};
+function fetchCoinDetails(ticker) {
+    let id = tickerToId[ticker];  // convert the ticker to id
+    if (!id) {
+        console.error(`Could not find ID for ticker: ${ticker}`);
+        return;
+    }
+
+    // Fetch the coin price
+    fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_market_cap=true&include_24hr_change=true`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Fetched details for', ticker, data); // Debug
+
+            let priceChange = data[id].usd_24h_change.toFixed(2);
+            let price = data[id].usd.toFixed(2);
+            let color = priceChange < 0 ? 'red' : 'green';
+
+            // Fetch the coin image
+            fetch(`https://api.coingecko.com/api/v3/coins/${id}`)
+                .then(response => response.json())
+                .then(coinData => {
+                    // Adding the new div
+                    let coinDiv = document.createElement('div');
+                    coinDiv.className = 'coin-info';
+                    let imgSrc = coinData.image.small;
+                    coinDiv.innerHTML = `
+    <div>
+        <img src="${imgSrc}" alt="${ticker} logo">
+        <span class="ticker">${ticker.toUpperCase()}</span>
+    </div>
+    <div class="details">
+        <span class="price-change" style="color: ${color};">${priceChange}%</span>
+        <span class="price">$${price}</span>
+    </div>
+`;
+                    console.log('Created new div:', coinDiv); // Debug
+
+                    let asideElement = document.querySelector('.article-aside');
+                    console.log('Found aside element:', asideElement); // Debug
+
+                    if (asideElement) {
+                        asideElement.prepend(coinDiv);
+                        console.log('Prepended new div to aside element'); // Debug
+                    } else {
+                        console.error('Aside element not found'); // Debug
+                    }
+                })
+                .catch(error => {
+                    console.error(`Could not load ${ticker} image:`, error);
+                });
+        })
+        .catch(error => {
+            console.error(`Could not load ${ticker} details:`, error);
+        });
+}
+
+window.onload = function() {
+    detectCoin();
+};
+
+function detectCoin() {
+    let titleElement = document.querySelector('.article-title');
+    if(titleElement){
+        let title = titleElement.innerText;
+        console.log('Title: ', title); // Debug: log the title
+
+        let detectedCoins = ['btc', 'eth', 'ada', 'bch', 'dot', 'ltc', 'shib', 'steth', 'trx', 'usdc', 'wbtc', 'avax', 'bnb', 'doge', 'matic', 'sol', 'ton', 'uni', 'usdt', 'xrp']
+        .filter(coin => title.includes(coin.toUpperCase())); // Changed to look for uppercase
+        
+        if (detectedCoins.includes('btc')) {
+            console.log('BTC detected in title'); // Debug: log when 'btc' is detected
+        }
+
+        detectedCoins.forEach(coin => fetchCoinDetails(coin));
+    } else {
+        console.log('Title element not found'); // Debug: log when the title element can't be found
+    }
+}

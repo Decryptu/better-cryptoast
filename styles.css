@@ -789,7 +789,7 @@ hustle-layout-body{
     height: 4px;
     background-color: #EF8867;
     z-index: 99;
-  }  
+  }
 
 /* article-end */
 /* formation-start */
@@ -1507,4 +1507,57 @@ section.videos-banner{
 }
 
 /* video-end */
+/* sidebar plugin crypto start */
+[data-theme="dark"] .coin-info {
+    border-bottom: 1px solid #1A1A1A;
+}
+[data-theme="light"] .coin-info {
+    border-bottom: 1px solid #E5E5E5; 
+}
+.coin-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 1rem;
+}
+
+.coin-info img {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0px;
+}
+
+[data-theme="dark"] .coin-info .ticker {
+    color: white;
+}
+[data-theme="light"] .coin-info .ticker {
+    color: black;
+}
+.coin-info .ticker {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.coin-info .details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.coin-info .price-change {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+[data-theme="dark"] .coin-info .price {
+    color: white;
+}
+[data-theme="light"] .coin-info .price {
+    color: black;
+}
+.coin-info .price {
+    font-size: 1rem;
+}
+/* sidebar plugin crypto end */
 }
