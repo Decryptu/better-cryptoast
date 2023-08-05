@@ -33,7 +33,7 @@
       "matches": ["*://cryptoast.fr/*"],
       "exclude_matches": ["*://cryptoast.fr/wp-admin/*"],
       "css": ["styles.css"],
-      "js": ["theme.js", "content.js"]
+      "js": ["theme.js", "content.js", "coinDetect.js", "authorCheck.js", "progressBar.js", "btcPrice.js", "searchBox.js", "imgEnhance.js"]
     }
   ]
 }

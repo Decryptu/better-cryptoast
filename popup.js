@@ -9,7 +9,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
   });
   
   const countdownContainer = document.querySelector("#countdown");
-  const halvingDate = new Date("11 April 2024 18:25:00 UTC");
+  const halvingDate = new Date("27 April 2024 01:55:00 UTC");
   
   // Initialize the countdown to "00" for every unit
   countdownContainer.innerHTML = `
