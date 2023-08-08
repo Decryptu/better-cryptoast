@@ -67,24 +67,3 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
   }
   
   setInterval(updateCountdown, 1000);
-  
-  //BTC price
-  /*
-  function updateBitcoinPrice() {
-    fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
-      .then(response => response.json())
-      .then(data => {
-        let price = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(data.bitcoin.usd);
-        price = price.replace(/,/g, '').replace(/ /g,'').replace('US$', '$');
-        document.getElementById('bitcoin-price').innerText = price;
-      })
-      .catch(() => {
-        document.getElementById('bitcoin-price').innerText = 'Impossible de charger le prix du Bitcoin';
-      });
-  }
-  
-  
-  // Update Bitcoin price every 10 seconds
-  setInterval(updateBitcoinPrice, 10000);
-  updateBitcoinPrice();
-  */
