@@ -80,7 +80,6 @@ function fetchBTCPrice() {
         .then(response => response.json())
         .then(data => {
             btcToUsdRate = data.bitcoin.usd;
-            console.log("Fetched BTC Price: ", btcToUsdRate); // Add console log
         })
         .catch(error => {
             console.error("There was an error fetching the BTC price:", error);
@@ -89,7 +88,6 @@ function fetchBTCPrice() {
 
 // Update the USD input based on the BTC input
 function updateUSDValue() {
-    console.log("BTC Input Changed");  // Add console log
     const btcValue = parseFloat(document.getElementById('btcInput').value);
     if (!isNaN(btcValue)) {
         const usdValue = btcToUsdRate * btcValue;
@@ -99,13 +97,22 @@ function updateUSDValue() {
 
 // Update the BTC input based on the USD input
 function updateBTCValue() {
-    console.log("USD Input Changed");  // Add console log
     const usdValue = parseFloat(document.getElementById('usdInput').value);
     if (!isNaN(usdValue)) {
         const btcValue = usdValue / btcToUsdRate;
         document.getElementById('btcInput').value = btcValue.toFixed(8);  // BTC can have up to 8 decimals
     }
 }
+
+// Function to filter input
+function filterInput(event) {
+    // Allow only digits and dots
+    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); 
+    // The second replace() ensures there's only one dot
+}
+
+document.getElementById('btcInput').addEventListener('input', filterInput);
+document.getElementById('usdInput').addEventListener('input', filterInput);
 
 // Fetch the BTC price on popup open
 fetchBTCPrice();
