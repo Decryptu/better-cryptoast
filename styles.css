@@ -545,6 +545,14 @@ p.crypto-change{
     margin-bottom: 0.5rem!important;
 }
 
+.good-deals-card-category{
+    display: none!important;
+}
+
+.global-search-modal-ctn.visible .global-search-modal{
+    border-radius: 0.25rem!important;
+}
+
 /* home-end */
 
 /* actu-start */
@@ -691,6 +699,11 @@ div.pagination-ctn .pagination-item{
     font-size: initial!important;
     margin-bottom: 1rem!important;
 }
+
+span.cta-gradient-2:hover {
+    opacity: 0.8!important;
+}
+
 
 #btn_zengo_3 span.cta-gradient-2{
     border-radius: 0.5rem!important;
@@ -984,7 +997,7 @@ hustle-layout-body{
     font-weight: 400!important;
 }
 
-.prices-grid-row.row.px-2.px-md-4.py-3.py-md-4{
+.prices-grid-row.row.px-2.px-md-4.py-3.py-md-4:first-of-type{
     border-radius: 0.5rem 0.5rem 0 0!important;
 }
 
@@ -1003,6 +1016,22 @@ hustle-layout-body{
 
 [data-theme="dark"] .prices-grid{
     border: 0.75px solid #333333!important;
+}
+
+.h3_cmc{
+    display: none!important;
+}
+
+.d-flex.flex-column.flex-md-row.crypto-infos-terciary.notel > .title{
+    display: none!important;
+}
+
+.crypto-infos .crypto-infos-terciary .crypto-infos-main-stats:not(.bottom-stats) div>div>div>div.changes{
+    border-radius: 0.25rem!important;
+}
+
+.market-info-grid .crypto-gainers .crypto-gainer .change, .market-info-grid .crypto-gainers .crypto-loser .change, .market-info-grid .crypto-losers .crypto-gainer .change, .market-info-grid .crypto-losers .crypto-loser .change{
+    border-radius: 0.25rem!important;
 }
 
 /* cmc-end */
@@ -1075,6 +1104,7 @@ hustle-layout-body{
 
 div.cryptos-grid .cryptos-card-img{
     border-radius: 0.5rem !important;
+    margin-bottom: 0.5rem!important;
 }
 
 .d-flex.align-items-center.justify-content-between.flex-wrap.cryptos-section-second-title-ctn > .search-input-ctn:hover{
@@ -1146,6 +1176,7 @@ div.cryptos-grid .cryptos-card-img{
 
 .price-utils{
     padding: 0!important;
+    margin-bottom: 2rem!important;
 }
 
 .crypto-infos .crypto-infos-terciary .user-actions>.user-action p{
@@ -1260,6 +1291,56 @@ div.cryptos-grid .cryptos-card-img{
 
 .crypto-infos .graph-ctn{
     background: transparent!important;
+}
+
+.crypto-bottom-description-ctn .see-associated-paper{
+    border-radius: 0.25rem!important;
+    margin-right: 0.5rem!important;
+}
+
+.last-news-card p.last-news-card-category{
+    max-width: 80px!important;
+}
+
+.buy-crypto-section-grid-item a.buy-crypto-btn, .buy-crypto-section-grid-item div.buy-crypto-btn{
+    border-radius: 0.5rem!important;
+    max-width: -webkit-fill-available!important;
+}
+
+.buy-crypto-section-grid-item .currency-displayed{
+    padding-right: 0rem!important;
+}
+
+.ss-main .ss-list{
+    max-height: 20rem!important;
+    border-radius: 0.5rem!important;
+    box-shadow: none !important;
+}
+
+[data-theme="light"] .ss-main .ss-list{
+    background-color: #FAFAFA!important;
+    border: 0.75px solid #EAEAEA;
+}
+
+[data-theme="dark"] .ss-main .ss-list{
+    background-color: #111111!important;
+    border: 0.5px solid #333333;
+}
+
+[data-theme="light"] .ss-content .ss-search{
+    background-color: #FAFAFA!important;
+}
+
+[data-theme="dark"] .ss-content .ss-search{
+    background-color: #111111!important;
+}
+
+[data-theme="light"] .market-cap-tool .market-cap-tool-card input{
+    border: 0.75px solid #EAEAEA;
+}
+
+[data-theme="dark"] .market-cap-tool .market-cap-tool-card input{
+    border: 0.5px solid #333333;
 }
 
 /* cmc-coin-end*/

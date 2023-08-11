@@ -139,10 +139,11 @@
             margin-bottom: 2rem;
           }
           /* btc price */
-          .popup-h1{
-            padding-bottom: 0.5rem;
-            margin-bottom: 0rem;
-          }
+          .converter {
+            padding: 5px 20px 10px 20px;
+            margin: 0px;
+            margin-bottom: 2rem;
+        }
           #bitcoin-price{
             margin-bottom: 2rem;
             justify-content: center;
@@ -152,7 +153,57 @@
             color: #E9983D;
             margin-top: 0rem;
             padding-top: 0rem;
-          }              
+          }
+          .input-container {
+            position: relative;
+            margin: 10px 0;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .input-container input {
+          display: flex;
+          align-items: center;
+          background-color: #FFFFFF;
+          border: 1px solid #E6E6E6;
+          border-radius: 0.5rem;
+          height: 40px;
+          width: 100%;
+          transition: border-color 0.3s;
+          padding-right: 30px;
+          padding-left: 10px;
+          max-width: 100%;
+          box-sizing: border-box;
+      }
+
+      .input-container:hover input,
+      .input-container:active input {
+          border: 1px solid #E9983D;
+      }
+
+      .input-container input:focus {
+        outline: none;
+        border: 1px solid #E9983D;
+    }    
+        
+      .btc-container::after {
+        content: "₿";
+        position: absolute;
+        right: 10px; 
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+    
+    .usd-container::after {
+        content: "$";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
     </style>
   </head>
   <body>
@@ -166,6 +217,15 @@
         <input type="text" id="searchInput" placeholder="Ethereum..." autocomplete="off">
       </div>
     </form>
+    <h1 class="popup-h1">Convertisseur BTC ↔ USD</h1>
+<div class="converter">
+  <div class="input-container btc-container">
+    <input type="text" id="btcInput" placeholder="BTC">
+</div>
+<div class="input-container usd-container">
+    <input type="text" id="usdInput" placeholder="USD">
+</div>
+</div>
     <!--
     <h1 class="popup-h1">Prix du BTC</h1>
         <p id="bitcoin-price">Loading Bitcoin price...</p>

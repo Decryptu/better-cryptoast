@@ -4,7 +4,7 @@ let observerForHeader = new MutationObserver(function() {
     if (element) {
         // Create a span and add the sparkle emoji to it
         let span = document.createElement('span');
-        span.textContent = '🥶';
+        span.textContent = '🏴‍☠️';
         span.classList.add('sparkle');
 
         // Append the span to the target element
@@ -45,3 +45,43 @@ function removeNBSP() {
 
 // Call the function
 removeNBSP();
+
+// fix broken emote
+function replaceQuestionMarks() {
+    const paragraphs = document.querySelectorAll('.article-section p');
+    paragraphs.forEach(p => {
+        // Replace in paragraph itself
+        if (p.childNodes.length > 0 && p.childNodes[0].nodeValue && p.childNodes[0].nodeValue.startsWith("? ")) {
+            p.childNodes[0].nodeValue = p.childNodes[0].nodeValue.replace('? ', '👉🏻 ');
+        }
+
+        // Replace in <a> tags within the paragraph
+        const anchorTags = p.querySelectorAll('a');
+        anchorTags.forEach(a => {
+            if (a.childNodes.length > 0 && a.childNodes[0].nodeValue && a.childNodes[0].nodeValue.startsWith("? ")) {
+                a.childNodes[0].nodeValue = a.childNodes[0].nodeValue.replace('? ', '👉🏻 ');
+            }
+        });
+    });
+}
+
+// Run the replacement function immediately on page load
+replaceQuestionMarks();
+
+let observerForEmote = new MutationObserver(function(mutations) {
+    mutations.forEach(mutation => {
+        if (mutation.addedNodes.length) {
+            replaceQuestionMarks();
+        }
+    });
+});
+
+const config = {
+    childList: true,
+    subtree: true
+};
+
+const targetNode = document.querySelector('.article-section');
+if (targetNode) {
+    observerForEmote.observe(targetNode, config);
+}
