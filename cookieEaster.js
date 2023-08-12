@@ -44,7 +44,7 @@ function applyEffect() {
 }
 
 function processCookie(value) {
-    const keywords = ["decrpt", "nico", "alex", "robin", "val", "valentin"];
+    const keywords = ["dcrpt", "nico", "alex", "robin", "val", "valentin"];
     for (let keyword of keywords) {
         if (value.toLowerCase().includes(keyword)) {
             applyEffect();
