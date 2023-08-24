@@ -9,65 +9,78 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
   });
   
   const countdownContainer = document.querySelector("#countdown");
-  const halvingDate = new Date("27 April 2024 01:55:00 UTC");
+
+  const TARGET_BLOCK_HEIGHT = 840000;
+  const AVERAGE_BLOCK_TIME = 600; // In seconds (10 minutes)
   
-  // Initialize the countdown to "00" for every unit
-  countdownContainer.innerHTML = `
-    <div class="time-segment">
-      <span class="number">00</span>
-      <span class="time-unit">Days</span>
-    </div>
-    :
-    <div class="time-segment">
-      <span class="number">00</span>
-      <span class="time-unit">Hours</span>
-    </div>
-    :
-    <div class="time-segment">
-      <span class="number">00</span>
-      <span class="time-unit">Minutes</span>
-    </div>
-    :
-    <div class="time-segment">
-      <span class="number">00</span>
-      <span class="time-unit">Seconds</span>
-    </div>
-  `;
+  // This will be the time in seconds till the halving event.
+  let timeTillHalving = 0;
   
-  function updateCountdown() {
-    const now = new Date();
-    const diffInSeconds = Math.max((halvingDate - now) / 1000, 0);
-  
-    const days = Math.floor(diffInSeconds / 60 / 60 / 24);
-    const hours = Math.floor(diffInSeconds / 60 / 60 % 24);
-    const minutes = Math.floor(diffInSeconds / 60 % 60);
-    const seconds = Math.floor(diffInSeconds % 60);
-  
-    countdownContainer.innerHTML = `
-      <div class="time-segment">
-        <span class="number">${days.toString().padStart(2, '0')}</span>
-        <span class="time-unit">Day${days !== 1 ? 's' : ''}</span>
-      </div>
-      :
-      <div class="time-segment">
-        <span class="number">${hours.toString().padStart(2, '0')}</span>
-        <span class="time-unit">Hour${hours !== 1 ? 's' : ''}</span>
-      </div>
-      :
-      <div class="time-segment">
-        <span class="number">${minutes.toString().padStart(2, '0')}</span>
-        <span class="time-unit">Minute${minutes !== 1 ? 's' : ''}</span>
-      </div>
-      :
-      <div class="time-segment">
-        <span class="number">${seconds.toString().padStart(2, '0')}</span>
-        <span class="time-unit">Second${seconds !== 1 ? 's' : ''}</span>
-      </div>
-    `;
+  function fetchCurrentBlockHeight() {
+      return fetch('https://blockchain.info/q/getblockcount')
+          .then(response => response.text())
+          .then(currentBlockHeight => {
+              const blocksLeft = TARGET_BLOCK_HEIGHT - currentBlockHeight;
+              timeTillHalving = blocksLeft * AVERAGE_BLOCK_TIME;
+          });
   }
   
-  setInterval(updateCountdown, 1000);
-
+  function updateCountdown() {
+      timeTillHalving = Math.max(timeTillHalving - 1, 0);
+    
+      const days = Math.floor(timeTillHalving / 60 / 60 / 24);
+      const hours = Math.floor(timeTillHalving / 60 / 60 % 24);
+      const minutes = Math.floor(timeTillHalving / 60 % 60);
+      const seconds = Math.floor(timeTillHalving % 60);
+    
+      countdownContainer.innerHTML = `
+        <div class="time-segment">
+          <span class="number">${days.toString().padStart(2, '0')}</span>
+          <span class="time-unit">jour${days !== 1 ? 's' : ''}</span>
+        </div>
+        :
+        <div class="time-segment">
+          <span class="number">${hours.toString().padStart(2, '0')}</span>
+          <span class="time-unit">heure${hours !== 1 ? 's' : ''}</span>
+        </div>
+        :
+        <div class="time-segment">
+          <span class="number">${minutes.toString().padStart(2, '0')}</span>
+          <span class="time-unit">minute${minutes !== 1 ? 's' : ''}</span>
+        </div>
+        :
+        <div class="time-segment">
+          <span class="number">${seconds.toString().padStart(2, '0')}</span>
+          <span class="time-unit">seconde${seconds !== 1 ? 's' : ''}</span>
+        </div>
+      `;
+  }
+  
+  const etaContainer = document.querySelector("#eta-time");
+  
+  function updateETA() {
+      const etaDate = new Date(Date.now() + timeTillHalving * 1000); // Convert seconds to milliseconds
+  
+      const etaDay = etaDate.getUTCDate().toString().padStart(2, '0');
+      const months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+      const etaMonth = months[etaDate.getUTCMonth()];
+      const etaYear = etaDate.getUTCFullYear();
+      const etaHours = etaDate.getUTCHours().toString().padStart(2, '0');
+      const etaMinutes = etaDate.getUTCMinutes().toString().padStart(2, '0');
+  
+      etaContainer.textContent = `${etaDay} ${etaMonth} ${etaYear}, ${etaHours}:${etaMinutes} UTC`;
+  }
+  
+  function updateCountdownAndETA() {
+      updateCountdown();
+      updateETA();
+  }
+  
+  fetchCurrentBlockHeight().then(() => {
+      updateCountdownAndETA(); // Initial update
+      setInterval(updateCountdownAndETA, 1000);
+  });
+  
 // Price converter
 let btcToUsdRate = 0;
 
