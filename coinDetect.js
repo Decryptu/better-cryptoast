@@ -30,6 +30,15 @@ const tickerToId = {
     'pepe': 'pepe',
     'wld': 'worldcoin-wld'
 };
+
+function formatPrice(price) {
+    if (price < 1) {
+        return '$' + price.toFixed(9).replace(/\.?0+$/, "");
+    } else {
+        return '$' + price.toFixed(2);
+    }
+}
+
 function fetchCoinDetails(ticker) {
     let id = tickerToId[ticker];  // convert the ticker to id
     if (!id) {
@@ -44,7 +53,7 @@ function fetchCoinDetails(ticker) {
             console.log('Fetched details for', ticker, data); // Debug
 
             let priceChange = data[id].usd_24h_change.toFixed(2);
-            let price = data[id].usd.toFixed(2);
+            let price = formatPrice(data[id].usd);
             let color = priceChange < 0 ? 'red' : 'green';
 
             // Fetch the coin image
@@ -62,7 +71,7 @@ function fetchCoinDetails(ticker) {
     </div>
     <div class="details">
         <span class="price-change" style="color: ${color};">${priceChange}%</span>
-        <span class="price">$${price}</span>
+        <span class="price">${price}</span>
     </div>
 `;
                     console.log('Created new div:', coinDiv); // Debug
