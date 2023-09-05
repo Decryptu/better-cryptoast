@@ -553,6 +553,10 @@ p.crypto-change{
     border-radius: 0.25rem!important;
 }
 
+.last-news-snd{
+    margin-right: 0px!important;
+}
+
 /* home-end */
 
 /* actu-start */
@@ -873,6 +877,10 @@ hustle-layout-body{
 
 .distrib_e2{
     display: none!important;
+}
+
+.emoji.lazy.loaded{
+    max-height: 24px!important;
 }
 
 /* article-end */
