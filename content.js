@@ -85,3 +85,39 @@ const targetNode = document.querySelector('.article-section');
 if (targetNode) {
     observerForEmote.observe(targetNode, config);
 }
+
+//remove prices-grid from page outils
+function isTargetPage(url) {
+    return url === "https://cryptoast.fr/outils-liste.php";
+  }
+  
+  function removeAllPricesGridInstances() {
+    const pricesGridElements = document.querySelectorAll("#body #prices-grid");
+    let elementsRemoved = 0;
+  
+    pricesGridElements.forEach((element) => {
+      element.remove();
+      elementsRemoved++;
+    });
+  
+    return elementsRemoved;  // Return the number of removed elements
+  }
+  
+  if (isTargetPage(window.location.href)) {
+    const observerConfig = {
+      childList: true,
+      subtree: true,
+    };
+  
+    const bodyElement = document.querySelector("body");
+  
+    const domObserver = new MutationObserver(() => {
+      const removedCount = removeAllPricesGridInstances();
+      if (removedCount > 0) {
+        console.log(`Removed ${removedCount} instances of #prices-grid.`);
+      }
+    });
+  
+    domObserver.observe(bodyElement, observerConfig);
+  }  
+  
