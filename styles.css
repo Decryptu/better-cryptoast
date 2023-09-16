@@ -883,6 +883,10 @@ hustle-layout-body{
     max-height: 24px!important;
 }
 
+.btn4 span{
+    font-size: 1rem;
+}
+
 /* article-end */
 /* formation-start */
 
@@ -1640,6 +1644,10 @@ div.cryptos-grid .cryptos-card-img{
     font-weight: 300!important;
     font-size: 1rem!important;
     color: #585858!important;
+}
+
+p.article-subtitle{
+    line-height: initial!important;
 }
 
 /* event-end */
