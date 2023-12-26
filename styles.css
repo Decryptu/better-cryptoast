@@ -1745,9 +1745,7 @@ section.videos-banner{
 [data-theme="dark"] .outils_card.event_card.last-outils-card.card-shadow.bitcoin {
     background-color: white !important;
 }
-[data-theme="light"] .coin-info .price {
-    background-color: black !important;
-}
+
 /* outils end */
 
 }
