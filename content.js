@@ -120,4 +120,3 @@ function isTargetPage(url) {
   
     domObserver.observe(bodyElement, observerConfig);
   }  
-  
