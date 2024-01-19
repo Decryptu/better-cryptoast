@@ -45,42 +45,47 @@ function initializeLightbox() {
         createLightboxImage(overlay, src);
 
         document.body.appendChild(overlay);
-        document.addEventListener('keydown', onEscapeClose);
+        document.addEventListener('keydown', function(event) {
+            onEscapeClose(event, overlay);
+        });
 
-        function onEscapeClose(e) {
-            if (e.key === "Escape") {
-                document.body.removeChild(overlay);
-                document.removeEventListener('keydown', onEscapeClose);
-            }
+        overlay.addEventListener('click', function() {
+            closeLightbox(overlay);
+        });
+    }
+
+    function configureOverlay(overlay) {
+        overlay.style.position = 'fixed';
+        overlay.style.top = 0;
+        overlay.style.left = 0;
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.75)';
+        overlay.style.display = 'flex';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+        overlay.style.zIndex = '1000';
+    }
+
+    function createLightboxImage(overlay, src) {
+        const lightboxImg = new Image();
+        lightboxImg.src = src;
+        lightboxImg.style.maxWidth = '90%';
+        lightboxImg.style.maxHeight = '90%';
+        lightboxImg.style.margin = 'auto';
+        lightboxImg.style.border = '3px solid white';
+        lightboxImg.style.boxShadow = '0px 0px 15px rgba(0, 0, 0, 0.5)';
+        overlay.appendChild(lightboxImg);
+    }
+
+    function onEscapeClose(e, overlay) {
+        if (e.key === "Escape") {
+            closeLightbox(overlay);
         }
     }
-}
 
-function configureOverlay(overlay) {
-    overlay.style.position = 'fixed';
-    overlay.style.top = 0;
-    overlay.style.left = 0;
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.75)';
-    overlay.style.display = 'flex';
-    overlay.style.justifyContent = 'center';
-    overlay.style.alignItems = 'center';
-    overlay.style.zIndex = '1000';
-
-    overlay.addEventListener('click', () => {
+    function closeLightbox(overlay) {
         document.body.removeChild(overlay);
         document.removeEventListener('keydown', onEscapeClose);
-    });
-}
-
-function createLightboxImage(overlay, src) {
-    const lightboxImg = new Image();
-    lightboxImg.src = src;
-    lightboxImg.style.maxWidth = '80%';
-    lightboxImg.style.maxHeight = '80%';
-    lightboxImg.style.margin = 'auto';
-    lightboxImg.style.border = '3px solid white';
-    lightboxImg.style.boxShadow = '0px 0px 15px rgba(0, 0, 0, 0.5)';
-    overlay.appendChild(lightboxImg);
+    }
 }
