@@ -4,7 +4,7 @@ let observerForHeader = new MutationObserver(function() {
     if (element) {
         // Create a span and add the sparkle emoji to it
         let span = document.createElement('span');
-        span.textContent = ' 🏄🏻';
+        span.textContent = ' 🥷🏻';
         span.classList.add('sparkle');
 
         // Append the span to the target element

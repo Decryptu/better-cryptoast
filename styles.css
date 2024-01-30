@@ -1748,4 +1748,59 @@ section.videos-banner{
 
 /* outils end */
 
+/* halving start */
+[data-theme="dark"] .countdown_titres {
+    color: white !important;
+}
+
+.countdown .figure{
+    background-color: transparent !important;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .countdown, .countdown_titres {
+        display: flex!important;
+        justify-content: space-between!important;
+    }
+
+    .countdown > div, .countdown_titres > span {
+        flex: 1!important; /* This ensures that each box and label takes up equal space */
+        text-align: center!important; /* This will center the text within each span */
+      }
+      
+      /* Assuming each box has a fixed width, we can align the spans by giving them the same width */
+      .countdown > div {
+        width: 4rem!important; /* or whatever the width of the boxes is */
+        flex: 1!important;
+      }
+      
+      /* Optional: If you want to align the text vertically */
+      .countdown, .countdown_titres {
+        align-items: center!important; /* This will vertically align the items in the center if the parent has a specific height */
+      }
+
+      .countdown_titres {
+        display: flex!important;
+        justify-content: space-between!important;
+        gap: 0.8rem!important;
+      }
+      
+      .countdown_titres > span {
+        flex: 1!important; /* This makes sure each label grows equally */
+        text-align: center!important; /* Center the text within each label */
+      }
+
+      .countdown_titres>span:first-child {
+        margin-left: 2rem!important;
+      }
+}
+
+/* halving end */
+
+/* lightbox start */
+.modal .close {
+    display: none!important;
+}
+/* ligutbox end */
+
 }

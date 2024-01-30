@@ -3,6 +3,33 @@ window.onload = function() {
 };
 
 function initializeLightbox() {
+    var modal = document.getElementById('ModalImg');
+    var modalContent = document.querySelector('.modal-content');
+    var closeModal = function() {
+        modal.style.display = 'none';
+    };
+
+    // Close modal when clicking outside of the modal content
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Close modal when pressing the Escape key
+    window.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
+}
+
+/*
+window.onload = function() {
+    initializeLightbox();
+};
+
+function initializeLightbox() {
     const targetNode = document.querySelector('.article-section');
 
     if (targetNode) {
@@ -89,3 +116,4 @@ function initializeLightbox() {
         document.removeEventListener('keydown', onEscapeClose);
     }
 }
+*/
