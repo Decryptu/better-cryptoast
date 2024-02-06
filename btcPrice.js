@@ -17,4 +17,4 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=u
             }
         }
     })
-    .catch(err => console.error(err));   
+    .catch(err => console.error(`Error fetching data: ${err.message}`));

@@ -121,6 +121,11 @@ header.page-header > div {
     flex-grow: 0!important;
 }
 
+#distrib_e1 a {
+    padding: 0!important;
+    margin-bottom: .8rem!important;
+}
+
 /*.search-icon{
     margin-left: 1rem!important;
 }*/
@@ -561,6 +566,19 @@ p.crypto-change{
 
 /* actu-start */
 
+.su-table table td {
+    background-color: white!important;
+}
+
+.su-table-alternate table tr:nth-child(even) td{
+    background-color: white!important;
+}
+
+td, tr, table, tbody {
+    background-color: white!important;
+    background: white!important;
+}
+
 .fd_head{
     display: none!important;
 }
@@ -781,6 +799,7 @@ hustle-layout-body{
 
 .article-aside .most-read-article-ctn>a.most-read-article>img{
     border-radius: 0.25rem!important;
+    aspect-ratio: 1!important;
 }
 
 .read-time{
