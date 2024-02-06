@@ -1,5 +1,5 @@
 // Function to fetch coin details
-const tickerToFullName = {
+const tickerDictionary = {
     'btc': 'bitcoin',
     'eth': 'ethereum',
     'ada': 'cardano',
@@ -31,106 +31,109 @@ const tickerToFullName = {
     'wld': 'worldcoin-wld'
 };
 
-// Format the price with appropriate precision
-function formatCryptoPrice(price) {
+// Function to format cryptocurrency prices with appropriate precision
+function formatPriceWithPrecision(price) {
     return price < 1 ? `$${price.toFixed(9).replace(/\.?0+$/, "")}` : `$${price.toFixed(2)}`;
 }
 
-// Fetch and display details about the cryptocurrency
-function fetchAndDisplayCryptoDetails(ticker) {
-    const id = tickerToFullName[ticker];
-    if (!id) {
-        console.error(`Crypto ID for ticker '${ticker}' not found.`);
+// Function to fetch and display details about a specific cryptocurrency
+function fetchAndInjectCryptoInfo(tickerSymbol) {
+    const cryptoFullName = tickerDictionary[tickerSymbol.toLowerCase()];
+    if (!cryptoFullName) {
+        console.error(`Ticker symbol '${tickerSymbol}' not recognized.`);
         return;
     }
 
-    fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_market_cap=true&include_24hr_change=true`)
+    const priceApiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${cryptoFullName.toLowerCase()}&vs_currencies=usd&include_market_cap=true&include_24hr_change=true`;
+    fetch(priceApiUrl)
         .then(response => response.json())
         .then(data => {
-            console.log(`Fetched crypto details for ${ticker}`, data);
-            const priceChange = data[id].usd_24h_change.toFixed(2);
-            const price = formatCryptoPrice(data[id].usd);
+            const cryptoData = data[cryptoFullName.toLowerCase()];
+            const priceChange = cryptoData.usd_24h_change.toFixed(2);
+            const price = formatPriceWithPrecision(cryptoData.usd);
             const color = priceChange < 0 ? 'red' : 'green';
 
-            fetch(`https://api.coingecko.com/api/v3/coins/${id}`)
+            const cryptoDetailsApiUrl = `https://api.coingecko.com/api/v3/coins/${cryptoFullName.toLowerCase()}`;
+            fetch(cryptoDetailsApiUrl)
                 .then(response => response.json())
-                .then(coinData => {
+                .then(detailsData => {
                     const cryptoInfoDiv = document.createElement('div');
-                    cryptoInfoDiv.className = 'crypto-info';
+                    cryptoInfoDiv.className = 'crypto-info-container';
                     cryptoInfoDiv.innerHTML = `
                         <div>
-                            <img src="${coinData.image.small}" alt="${ticker.toUpperCase()} logo">
-                            <span class="ticker">${ticker.toUpperCase()}</span>
+                            <img src="${detailsData.image.small}" alt="${tickerSymbol.toUpperCase()} logo">
+                            <span class="ticker-symbol">${tickerSymbol.toUpperCase()}</span>
                         </div>
-                        <div class="details">
+                        <div class="crypto-details">
                             <span class="price-change" style="color: ${color};">${priceChange}%</span>
-                            <span class="price">${price}</span>
+                            <span class="current-price">${price}</span>
                         </div>
                     `;
-                    console.log('Crypto info div created:', cryptoInfoDiv);
+                    console.log(`Crypto information div for ${tickerSymbol.toUpperCase()} created and ready to be injected.`);
 
-                    const asideElement = document.querySelector('.article-aside');
-                    if (asideElement) {
-                        asideElement.prepend(cryptoInfoDiv);
-                        console.log('Crypto info div added to the aside element.');
+                    const articleSidePanel = document.querySelector('.article-aside');
+                    if (articleSidePanel) {
+                        articleSidePanel.prepend(cryptoInfoDiv);
+                        console.log(`Crypto information for ${tickerSymbol.toUpperCase()} added to the side panel.`);
                     } else {
-                        console.error('Aside element for appending crypto info not found.');
+                        console.error('Unable to find the article side panel for injecting crypto information.');
                     }
                 })
-                .catch(error => console.error(`Error fetching image for ${ticker}:`, error));
+                .catch(error => console.error(`Failed to fetch cryptocurrency details for ${tickerSymbol.toUpperCase()}:`, error));
         })
-        .catch(error => console.error(`Error fetching details for ${ticker}:`, error));
+        .catch(error => console.error(`Failed to fetch cryptocurrency price for ${tickerSymbol.toUpperCase()}:`, error));
 }
 
-// MutationObserver callback to handle mutations
-function handleTitleMutation(mutationsList, observer) {
-    for (let mutation of mutationsList) {
+// MutationObserver callback to handle title updates
+function articleTitleChangeHandler(mutationsList, observer) {
+    mutationsList.forEach(mutation => {
         if (mutation.type === 'childList' || mutation.type === 'characterData') {
-            console.log('Detected changes in the article title.');
-            initiateCryptoDetection();
+            console.log('Change detected in the article title by the cryptoDetectorObserver.');
+            detectAndProcessCryptoReferences();
         }
-    }
+    });
 }
 
-// Set up and start the MutationObserver
-function setUpArticleTitleObserver() {
-    const titleElement = document.querySelector('.article-title');
-    if (!titleElement) {
-        console.error('Article title element not found for observing.');
+// Setup the MutationObserver to monitor article title changes
+function initializeTitleObserver() {
+    const articleTitleElement = document.querySelector('.article-title');
+    if (!articleTitleElement) {
+        console.error('Failed to locate the article title element for monitoring.');
         return;
     }
 
-    const observerOptions = {
-        childList: true, // to observe direct children
-        subtree: true, // to observe all descendants
-        characterData: true // to observe text changes
+    const observerConfig = {
+        childList: true,
+        subtree: true,
+        characterData: true,
     };
 
-    const articleTitleObserver = new MutationObserver(handleTitleMutation);
-    articleTitleObserver.observe(titleElement, observerOptions);
-    console.log('Article title observer set up successfully.');
+    const cryptoDetectorObserver = new MutationObserver(articleTitleChangeHandler);
+    cryptoDetectorObserver.observe(articleTitleElement, observerConfig);
+    console.log('CryptoDetectorObserver has been successfully initialized.');
 }
 
-// Detect and process cryptocurrency references in the title
-function initiateCryptoDetection() {
-    const titleElement = document.querySelector('.article-title');
-    if (titleElement) {
-        const titleText = titleElement.innerText.toLowerCase();
-        console.log(`Current article title: ${titleText}`);
+// Function to detect and process cryptocurrency references in the title
+function detectAndProcessCryptoReferences() {
+    const articleTitleElement = document.querySelector('.article-title');
+    if (articleTitleElement) {
+        const articleTitleText = articleTitleElement.innerText.toLowerCase();
+        console.log(`Evaluating article title for cryptocurrency references: ${articleTitleText}`);
 
-        const detectedCryptos = Object.keys(tickerToFullName).filter(ticker => titleText.includes(ticker));
-        detectedCryptos.forEach(ticker => {
-            console.log(`Detected "${ticker.toUpperCase()}" in the title.`);
-            fetchAndDisplayCryptoDetails(ticker);
+        Object.keys(tickerDictionary).forEach(ticker => {
+            if (articleTitleText.includes(ticker)) {
+                console.log(`Cryptocurrency ticker detected in title: ${ticker.toUpperCase()}.`);
+                fetchAndInjectCryptoInfo(ticker);
+            }
         });
     } else {
-        console.error('Article title element not detected.');
+        console.error('Could not find the article title element for cryptocurrency detection.');
     }
 }
 
-// Initialize the observer and detection on page load
-window.onload = function() {
-    console.log('Page loaded. Setting up the article title observer.');
-    setUpArticleTitleObserver();
-    initiateCryptoDetection(); // Initial check in case the title is already present at load time
+// Initialize the MutationObserver and check the title on page load
+window.onload = () => {
+    console.log('Document loaded. Initializing crypto detection mechanisms.');
+    initializeTitleObserver();
+    detectAndProcessCryptoReferences(); // Initial check in case the title does not change after page load
 };
