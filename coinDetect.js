@@ -72,8 +72,10 @@ function fetchCoinDetails(ticker) {
                     return response.json();
                 })
                 .then(coinData => {
+                    observer.disconnect(); // Temporarily disconnect the observer
+
                     let coinDiv = document.createElement('div');
-                    coinDiv.className = 'coin-info script-generated-coin-info'; // Add a specific class to identify script-generated elements
+                    coinDiv.className = 'coin-info'; // No need for the special class anymore
                     let imgSrc = coinData.image.small;
                     coinDiv.innerHTML = `
                         <div>
@@ -95,9 +97,12 @@ function fetchCoinDetails(ticker) {
                     } else {
                         console.error('Aside element not found');
                     }
+
+                    observer.observe(document.body, { childList: true, subtree: true }); // Reconnect the observer
                 })
                 .catch(error => {
                     console.error(`Could not load ${ticker} image:`, error);
+                    observer.observe(document.body, { childList: true, subtree: true }); // Ensure reconnection even if an error occurs
                 });
         })
         .catch(error => {
@@ -107,23 +112,12 @@ function fetchCoinDetails(ticker) {
 
 function initializeCoinDetection() {
     const observeChanges = (mutationsList, observer) => {
-        for (let mutation of mutationsList) {
-            if (mutation.type === 'childList') {
-                console.log('A child node has been added or removed.');
-                let isScriptGenerated = Array.from(mutation.addedNodes).some(node =>
-                    node.classList && node.classList.contains('script-generated-coin-info'));
-                if (!isScriptGenerated) {
-                    detectCoin();
-                }
-            }
-        }
+        console.log('A child node has been added or removed.');
+        detectCoin();
     };
 
-    const config = { attributes: false, childList: true, subtree: true };
-    const targetNode = document.body;
-    const observer = new MutationObserver(observeChanges);
-
-    observer.observe(targetNode, config);
+    observer = new MutationObserver(observeChanges);
+    observer.observe(document.body, { childList: true, subtree: true });
 
     console.log('MutationObserver set up.');
 }
@@ -136,8 +130,8 @@ function detectCoin() {
         let title = titleElement.innerText;
         console.log('Article title:', title);
 
-        let detectedCoins = ['btc', 'eth' // Add more tickers here as needed
-        ].filter(coin => title.toUpperCase().includes(coin.toUpperCase()));
+        let detectedCoins = ['btc', 'eth'] // Add more tickers here as needed
+            .filter(coin => title.toUpperCase().includes(coin.toUpperCase()));
 
         console.log('Detected coins:', detectedCoins);
 
