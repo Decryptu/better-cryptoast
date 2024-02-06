@@ -42,50 +42,58 @@ function formatPrice(price) {
 }
 
 function fetchCoinDetails(ticker) {
-    let id = tickerToId[ticker];  // convert the ticker to id
+    let id = tickerToId[ticker];
     if (!id) {
         console.error(`Could not find ID for ticker: ${ticker}`);
         return;
     }
 
-    // Fetch the coin price
+    console.log(`Fetching details for ${ticker} (${id})`); // Log the fetch action
+
     fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_market_cap=true&include_24hr_change=true`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            console.log('Fetched details for', ticker, data); // Debug
+            console.log(`Fetched details for ${ticker}:`, data);
 
             let priceChange = data[id].usd_24h_change.toFixed(2);
             let price = formatPrice(data[id].usd);
             let color = priceChange < 0 ? 'red' : 'green';
 
-            // Fetch the coin image
             fetch(`https://api.coingecko.com/api/v3/coins/${id}`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(coinData => {
-                    // Adding the new div
                     let coinDiv = document.createElement('div');
                     coinDiv.className = 'coin-info';
                     let imgSrc = coinData.image.small;
                     coinDiv.innerHTML = `
-    <div>
-        <img src="${imgSrc}" alt="${ticker} logo">
-        <span class="ticker">${ticker.toUpperCase()}</span>
-    </div>
-    <div class="details">
-        <span class="price-change" style="color: ${color};">${priceChange}%</span>
-        <span class="price">${price}</span>
-    </div>
-`;
-                    console.log('Created new div:', coinDiv); // Debug
+                        <div>
+                            <img src="${imgSrc}" alt="${ticker} logo">
+                            <span class="ticker">${ticker.toUpperCase()}</span>
+                        </div>
+                        <div class="details">
+                            <span class="price-change" style="color: ${color};">${priceChange}%</span>
+                            <span class="price">${price}</span>
+                        </div>
+                    `;
+
+                    console.log(`Created new div for ${ticker}`);
 
                     let asideElement = document.querySelector('.article-aside');
-                    console.log('Found aside element:', asideElement); // Debug
-
                     if (asideElement) {
                         asideElement.prepend(coinDiv);
-                        console.log('Prepended new div to aside element'); // Debug
+                        console.log(`Prepended new div for ${ticker} to aside element`);
                     } else {
-                        console.error('Aside element not found'); // Debug
+                        console.error('Aside element not found');
                     }
                 })
                 .catch(error => {
@@ -98,24 +106,25 @@ function fetchCoinDetails(ticker) {
 }
 
 window.onload = function() {
+    console.log('window.onload triggered'); // Verify window.onload is working
     detectCoin();
 };
 
 function detectCoin() {
+    console.log('Running detectCoin function'); // Verify detectCoin is called
+
     let titleElement = document.querySelector('.article-title');
     if(titleElement){
         let title = titleElement.innerText;
-        console.log('Title: ', title); // Debug: log the title
+        console.log('Article title:', title); // Log the article title
 
-        let detectedCoins = ['btc', 'eth', 'ada', 'bch', 'dot', 'ltc', 'shib', 'steth', 'trx', 'usdc', 'wbtc', 'avax', 'bnb', 'doge', 'matic', 'sol', 'ton', 'uni', 'usdt', 'xrp', 'crv', 'aave', 'op', 'arb', 'atom', 'xmr', 'link', 'pepe', 'wld']
-        .filter(coin => title.includes(coin.toUpperCase())); // Changed to look for uppercase
-        
-        if (detectedCoins.includes('btc')) {
-            console.log('BTC detected in title'); // Debug: log when 'btc' is detected
-        }
+        let detectedCoins = ['btc', 'eth', // add other coin tickers here
+        ].filter(coin => title.toUpperCase().includes(coin.toUpperCase()));
+
+        console.log('Detected coins:', detectedCoins); // Log detected coins
 
         detectedCoins.forEach(coin => fetchCoinDetails(coin));
     } else {
-        console.log('Title element not found'); // Debug: log when the title element can't be found
+        console.log('Title element not found'); // Log when the title element can't be found
     }
 }
