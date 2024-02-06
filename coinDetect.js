@@ -113,8 +113,9 @@ window.onload = function() {
 function detectCoin() {
     console.log('Running detectCoin function'); // Verify detectCoin is called
 
-    let titleElement = document.querySelector('.article-title');
-    if(titleElement){
+    // Updated selector to match the provided HTML structure
+    let titleElement = document.querySelector('.article-title-ctn .article-title');
+    if (titleElement) {
         let title = titleElement.innerText;
         console.log('Article title:', title); // Log the article title
 
