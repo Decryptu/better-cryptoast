@@ -1,4 +1,7 @@
 // Function to fetch coin details
+
+console.log('CoinDetect is starting...');
+
 const tickerToId = {
     'btc': 'bitcoin',
     'eth': 'ethereum',
@@ -36,13 +39,13 @@ function formatPrice(price) {
 }
 
 function fetchCoinDetails(ticker) {
+    console.log(`Fetching details for ${ticker.toUpperCase()}...`);
     const id = tickerToId[ticker.toLowerCase()]; // Ensure ticker is in lowercase for matching
     if (!id) {
         console.error(`Could not find ID for ticker: ${ticker}`);
         return;
     }
 
-    // Fetch coin price and details
     fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_market_cap=true&include_24hr_change=true`)
         .then(response => response.json())
         .then(data => {
@@ -65,12 +68,14 @@ function fetchCoinDetails(ticker) {
                             <span class="price">${price}</span>
                         </div>
                     `;
+                    console.log(`Coin details fetched and element created for ${ticker.toUpperCase()}`);
 
                     const asideElement = document.querySelector('.article-aside');
                     if (asideElement) {
                         asideElement.prepend(coinDiv);
+                        console.log(`Coin information added to the sidebar for ${ticker.toUpperCase()}`);
                     } else {
-                        console.error('Aside element not found');
+                        console.error('Aside element not found, cannot add coin information');
                     }
                 })
                 .catch(error => console.error(`Could not load ${ticker} image:`, error));
@@ -78,43 +83,55 @@ function fetchCoinDetails(ticker) {
         .catch(error => console.error(`Could not load ${ticker} details:`, error));
 }
 
-// MutationObserver to monitor for changes in the article title
-const observer = new MutationObserver((mutationsList, observer) => {
+// MutationObserver for coin detection with a unique name to avoid conflicts
+const coinDetectionObserver = new MutationObserver((mutationsList, observer) => {
+    console.log('Mutation observed, checking for title changes...');
     for (const mutation of mutationsList) {
         if (mutation.type === 'childList' || mutation.type === 'characterData') {
-            const titleElement = document.querySelector('.article-title');
-            if (titleElement && titleElement.textContent) {
-                const titleText = titleElement.textContent.toLowerCase();
-                const detectedCoins = Object.keys(tickerToId).filter(ticker => titleText.includes(ticker));
-
-                detectedCoins.forEach(fetchCoinDetails);
-            }
+            detectCoinInTitle();
         }
     }
 });
 
-// Function to start observing changes
+function detectCoinInTitle() {
+    const titleElement = document.querySelector('.article-title');
+    if (titleElement && titleElement.textContent) {
+        const titleText = titleElement.textContent.toLowerCase();
+        console.log(`Article title found: "${titleElement.textContent}"`);
+        const detectedCoins = Object.keys(tickerToId).filter(ticker => titleText.includes(ticker));
+
+        if (detectedCoins.length > 0) {
+            console.log(`Detected coins in title: ${detectedCoins.join(', ').toUpperCase()}`);
+            detectedCoins.forEach(fetchCoinDetails);
+        } else {
+            console.log('No coin keywords detected in title.');
+        }
+    }
+}
+
 function startObserving() {
     const targetNode = document.querySelector('.article-title');
     if (targetNode) {
-        observer.observe(targetNode, {
+        coinDetectionObserver.observe(targetNode, {
             characterData: true,
             childList: true,
             subtree: true,
         });
+        console.log('Started observing the article title for changes.');
     } else {
-        console.log('Article title element not found, waiting for it to appear...');
-        // If the target node isn't available on initial load, observe the body or specific container for its appearance
+        console.log('Article title element not found, setting up observer for body to detect its appearance...');
         const bodyObserver = new MutationObserver((mutations, obs) => {
-            const targetNode = document.querySelector('.article-title');
-            if (targetNode) {
+            if (document.querySelector('.article-title')) {
                 obs.disconnect(); // Stop observing the body once the target is available
                 startObserving(); // Start observing the target node
+                console.log('Article title element appeared, started observing for changes.');
             }
         });
         bodyObserver.observe(document.body, { childList: true, subtree: true });
     }
 }
 
-// Start observing when the page has loaded
-document.addEventListener('DOMContentLoaded', startObserving);
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded and parsed, initializing coin detection...');
+    startObserving();
+});
