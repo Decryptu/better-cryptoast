@@ -1,6 +1,9 @@
 // Function to fetch coin details
 console.log('coinDetect.js script loaded'); // Verify the script is loaded
 
+// Global flag to indicate whether the DOM changes are script-initiated
+let isScriptMakingChanges = false;
+
 const tickerToId = {
     'btc': 'bitcoin',
     'eth': 'ethereum',
@@ -72,10 +75,10 @@ function fetchCoinDetails(ticker) {
                     return response.json();
                 })
                 .then(coinData => {
-                    observer.disconnect(); // Temporarily disconnect the observer
+                    isScriptMakingChanges = true; // Indicate script is making changes
 
                     let coinDiv = document.createElement('div');
-                    coinDiv.className = 'coin-info'; // No need for the special class anymore
+                    coinDiv.className = 'coin-info';
                     let imgSrc = coinData.image.small;
                     coinDiv.innerHTML = `
                         <div>
@@ -98,11 +101,11 @@ function fetchCoinDetails(ticker) {
                         console.error('Aside element not found');
                     }
 
-                    observer.observe(document.body, { childList: true, subtree: true }); // Reconnect the observer
+                    isScriptMakingChanges = false; // Reset flag after changes are done
                 })
                 .catch(error => {
                     console.error(`Could not load ${ticker} image:`, error);
-                    observer.observe(document.body, { childList: true, subtree: true }); // Ensure reconnection even if an error occurs
+                    isScriptMakingChanges = false; // Reset flag even if there's an error
                 });
         })
         .catch(error => {
@@ -110,19 +113,23 @@ function fetchCoinDetails(ticker) {
         });
 }
 
-function initializeCoinDetection() {
-    const observeChanges = (mutationsList, observer) => {
-        console.log('A child node has been added or removed.');
+const observer = new MutationObserver((mutationsList, observer) => {
+    if (!isScriptMakingChanges) { // Check if the script is not making changes
+        console.log('DOM changed by user or other scripts');
         detectCoin();
-    };
+    }
+});
 
-    observer = new MutationObserver(observeChanges);
-    observer.observe(document.body, { childList: true, subtree: true });
+observer.observe(document.body, { childList: true, subtree: true });
 
-    console.log('MutationObserver set up.');
-}
+console.log('MutationObserver set up.');
 
 function detectCoin() {
+    if (isScriptMakingChanges) {
+        console.log('Skipping detectCoin due to script changes');
+        return; // Exit if changes are script-initiated
+    }
+
     console.log('Running detectCoin function');
 
     let titleElement = document.querySelector('.article-title-ctn .article-title');
@@ -141,4 +148,4 @@ function detectCoin() {
     }
 }
 
-initializeCoinDetection();
+detectCoin(); // Initial call to detectCoin to handle page load scenarios
