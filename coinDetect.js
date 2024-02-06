@@ -1,4 +1,6 @@
 // Function to fetch coin details
+console.log('coinDetect.js script loaded'); // Verify the script is loaded
+
 const tickerToId = {
     'btc': 'bitcoin',
     'eth': 'ethereum',

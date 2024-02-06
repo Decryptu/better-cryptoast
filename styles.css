@@ -899,6 +899,14 @@ hustle-layout-body{
     margin-left: 0em!important;
 }
 
+#distrib_e2{
+    display: none;
+}
+
+.btn4 {
+    margin-bottom: 1rem!important;
+}
+
 /* article-end */
 /* formation-start */
 
@@ -1801,6 +1809,22 @@ section.videos-banner{
 .modal .close {
     display: none!important;
 }
+
+.modal-content {
+    width: auto!important;
+    max-width: 90%!important;
+    max-height: 90%!important;
+    height: auto!important;
+    top: 50%!important;
+    position: fixed!important;
+    left: 50%!important;
+    transform: translate(-50%, -50%)!important;
+}
+
+.modal #caption {
+    display: none!important;
+}
+
 /* ligutbox end */
 
 }
