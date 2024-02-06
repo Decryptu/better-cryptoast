@@ -48,7 +48,7 @@ function fetchCoinDetails(ticker) {
         return;
     }
 
-    console.log(`Fetching details for ${ticker} (${id})`); // Log the fetch action
+    console.log(`Fetching details for ${ticker} (${id})`);
 
     fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_market_cap=true&include_24hr_change=true`)
         .then(response => {
@@ -73,7 +73,7 @@ function fetchCoinDetails(ticker) {
                 })
                 .then(coinData => {
                     let coinDiv = document.createElement('div');
-                    coinDiv.className = 'coin-info';
+                    coinDiv.className = 'coin-info script-generated-coin-info'; // Add a specific class to identify script-generated elements
                     let imgSrc = coinData.image.small;
                     coinDiv.innerHTML = `
                         <div>
@@ -106,49 +106,45 @@ function fetchCoinDetails(ticker) {
 }
 
 function initializeCoinDetection() {
-    // MutationObserver callback function
     const observeChanges = (mutationsList, observer) => {
         for (let mutation of mutationsList) {
             if (mutation.type === 'childList') {
                 console.log('A child node has been added or removed.');
-                detectCoin();
+                let isScriptGenerated = Array.from(mutation.addedNodes).some(node =>
+                    node.classList && node.classList.contains('script-generated-coin-info'));
+                if (!isScriptGenerated) {
+                    detectCoin();
+                }
             }
         }
     };
 
-    // Options for the observer (which mutations to observe)
     const config = { attributes: false, childList: true, subtree: true };
-
-    // Target node to observe
     const targetNode = document.body;
-
-    // Creating an instance of MutationObserver
     const observer = new MutationObserver(observeChanges);
 
-    // Start observing the target node for configured mutations
     observer.observe(targetNode, config);
 
     console.log('MutationObserver set up.');
 }
 
 function detectCoin() {
-    console.log('Running detectCoin function'); // Verify detectCoin is called
+    console.log('Running detectCoin function');
 
     let titleElement = document.querySelector('.article-title-ctn .article-title');
     if (titleElement) {
         let title = titleElement.innerText;
-        console.log('Article title:', title); // Log the article title
+        console.log('Article title:', title);
 
-        let detectedCoins = ['btc', 'eth', // Add more tickers here
+        let detectedCoins = ['btc', 'eth' // Add more tickers here as needed
         ].filter(coin => title.toUpperCase().includes(coin.toUpperCase()));
 
-        console.log('Detected coins:', detectedCoins); // Log detected coins
+        console.log('Detected coins:', detectedCoins);
 
         detectedCoins.forEach(coin => fetchCoinDetails(coin));
     } else {
-        console.log('Title element not found'); // Log when the title element can't be found
+        console.log('Title element not found');
     }
 }
 
-// Call the function to set up the MutationObserver on page load
 initializeCoinDetection();
