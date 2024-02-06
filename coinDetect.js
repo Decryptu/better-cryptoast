@@ -1,5 +1,5 @@
 // Function to fetch coin details
-const tickerToId = {
+const tickerToFullName = {
     'btc': 'bitcoin',
     'eth': 'ethereum',
     'ada': 'cardano',
