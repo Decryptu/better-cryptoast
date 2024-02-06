@@ -105,21 +105,41 @@ function fetchCoinDetails(ticker) {
         });
 }
 
-window.onload = function() {
-    console.log('window.onload triggered'); // Verify window.onload is working
-    detectCoin();
-};
+function initializeCoinDetection() {
+    // MutationObserver callback function
+    const observeChanges = (mutationsList, observer) => {
+        for (let mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                console.log('A child node has been added or removed.');
+                detectCoin();
+            }
+        }
+    };
+
+    // Options for the observer (which mutations to observe)
+    const config = { attributes: false, childList: true, subtree: true };
+
+    // Target node to observe
+    const targetNode = document.body;
+
+    // Creating an instance of MutationObserver
+    const observer = new MutationObserver(observeChanges);
+
+    // Start observing the target node for configured mutations
+    observer.observe(targetNode, config);
+
+    console.log('MutationObserver set up.');
+}
 
 function detectCoin() {
     console.log('Running detectCoin function'); // Verify detectCoin is called
 
-    // Updated selector to match the provided HTML structure
     let titleElement = document.querySelector('.article-title-ctn .article-title');
     if (titleElement) {
         let title = titleElement.innerText;
         console.log('Article title:', title); // Log the article title
 
-        let detectedCoins = ['btc', 'eth', // add other coin tickers here
+        let detectedCoins = ['btc', 'eth', // Add more tickers here
         ].filter(coin => title.toUpperCase().includes(coin.toUpperCase()));
 
         console.log('Detected coins:', detectedCoins); // Log detected coins
@@ -129,3 +149,6 @@ function detectCoin() {
         console.log('Title element not found'); // Log when the title element can't be found
     }
 }
+
+// Call the function to set up the MutationObserver on page load
+initializeCoinDetection();
