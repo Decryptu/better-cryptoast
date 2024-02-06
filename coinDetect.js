@@ -1,9 +1,6 @@
 // Function to fetch coin details
 console.log('coinDetect.js script loaded'); // Verify the script is loaded
 
-// Global flag to indicate whether the DOM changes are script-initiated
-let isScriptMakingChanges = false;
-
 const tickerToId = {
     'btc': 'bitcoin',
     'eth': 'ethereum',
@@ -36,16 +33,14 @@ const tickerToId = {
     'wld': 'worldcoin-wld'
 };
 
+let hasAppended = {}; // Object to keep track of which tickers' details have been appended
+
 function formatPrice(price) {
-    if (price < 1) {
-        return '$' + price.toFixed(9).replace(/\.?0+$/, "");
-    } else {
-        return '$' + price.toFixed(2);
-    }
+    return price < 1 ? `$${price.toFixed(9).replace(/\.?0+$/, "")}` : `$${price.toFixed(2)}`;
 }
 
 function fetchCoinDetails(ticker) {
-    let id = tickerToId[ticker];
+    const id = tickerToId[ticker];
     if (!id) {
         console.error(`Could not find ID for ticker: ${ticker}`);
         return;
@@ -54,98 +49,64 @@ function fetchCoinDetails(ticker) {
     console.log(`Fetching details for ${ticker} (${id})`);
 
     fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_market_cap=true&include_24hr_change=true`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            console.log(`Fetched details for ${ticker}:`, data);
+            const priceChange = data[id].usd_24h_change.toFixed(2);
+            const price = formatPrice(data[id].usd);
+            const color = priceChange < 0 ? 'red' : 'green';
 
-            let priceChange = data[id].usd_24h_change.toFixed(2);
-            let price = formatPrice(data[id].usd);
-            let color = priceChange < 0 ? 'red' : 'green';
+            // Ensure details for this ticker are appended only once
+            if (!hasAppended[ticker]) {
+                const coinDiv = document.createElement('div');
+                coinDiv.setAttribute('class', 'coin-info');
+                coinDiv.setAttribute('data-ticker', ticker); // Mark the div with the ticker
+                coinDiv.innerHTML = `
+                    <div>
+                        <span class="ticker">${ticker.toUpperCase()}: </span>
+                        <span class="price-change" style="color: ${color};">${priceChange}%</span>
+                        <span class="price">${price}</span>
+                    </div>
+                `;
 
-            fetch(`https://api.coingecko.com/api/v3/coins/${id}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(coinData => {
-                    isScriptMakingChanges = true; // Indicate script is making changes
-
-                    let coinDiv = document.createElement('div');
-                    coinDiv.className = 'coin-info';
-                    let imgSrc = coinData.image.small;
-                    coinDiv.innerHTML = `
-                        <div>
-                            <img src="${imgSrc}" alt="${ticker} logo">
-                            <span class="ticker">${ticker.toUpperCase()}</span>
-                        </div>
-                        <div class="details">
-                            <span class="price-change" style="color: ${color};">${priceChange}%</span>
-                            <span class="price">${price}</span>
-                        </div>
-                    `;
-
-                    console.log(`Created new div for ${ticker}`);
-
-                    let asideElement = document.querySelector('.article-aside');
-                    if (asideElement) {
-                        asideElement.prepend(coinDiv);
-                        console.log(`Prepended new div for ${ticker} to aside element`);
-                    } else {
-                        console.error('Aside element not found');
-                    }
-
-                    isScriptMakingChanges = false; // Reset flag after changes are done
-                })
-                .catch(error => {
-                    console.error(`Could not load ${ticker} image:`, error);
-                    isScriptMakingChanges = false; // Reset flag even if there's an error
-                });
+                const asideElement = document.querySelector('.article-aside');
+                if (asideElement) {
+                    asideElement.prepend(coinDiv);
+                    console.log(`Prepended new div for ${ticker} to aside element`);
+                    hasAppended[ticker] = true; // Mark as appended
+                } else {
+                    console.error('Aside element not found');
+                }
+            }
         })
-        .catch(error => {
-            console.error(`Could not load ${ticker} details:`, error);
-        });
+        .catch(error => console.error(`Error fetching details for ${ticker}:`, error));
 }
 
-const observer = new MutationObserver((mutationsList, observer) => {
-    if (!isScriptMakingChanges) { // Check if the script is not making changes
-        console.log('DOM changed by user or other scripts');
-        detectCoin();
+function detectAndDisplayCoins() {
+    const titleElement = document.querySelector('.article-title-ctn .article-title');
+    if (!titleElement) {
+        console.error('Title element not found');
+        return;
     }
+
+    const titleText = titleElement.innerText.toUpperCase();
+    console.log(`Article title: ${titleText}`);
+
+    Object.keys(tickerToId).forEach(ticker => {
+        if (titleText.includes(ticker.toUpperCase()) && !hasAppended[ticker]) {
+            fetchCoinDetails(ticker);
+        }
+    });
+}
+
+// Use MutationObserver to detect when it's safe to run our detection logic
+const observer = new MutationObserver((mutations, observer) => {
+    detectAndDisplayCoins();
 });
 
-observer.observe(document.body, { childList: true, subtree: true });
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});
 
-console.log('MutationObserver set up.');
-
-function detectCoin() {
-    if (isScriptMakingChanges) {
-        console.log('Skipping detectCoin due to script changes');
-        return; // Exit if changes are script-initiated
-    }
-
-    console.log('Running detectCoin function');
-
-    let titleElement = document.querySelector('.article-title-ctn .article-title');
-    if (titleElement) {
-        let title = titleElement.innerText;
-        console.log('Article title:', title);
-
-        let detectedCoins = ['btc', 'eth'] // Add more tickers here as needed
-            .filter(coin => title.toUpperCase().includes(coin.toUpperCase()));
-
-        console.log('Detected coins:', detectedCoins);
-
-        detectedCoins.forEach(coin => fetchCoinDetails(coin));
-    } else {
-        console.log('Title element not found');
-    }
-}
-
-detectCoin(); // Initial call to detectCoin to handle page load scenarios
+// Initial execution in case the page is already loaded
+detectAndDisplayCoins();
