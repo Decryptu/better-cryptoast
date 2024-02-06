@@ -49,7 +49,7 @@ function fetchAndInjectCryptoInfo(tickerSymbol) {
         .then(response => response.json())
         .then(data => {
             const cryptoData = data[cryptoFullName.toLowerCase()];
-            const priceChange = cryptoData.usd_24h_change.toFixed(2);
+            const priceChange = Number(cryptoData.usd_24h_change).toFixed(2);
             const price = formatPriceWithPrecision(cryptoData.usd);
             const color = priceChange < 0 ? 'red' : 'green';
 
