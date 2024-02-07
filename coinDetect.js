@@ -39,6 +39,12 @@ const tickerToId = {
     'dym': 'dymension'
 };
 
+// Set to keep track of already processed tickers to prevent duplicates
+const processedTickers = new Set();
+
+// Variable to store the last processed title to avoid reprocessing the same title
+let lastProcessedTitle = '';
+
 // Function to format the cryptocurrency price for display
 function formatCryptoPrice(price) {
     return price < 1 ? `$${price.toFixed(9).replace(/\.?0+$/, "")}` : `$${price.toFixed(2)}`;
@@ -46,6 +52,11 @@ function formatCryptoPrice(price) {
 
 // Function to fetch and display cryptocurrency details
 function fetchAndDisplayCryptoDetails(ticker) {
+    if (processedTickers.has(ticker)) {
+        console.log(`Crypto details for ${ticker.toUpperCase()} already added to the page.`);
+        return; // Prevent processing a ticker more than once
+    }
+
     const cryptoId = tickerToId[ticker.toLowerCase()];
     if (!cryptoId) {
         console.error(`Crypto ID not found for ticker: ${ticker}`);
@@ -65,8 +76,8 @@ function fetchAndDisplayCryptoDetails(ticker) {
                 .then(response => response.json())
                 .then(coinData => {
                     const cryptoInfoDiv = document.createElement('div');
-                    cryptoInfoDiv.className = 'coin-info'; // Use the class name as in your original HTML structure
-                    let imgSrc = coinData.image.small; // Use let for variable imgSrc
+                    cryptoInfoDiv.className = 'coin-info';
+                    let imgSrc = coinData.image.small;
                     cryptoInfoDiv.innerHTML = `
                         <div>
                             <img src="${imgSrc}" alt="${ticker.toUpperCase()} logo">
@@ -82,6 +93,7 @@ function fetchAndDisplayCryptoDetails(ticker) {
                     if (articleAsideElement) {
                         articleAsideElement.prepend(cryptoInfoDiv);
                         console.log(`Crypto details for ${ticker.toUpperCase()} added to the page.`);
+                        processedTickers.add(ticker); // Mark this ticker as processed
                     } else {
                         console.error('Article aside element not found.');
                     }
@@ -91,15 +103,23 @@ function fetchAndDisplayCryptoDetails(ticker) {
         .catch(error => console.error(`Error fetching crypto details for ${ticker.toUpperCase()}:`, error));
 }
 
-// Function to detect cryptocurrencies mentioned in the article title and initiate detail fetching
+// Enhanced function to detect cryptocurrencies in the title and handle word boundaries for tickers
 function detectAndProcessCryptoInTitle() {
     const articleTitleElement = document.querySelector('.article-title');
     if (articleTitleElement) {
-        const articleTitle = articleTitleElement.innerText.toLowerCase();
+        let articleTitle = articleTitleElement.innerText.toLowerCase();
+        // Check if the title has changed since the last processing
+        if (articleTitle === lastProcessedTitle) {
+            console.log('Article title has not changed since last check. Skipping reprocessing.');
+            return;
+        }
         console.log('Article title detected:', articleTitle);
+        lastProcessedTitle = articleTitle; // Update the last processed title
 
         Object.keys(tickerToId).forEach(ticker => {
-            if (articleTitle.includes(ticker)) {
+            // Use regex to match whole words only, preventing false positives
+            let regex = new RegExp(`\\b${ticker}\\b`, 'i');
+            if (regex.test(articleTitle)) {
                 console.log(`Crypto ticker found in title: ${ticker.toUpperCase()}`);
                 fetchAndDisplayCryptoDetails(ticker);
             }

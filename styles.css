@@ -566,6 +566,10 @@ p.crypto-change{
 
 /* actu-start */
 
+.su-table {
+    background-color: white!important;
+}
+
 .su-table table td {
     background-color: white!important;
 }
