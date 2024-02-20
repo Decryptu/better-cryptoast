@@ -1828,6 +1828,22 @@ section.videos-banner{
 
 /* halving end */
 
+/* 404 start */
+
+form input[type="image"][alt="Search"] {
+    left: -16em !important;
+}
+
+[data-theme="light"] .pageerreur{
+    background-color: white!important;
+}
+
+[data-theme="dark"] .pageerreur{
+    background-color: black!important;
+}
+
+/* 404 end */
+
 /* lightbox start */
 .modal .close {
     display: none!important;
