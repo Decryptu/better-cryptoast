@@ -3,7 +3,7 @@ let audioPlayed = false; // flag to ensure the audio only tries to play once
 function playSong() {
   if (audioPlayed) return;
 
-  let audio = new Audio('https://cdn.discordapp.com/attachments/1066833707941515326/1135228657418379274/Bring_Me_The_Horizon_-_Can_You_Feel_My_Heart.mp3');
+  let audio = new Audio('https://cdn.discordapp.com/attachments/1066833707941515326/1135228657418379274/Bring_Me_The_Horizon_-_Can_You_Feel_My_Heart.mp3?ex=65e49393&is=65d21e93&hm=8d25d517f57683ba87909cfdc720fbf02d2086f4ec6876905bc601cb00d3df06&');
   audio.loop = true;
 
   // Function to handle user interactions

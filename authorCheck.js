@@ -39,7 +39,7 @@ if (authorElement && authorElement.href === 'https://cryptoast.fr/author/robin/'
 //Play a music on a certain page
 window.addEventListener('load', function() {
     if(window.location.href === 'https://cryptoast.fr/author/maximilien/') {
-        let audio = new Audio('https://cdn.discordapp.com/attachments/1066833707941515326/1135228657418379274/Bring_Me_The_Horizon_-_Can_You_Feel_My_Heart.mp3');
+        let audio = new Audio('https://cdn.discordapp.com/attachments/1066833707941515326/1135228657418379274/Bring_Me_The_Horizon_-_Can_You_Feel_My_Heart.mp3?ex=65e49393&is=65d21e93&hm=8d25d517f57683ba87909cfdc720fbf02d2086f4ec6876905bc601cb00d3df06&');
 
         document.addEventListener('click', function() {
             let promise = audio.play();
