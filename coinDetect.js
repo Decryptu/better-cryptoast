@@ -36,7 +36,9 @@ const tickerToId = {
     'tia': 'celestia',
     'zeta': 'zetachain',
     'tao': 'bittensor',
-    'dym': 'dymension'
+    'dym': 'dymension',
+    'strk': 'starknet',
+    'xlm': 'stellar'
 };
 
 // Set to keep track of already processed tickers to prevent duplicates
