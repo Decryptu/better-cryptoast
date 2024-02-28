@@ -624,6 +624,14 @@ div.pagination-ctn .pagination-item{
     width: 20rem!important;
 }
 
+[data-theme="light"] .search-input-ctn{
+    color: black!important;
+}
+
+[data-theme="dark"] .search-input-ctn{
+    color: white!important;
+}
+
 .category-popover{
     border-radius: 0.25rem!important;
     transition: all 0.3s ease-in-out!important;
