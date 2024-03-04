@@ -8,6 +8,10 @@
     transition: background-color 0.3s ease-in-out!important;
 }
 
+:root {
+    --orange-primary: #EEA93C !important;
+}  
+
 @media (max-width: 1200px) {
     .article-main-ctn{
         display: block!important;
@@ -60,15 +64,27 @@ body{
     margin-top: 5rem!important;
 }
 
+#distrib_e1{
+    display: none!important;
+}
+
+div.main-content{
+    padding-top: 0px !important;
+}
+
+.page-section{
+    margin-top: 0rem !important;
+}
+
 a.buy-crypto{
     /*display: none !important;*/
-    border: 1px solid var(--orange-primary)!important;
+    border: 1px solid #EEA93C!important;
     border-radius: 0.5rem!important;
     transition: background-color 0.2 ease!important;
 }
 
 a.buy-crypto:hover{
-    background-color: #ff815e24!important;
+    background-color: #EEA93C24!important;
     transition: background-color 0.2 ease!important;
 }
 
@@ -158,8 +174,20 @@ header.page-header .header-logo-ctn{
     border-right-color: #1A1A1A!important;
 }
 
+div.main-content .section-header{
+    margin: 3rem 0 1rem !important;
+}
+
 div.main-content h3.title{
-    font-size: 2.5rem!important;
+    font-size: 2rem!important;
+    color: var(--black-normal) !important;
+    background-color: none !important;
+    background: none !important;
+    -webkit-text-fill-color: var(--black-normal) !important;
+}
+
+.incoming-nft-collections{
+    margin-bottom: 3rem!important;
 }
 
 .last-news-snd{
@@ -617,7 +645,7 @@ div.pagination-ctn .pagination-item{
 }
 
 #searchBox:hover{
-    border: 0.75px solid #EE8665!important;
+    border: 0.75px solid #EEA93C!important;
 }
 
 #searchBox{
@@ -666,7 +694,9 @@ div.pagination-ctn .pagination-item{
 /* actu-end */
 /* article-start */
 
-
+.article-aside .most-read-article-ctn{
+    margin-top: 0rem!important;
+}
 
 .share-article-ctn svg{
     width: 1rem!important;
@@ -702,7 +732,8 @@ div.pagination-ctn .pagination-item{
 .article-subtitle{
     font-weight: 300!important;
     font-size: 1.3rem!important;
-    margin-bottom: 1rem!important;
+    margin-bottom: 0rem!important;
+    line-height: 1 !important
 }
 
 .article-content .date-and-read-time .date{
@@ -837,13 +868,13 @@ hustle-layout-body{
 }
 
 [data-theme="light"] .article-content blockquote{
-    border-left: 4px solid #EF8867!important;
+    border-left: 4px solid #EEA93C!important;
     background-color: #f3f3f3!important;
     border-radius: 0.25rem!important;
 }
 
 [data-theme="dark"] .article-content blockquote{
-    border-left: 4px solid #EF8867!important;
+    border-left: 4px solid #EEA93C!important;
     background-color: #232323!important;
     border-radius: 0.25rem!important;
 }
@@ -858,7 +889,11 @@ hustle-layout-body{
 }
 
 .article-content .article-section{
-    margin-top: 1rem!important;
+    margin-top: 0rem!important;
+}
+
+.article-section h2, .article-section p{
+    line-height: 1.3 !important;
 }
 
 #myBar {
@@ -867,7 +902,7 @@ hustle-layout-body{
     left: 0;
     width: 0;
     height: 4px;
-    background-color: #EF8867;
+    background-color: #EEA93C;
     z-index: 99;
   }
 
@@ -896,7 +931,7 @@ hustle-layout-body{
 }
 
 #wpdcom .wpd-thread-head .wpd-thread-info{
-    border-bottom: 1px solid #EF8867!important;
+    border-bottom: 1px solid #EEA93C!important;
     margin-bottom: -1px!important;
 }
 
@@ -1525,7 +1560,7 @@ div.cryptos-grid .cryptos-card-img{
 }
 
 .d-flex.align-items-center.orange.card-shadow {
-    background-color: var(--orange-primary)!important;
+    background-color: #EEA93C!important;
 }
 
 .jobs button.orange p{
