@@ -666,6 +666,8 @@ div.pagination-ctn .pagination-item{
 /* actu-end */
 /* article-start */
 
+
+
 .share-article-ctn svg{
     width: 1rem!important;
     height: 1rem!important;
@@ -812,10 +814,6 @@ hustle-layout-body{
 .article-aside .most-read-article-ctn>a.most-read-article>img{
     border-radius: 0.25rem!important;
     aspect-ratio: 1!important;
-}
-
-.read-time{
-    margin-left: 1.5rem!important;
 }
 
 .article-aside .what-is-cryptoast{
