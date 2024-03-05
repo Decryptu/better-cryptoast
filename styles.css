@@ -590,6 +590,13 @@ p.crypto-change{
     margin-right: 0px!important;
 }
 
+.d-block.grid-item.already-released .grid-item-infos .title{
+    display: block!important;
+    height: auto!important;
+    margin-bottom: .5rem!important;
+    margin-top: .1rem!important;
+}
+
 /* home-end */
 
 /* actu-start */
