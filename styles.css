@@ -142,10 +142,6 @@ header.page-header > div {
     margin-bottom: .8rem!important;
 }
 
-/*.search-icon{
-    margin-left: 1rem!important;
-}*/
-
 header.page-header nav a.popover-hover-btn{
     font-weight: 500!important;
     color: #666!important;
@@ -337,7 +333,6 @@ img.redaction-selection-card-img.lazy.loaded {
 .redaction-selection-card .redaction-selection-card-img-ctn{
     border-radius: 0.5rem 0.5rem 0 0!important;
 }
-
 
 .redaction-selection-card .redaction-selection-card-texts{
     margin: 0rem 1rem 1rem 1rem!important;
@@ -1240,6 +1235,10 @@ div.cryptos-grid .cryptos-card-img{
 }
 
 .crypto-infos .graph-ctn{
+    background: transparent!important;
+}
+
+.crypto-infos .graph-ctn{
     margin: 0!important;
     padding: 0!important;
 }
@@ -1403,10 +1402,6 @@ div.cryptos-grid .cryptos-card-img{
 }
 
 .exchange-list-ctn, .prices-single .crypto-bottom-description-ctn{
-    background: transparent!important;
-}
-
-.crypto-infos .graph-ctn{
     background: transparent!important;
 }
 
@@ -1922,6 +1917,6 @@ form input[type="image"][alt="Search"] {
     display: none!important;
 }
 
-/* ligutbox end */
+/* lightbox end */
 
 }
