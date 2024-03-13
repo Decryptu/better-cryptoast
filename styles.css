@@ -1145,6 +1145,12 @@ hustle-layout-body{
     border-radius: 0.25rem!important;
 }
 
+.crypto-infos .crypto-infos-main .crypto-infos-main-name{
+    font-size: 2rem!important;
+    line-height: 2rem!important;
+    width: 50%!important;
+}
+
 /* cmc-end */
 
 /* nft-intro */
