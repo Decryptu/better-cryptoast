@@ -973,6 +973,18 @@ hustle-layout-body{
     margin-bottom: 1rem!important;
 }
 
+div.lwptoc_items.lwptoc_items-visible>div>div>a>span.lwptoc_item_label{
+    color: #EEA93C!important;
+}
+
+.article-blockquote-module .blockquote-icon{
+    filter: hue-rotate(20deg) saturate(1) brightness(1.4) contrast(0.8);
+}
+
+.article-blockquote-module .blockquote-citation{
+    font-weight: 400!important;
+}
+
 /* article-end */
 /* formation-start */
 
