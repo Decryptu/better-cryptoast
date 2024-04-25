@@ -10,7 +10,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
   
   const countdownContainer = document.querySelector("#countdown");
 
-  const TARGET_BLOCK_HEIGHT = 840000;
+  const TARGET_BLOCK_HEIGHT = 1050000;
   const AVERAGE_BLOCK_TIME = 600; // In seconds (10 minutes)
   
   // This will be the time in seconds till the halving event.
