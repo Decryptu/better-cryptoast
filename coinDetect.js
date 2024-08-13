@@ -67,7 +67,7 @@ function injectKeywords(keywords) {
 
     keywordsDiv.innerHTML = `
         <div>
-            <span class="keyword-title">Keywords</span>
+            <span class="keyword-title">Tags de l'article</span>
         </div>
         <div class="keyword-details">
             ${keywordsContent}

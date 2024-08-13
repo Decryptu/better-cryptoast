@@ -1967,7 +1967,15 @@ form input[type="image"][alt="Search"] {
   .keyword-info {
     margin-bottom: 1rem;
   }
-  
+
+  [data-theme="light"] .keyword-title {
+    color: black;
+  }
+
+  [data-theme="dark"] .keyword-title {
+    color: white;
+  }
+
   .keyword-title {
     font-weight: bold;
     margin-bottom: 0.5rem;
