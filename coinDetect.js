@@ -1,133 +1,140 @@
-// Function to fetch coin details
+console.log('Keyword extractor and edit button script is starting');
 
-console.log(`Crypto info script is starting`);
+// Set to keep track of processed keywords to prevent duplicates
+const processedKeywords = new Set();
 
-const tickerToId = {
-    'btc': 'bitcoin',
-    'eth': 'ethereum',
-    'ada': 'cardano',
-    'bch': 'bitcoin-cash',
-    'dot': 'polkadot',
-    'ltc': 'litecoin',
-    'shib': 'shiba-inu',
-    'steth': 'staked-ether',
-    'trx': 'tron',
-    'usdc': 'usd-coin',
-    'wbtc': 'wrapped-bitcoin',
-    'avax': 'avalanche-2',
-    'bnb': 'binancecoin',
-    'doge': 'dogecoin',
-    'matic': 'matic-network',
-    'sol': 'solana',
-    'ton': 'the-open-network',
-    'uni': 'uniswap',
-    'usdt': 'tether',
-    'xrp': 'ripple',
-    'crv': 'curve-dao-token',
-    'aave': 'aave',
-    'op': 'optimism',
-    'arb': 'arbitrum',
-    'atom': 'cosmos',
-    'xmr': 'monero',
-    'link': 'chainlink',
-    'pepe': 'pepe',
-    'wld': 'worldcoin-wld',
-    'jup': 'jupiter-exchange-solana',
-    'tia': 'celestia',
-    'zeta': 'zetachain',
-    'tao': 'bittensor',
-    'dym': 'dymension',
-    'strk': 'starknet',
-    'xlm': 'stellar'
-};
+// Variable to store the last processed schema to avoid reprocessing
+let lastProcessedSchema = '';
 
-// Set to keep track of already processed tickers to prevent duplicates
-const processedTickers = new Set();
+// Function to extract keywords from the Yoast schema
+function extractKeywords() {
+    const schemaScript = document.querySelector('script[type="application/ld+json"].yoast-schema-graph');
+    if (schemaScript) {
+        const currentSchema = schemaScript.textContent;
+        // Check if the schema has changed since the last processing
+        if (currentSchema === lastProcessedSchema) {
+            console.log('Schema has not changed since last check. Skipping reprocessing.');
+            return null;
+        }
+        lastProcessedSchema = currentSchema;
 
-// Variable to store the last processed title to avoid reprocessing the same title
-let lastProcessedTitle = '';
-
-// Function to format the cryptocurrency price for display
-function formatCryptoPrice(price) {
-    return price < 1 ? `$${price.toFixed(9).replace(/\.?0+$/, "")}` : `$${price.toFixed(2)}`;
+        try {
+            const schemaData = JSON.parse(currentSchema);
+            const article = schemaData['@graph'].find(item => item['@type'] === 'NewsArticle');
+            if (article && article.keywords) {
+                return article.keywords;
+            }
+        } catch (error) {
+            console.error('Error parsing schema data:', error);
+        }
+    }
+    return null;
 }
 
-// Function to fetch and display cryptocurrency details
-function fetchAndDisplayCryptoDetails(ticker) {
-    if (processedTickers.has(ticker)) {
-        console.log(`Crypto details for ${ticker.toUpperCase()} already added to the page.`);
-        return; // Prevent processing a ticker more than once
-    }
+// Function to create and inject the keywords element
+function injectKeywords(keywords) {
+    if (!keywords || keywords.length === 0) return;
 
-    const cryptoId = tickerToId[ticker.toLowerCase()];
-    if (!cryptoId) {
-        console.error(`Crypto ID not found for ticker: ${ticker}`);
+    const articleAsideElement = document.querySelector('.article-aside');
+    if (!articleAsideElement) {
+        console.error('Article aside element not found.');
         return;
     }
 
-    console.log(`Fetching details for: ${ticker.toUpperCase()}`);
+    // Filter out already processed keywords
+    const newKeywords = keywords.filter(keyword => !processedKeywords.has(keyword));
+    if (newKeywords.length === 0) {
+        console.log('No new keywords to inject.');
+        return;
+    }
 
-    fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${cryptoId}&vs_currencies=usd&include_market_cap=true&include_24hr_change=true`)
-        .then(response => response.json())
-        .then(data => {
-            const priceChange = data[cryptoId].usd_24h_change.toFixed(2);
-            const price = formatCryptoPrice(data[cryptoId].usd);
-            const color = priceChange < 0 ? 'red' : 'green';
+    let keywordsDiv = document.querySelector('.keyword-info');
+    if (!keywordsDiv) {
+        keywordsDiv = document.createElement('div');
+        keywordsDiv.className = 'coin-info keyword-info';
+        const editButtonContainer = document.querySelector('.edit-button-container');
+        if (editButtonContainer) {
+            articleAsideElement.insertBefore(keywordsDiv, editButtonContainer.nextSibling);
+        } else {
+            articleAsideElement.prepend(keywordsDiv);
+        }
+    }
 
-            fetch(`https://api.coingecko.com/api/v3/coins/${cryptoId}`)
-                .then(response => response.json())
-                .then(coinData => {
-                    const cryptoInfoDiv = document.createElement('div');
-                    cryptoInfoDiv.className = 'coin-info';
-                    let imgSrc = coinData.image.small;
-                    cryptoInfoDiv.innerHTML = `
-                        <div>
-                            <img src="${imgSrc}" alt="${ticker.toUpperCase()} logo">
-                            <span class="ticker">${ticker.toUpperCase()}</span>
-                        </div>
-                        <div class="details">
-                            <span class="price-change" style="color: ${color};">${priceChange}%</span>
-                            <span class="price">${price}</span>
-                        </div>
-                    `;
+    const keywordsContent = newKeywords.map(keyword => {
+        processedKeywords.add(keyword);
+        return `<span class="keyword-tag">${keyword}</span>`;
+    }).join('');
 
-                    const articleAsideElement = document.querySelector('.article-aside');
-                    if (articleAsideElement) {
-                        articleAsideElement.prepend(cryptoInfoDiv);
-                        console.log(`Crypto details for ${ticker.toUpperCase()} added to the page.`);
-                        processedTickers.add(ticker); // Mark this ticker as processed
-                    } else {
-                        console.error('Article aside element not found.');
-                    }
-                })
-                .catch(error => console.error(`Error fetching crypto image for ${ticker.toUpperCase()}:`, error));
-        })
-        .catch(error => console.error(`Error fetching crypto details for ${ticker.toUpperCase()}:`, error));
+    keywordsDiv.innerHTML = `
+        <div>
+            <span class="keyword-title">Keywords</span>
+        </div>
+        <div class="keyword-details">
+            ${keywordsContent}
+        </div>
+    `;
+
+    console.log('New keywords injected into the sidebar:', newKeywords);
 }
 
-// Enhanced function to detect cryptocurrencies in the title and handle word boundaries for tickers
-function detectAndProcessCryptoInTitle() {
-    const articleTitleElement = document.querySelector('.article-title');
-    if (articleTitleElement) {
-        let articleTitle = articleTitleElement.innerText.toLowerCase();
-        // Check if the title has changed since the last processing
-        if (articleTitle === lastProcessedTitle) {
-            console.log('Article title has not changed since last check. Skipping reprocessing.');
-            return;
+// Function to get post ID from links
+function getPostIdFromLinks() {
+    const links = document.getElementsByTagName("link");
+    for (let i = 0; i < links.length; i++) {
+        const href = links[i].getAttribute("href");
+        if (href?.includes("/wp-json/wp/v2/posts/")) {
+            return href.split("/wp-json/wp/v2/posts/")[1];
         }
-        console.log('Article title detected:', articleTitle);
-        lastProcessedTitle = articleTitle; // Update the last processed title
+        if (href?.includes("shortlink")) {
+            return href.split("p=")[1];
+        }
+    }
+    return null;
+}
 
-        Object.keys(tickerToId).forEach(ticker => {
-            // Use regex to match whole words only, preventing false positives
-            let regex = new RegExp(`\\b${ticker}\\b`, 'i');
-            if (regex.test(articleTitle)) {
-                console.log(`Crypto ticker found in title: ${ticker.toUpperCase()}`);
-                fetchAndDisplayCryptoDetails(ticker);
-            }
-        });
+// Function to create and inject the edit button
+function injectEditButton() {
+    const articleAsideElement = document.querySelector('.article-aside');
+    if (!articleAsideElement) {
+        console.error('Article aside element not found.');
+        return;
+    }
+
+    if (document.querySelector('.edit-button-container')) {
+        console.log('Edit button already exists.');
+        return;
+    }
+
+    const editButtonDiv = document.createElement('div');
+    editButtonDiv.className = 'coin-info edit-button-container';
+
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Modifier cet article';
+    editButton.className = 'edit-article-button';
+    editButton.addEventListener('click', () => {
+        const postId = getPostIdFromLinks();
+        if (postId) {
+            const editUrl = `${window.location.origin}/wp-admin/post.php?post=${postId}&action=edit`;
+            window.location.href = editUrl;
+        } else {
+            console.log("No post ID found.");
+        }
+    });
+
+    editButtonDiv.appendChild(editButton);
+    articleAsideElement.prepend(editButtonDiv);
+    console.log('Edit button injected into the sidebar.');
+}
+
+// Function to handle keyword extraction and injection
+function handleKeywords() {
+    console.log('Checking for keywords...');
+    const keywords = extractKeywords();
+    if (keywords) {
+        console.log('Keywords found:', keywords);
+        injectKeywords(keywords);
     } else {
-        console.log('Article title element not found.');
+        console.log('No new keywords found or unable to parse schema data.');
     }
 }
 
@@ -139,32 +146,33 @@ function setupArticleContentObserver() {
         return;
     }
 
-    console.log('Setting up article content observer...');
+    console.log('Setting up article content observer for keywords...');
 
     const observerConfig = { childList: true, subtree: true };
     const articleMutationObserver = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
             if (mutation.type === 'childList') {
-                console.log('Detected a change in the article content.');
-                detectAndProcessCryptoInTitle(); // Re-check if the title has been updated/added
+                console.log('Detected a change in the article content. Checking for keywords...');
+                handleKeywords();
             }
         }
     });
 
     articleMutationObserver.observe(articleContentNode, observerConfig);
-    console.log('Article content observer set up successfully.');
+    console.log('Article content observer for keywords set up successfully.');
 }
 
 // Initialization function to set up observers and initial checks
-function initializeCryptoInfoExtension() {
-    console.log('Initializing crypto info extension...');
-    detectAndProcessCryptoInTitle(); // Initial check for the title
+function initializeExtension() {
+    console.log('Initializing keyword extractor and edit button...');
+    injectEditButton(); // Inject the edit button
+    handleKeywords(); // Initial check for keywords
     setupArticleContentObserver(); // Set up observer for dynamic content changes
 }
 
 // Start the script once the page has loaded
 if (document.readyState === 'complete') {
-    initializeCryptoInfoExtension();
+    initializeExtension();
 } else {
-    window.addEventListener('load', initializeCryptoInfoExtension);
+    window.addEventListener('load', initializeExtension);
 }
