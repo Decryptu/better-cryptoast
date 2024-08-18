@@ -61,7 +61,7 @@
 /* home-start */
 
 body{
-    margin-top: 5rem!important;
+    margin-top: 4rem!important;
 }
 
 #distrib_e1{
@@ -74,6 +74,7 @@ div.main-content{
 
 .page-section{
     margin-top: 0rem !important;
+    margin-bottom: 3rem !important;
 }
 
 a.buy-crypto{
@@ -180,7 +181,7 @@ header.page-header .header-logo-ctn{
 }
 
 div.main-content .section-header{
-    margin: 3rem 0 1rem !important;
+    margin: 1rem 0 1rem !important;
 }
 
 div.main-content h3.title{
@@ -1956,39 +1957,44 @@ form input[type="image"][alt="Search"] {
 }
 
 /* lightbox end */
-/* keyword fetcher start*/
-.coin-info.keyword-info{
+/* Article Info Styles */
+.coin-info.article-info {
     display: block;
+    margin-bottom: 1rem;
 }
 
-.keyword-info {
-    margin-bottom: 1rem;
-  }
-  .keyword-info {
-    margin-bottom: 1rem;
-  }
-
-  [data-theme="light"] .keyword-title {
-    color: black;
-  }
-
-  [data-theme="dark"] .keyword-title {
-    color: white;
-  }
-
-  .keyword-title {
+.info-title,
+.keyword-title {
     font-weight: bold;
     margin-bottom: 0.5rem;
     display: block;
-  }
-  
-  .keyword-details {
+}
+
+[data-theme="light"] .info-title,
+[data-theme="light"] .keyword-title {
+    color: black;
+}
+
+[data-theme="dark"] .info-title,
+[data-theme="dark"] .keyword-title {
+    color: white;
+}
+
+.info-details {
+    margin-top: 0.5rem;
+}
+
+.keywords-section {
+    margin-top: 0.5rem;
+}
+
+.keyword-list {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-  }
-  
-  .keyword-tag {
+}
+
+.keyword-tag {
     display: inline-block;
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
@@ -1996,30 +2002,35 @@ form input[type="image"][alt="Search"] {
     white-space: nowrap;
     transition: all 0.3s ease-in-out !important;
     border-radius: 0.5rem !important;
-  }
-  
-  [data-theme="light"] .keyword-tag {
+}
+
+[data-theme="light"] .keyword-tag {
     background-color: #FAFAFA !important;
     border: 0.75px solid #EAEAEA !important;
     color: #333;
-  }
-  
-  [data-theme="dark"] .keyword-tag {
+}
+
+[data-theme="dark"] .keyword-tag {
     background-color: #111111 !important;
     border: 0.5px solid #333333 !important;
     color: #e0e0e0;
-  }
-  
-  .keyword-tag:hover {
+}
+
+.keyword-tag:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .edit-button-container {
-    margin-bottom: 1rem;
-  }
-  
-  .edit-article-button {
+}
+
+.keyword-tag.word-count {
+    font-weight: bold;
+}
+
+/* Edit Button Styles */
+.edit-button-container {
+    margin-bottom: .1rem;
+}
+
+.edit-article-button {
     display: inline-block;
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -2030,23 +2041,23 @@ form input[type="image"][alt="Search"] {
     border: none;
     border-radius: 0.5rem;
     transition: all 0.3s ease-in-out;
-  }
-  
-  [data-theme="light"] .edit-article-button {
+}
+
+[data-theme="light"] .edit-article-button {
     background-color: #EEA93C;
     color: #ffffff;
-  }
-  
-  [data-theme="dark"] .edit-article-button {
+}
+
+[data-theme="dark"] .edit-article-button {
     background-color: #EEA93C;
     color: #ffffff;
-  }
-  
-  .edit-article-button:hover {
+}
+
+.edit-article-button:hover {
     opacity: 0.9;
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-/* keyword fetcher end */
+}
+/* Article Info Styles end*/
 
 }

@@ -1,4 +1,4 @@
-console.log('Keyword extractor and edit button script is starting');
+console.log('Enhanced article info extractor and edit button script is starting');
 
 // Set to keep track of processed keywords to prevent duplicates
 const processedKeywords = new Set();
@@ -6,8 +6,8 @@ const processedKeywords = new Set();
 // Variable to store the last processed schema to avoid reprocessing
 let lastProcessedSchema = '';
 
-// Function to extract keywords from the Yoast schema
-function extractKeywords() {
+// Function to extract article information from the Yoast schema
+function extractArticleInfo() {
     const schemaScript = document.querySelector('script[type="application/ld+json"].yoast-schema-graph');
     if (schemaScript) {
         const currentSchema = schemaScript.textContent;
@@ -21,8 +21,11 @@ function extractKeywords() {
         try {
             const schemaData = JSON.parse(currentSchema);
             const article = schemaData['@graph'].find(item => item['@type'] === 'NewsArticle');
-            if (article && article.keywords) {
-                return article.keywords;
+            if (article) {
+                return {
+                    keywords: article.keywords || [],
+                    wordCount: article.wordCount || 0
+                };
             }
         } catch (error) {
             console.error('Error parsing schema data:', error);
@@ -31,9 +34,9 @@ function extractKeywords() {
     return null;
 }
 
-// Function to create and inject the keywords element
-function injectKeywords(keywords) {
-    if (!keywords || keywords.length === 0) return;
+// Function to create and inject the article info element
+function injectArticleInfo(articleInfo) {
+    if (!articleInfo) return;
 
     const articleAsideElement = document.querySelector('.article-aside');
     if (!articleAsideElement) {
@@ -41,40 +44,44 @@ function injectKeywords(keywords) {
         return;
     }
 
-    // Filter out already processed keywords
-    const newKeywords = keywords.filter(keyword => !processedKeywords.has(keyword));
-    if (newKeywords.length === 0) {
-        console.log('No new keywords to inject.');
-        return;
-    }
-
-    let keywordsDiv = document.querySelector('.keyword-info');
-    if (!keywordsDiv) {
-        keywordsDiv = document.createElement('div');
-        keywordsDiv.className = 'coin-info keyword-info';
+    let infoDiv = document.querySelector('.article-info');
+    if (!infoDiv) {
+        infoDiv = document.createElement('div');
+        infoDiv.className = 'coin-info article-info';
         const editButtonContainer = document.querySelector('.edit-button-container');
         if (editButtonContainer) {
-            articleAsideElement.insertBefore(keywordsDiv, editButtonContainer.nextSibling);
+            articleAsideElement.insertBefore(infoDiv, editButtonContainer.nextSibling);
         } else {
-            articleAsideElement.prepend(keywordsDiv);
+            articleAsideElement.prepend(infoDiv);
         }
     }
 
-    const keywordsContent = newKeywords.map(keyword => {
+    // Filter out already processed keywords
+    const newKeywords = articleInfo.keywords.filter(keyword => !processedKeywords.has(keyword));
+    for (const keyword of newKeywords) {
         processedKeywords.add(keyword);
-        return `<span class="keyword-tag">${keyword}</span>`;
-    }).join('');
+    }
 
-    keywordsDiv.innerHTML = `
-        <div>
-            <span class="keyword-title">Tags de l'article</span>
-        </div>
-        <div class="keyword-details">
-            ${keywordsContent}
+    const keywordsContent = articleInfo.keywords.map(keyword => 
+        `<span class="keyword-tag">${keyword}</span>`
+    ).join('');
+
+    infoDiv.innerHTML = `
+        <div class="info-details">
+            <div class="keywords-section">
+                <span class="keyword-title">Nombre de mots</span>
+                <div class="keyword-list">
+                    <span class="keyword-tag word-count">${articleInfo.wordCount}</span>
+                </div>
+            </div>
+            <div class="keywords-section">
+                <span class="keyword-title">Tags de l'article</span>
+                <div class="keyword-list">${keywordsContent}</div>
+            </div>
         </div>
     `;
 
-    console.log('New keywords injected into the sidebar:', newKeywords);
+    console.log('Article info injected into the sidebar:', articleInfo);
 }
 
 // Function to get post ID from links
@@ -126,15 +133,15 @@ function injectEditButton() {
     console.log('Edit button injected into the sidebar.');
 }
 
-// Function to handle keyword extraction and injection
-function handleKeywords() {
-    console.log('Checking for keywords...');
-    const keywords = extractKeywords();
-    if (keywords) {
-        console.log('Keywords found:', keywords);
-        injectKeywords(keywords);
+// Function to handle article info extraction and injection
+function handleArticleInfo() {
+    console.log('Checking for article info...');
+    const articleInfo = extractArticleInfo();
+    if (articleInfo) {
+        console.log('Article info found:', articleInfo);
+        injectArticleInfo(articleInfo);
     } else {
-        console.log('No new keywords found or unable to parse schema data.');
+        console.log('No new article info found or unable to parse schema data.');
     }
 }
 
@@ -146,27 +153,27 @@ function setupArticleContentObserver() {
         return;
     }
 
-    console.log('Setting up article content observer for keywords...');
+    console.log('Setting up article content observer for article info...');
 
     const observerConfig = { childList: true, subtree: true };
     const articleMutationObserver = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
             if (mutation.type === 'childList') {
-                console.log('Detected a change in the article content. Checking for keywords...');
-                handleKeywords();
+                console.log('Detected a change in the article content. Checking for article info...');
+                handleArticleInfo();
             }
         }
     });
 
     articleMutationObserver.observe(articleContentNode, observerConfig);
-    console.log('Article content observer for keywords set up successfully.');
+    console.log('Article content observer for article info set up successfully.');
 }
 
 // Initialization function to set up observers and initial checks
 function initializeExtension() {
-    console.log('Initializing keyword extractor and edit button...');
+    console.log('Initializing enhanced article info extractor and edit button...');
     injectEditButton(); // Inject the edit button
-    handleKeywords(); // Initial check for keywords
+    handleArticleInfo(); // Initial check for article info
     setupArticleContentObserver(); // Set up observer for dynamic content changes
 }
 
