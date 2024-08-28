@@ -2058,6 +2058,130 @@ form input[type="image"][alt="Search"] {
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* Button Container Styles */
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.1rem;
+}
+
+/* Common Button Styles */
+.edit-article-button,
+.check-errors-button {
+    display: inline-block;
+    width: 48%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Light Theme Button Styles */
+[data-theme="light"] .edit-article-button {
+    background-color: #EEA93C;
+    color: #ffffff;
+}
+
+[data-theme="light"] .check-errors-button {
+    background-color: #3C8CEE;
+    color: #ffffff;
+}
+
+/* Dark Theme Button Styles */
+[data-theme="dark"] .edit-article-button {
+    background-color: #EEA93C;
+    color: #ffffff;
+}
+
+[data-theme="dark"] .check-errors-button {
+    background-color: #3C8CEE;
+    color: #ffffff;
+}
+
+/* Button Hover Effects */
+.edit-article-button:hover,
+.check-errors-button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Popup Styles */
+.error-check-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+    font-family: Arial, sans-serif;
+}
+
+[data-theme="dark"] .error-check-popup {
+    background: #2a2a2a;
+    color: #ffffff;
+}
+
+.error-check-popup h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.error-check-popup p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+/* Loading Animation */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3C8CEE;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Close Button Styles */
+.close-popup-button {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    background-color: #3C8CEE;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.close-popup-button:hover {
+    background-color: #3070c0;
+}
 /* Article Info Styles end*/
 
 }

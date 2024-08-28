@@ -1,9 +1,9 @@
 // Create a MutationObserver instance
-let observerForHeader = new MutationObserver(function() {
-    let element = document.querySelector('.header-title.ms-2.me-1.bold');
+const observerForHeader = new MutationObserver(() => {
+    const element = document.querySelector('.header-title.ms-2.me-1.bold');
     if (element) {
         // Create a span and add the sparkle emoji to it
-        let span = document.createElement('span');
+        const span = document.createElement('span');
         span.textContent = ' ඞ';
         span.classList.add('sparkle');
 
@@ -11,7 +11,7 @@ let observerForHeader = new MutationObserver(function() {
         element.appendChild(span);
 
         // Create a new style element
-        let style = document.createElement('style');
+        const style = document.createElement('style');
 
         // Define CSS as text
         style.textContent = `
@@ -68,7 +68,7 @@ function replaceQuestionMarks() {
 // Run the replacement function immediately on page load
 replaceQuestionMarks();
 
-let observerForEmote = new MutationObserver(function(mutations) {
+const observerForEmote = new MutationObserver((mutations) => {
     mutations.forEach(mutation => {
         if (mutation.addedNodes.length) {
             replaceQuestionMarks();

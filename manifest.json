@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Better Cryptoast",
   "description": "This extension enhances the CSS of Cryptoast.fr, bug fixes, dark & light theme auto detect...",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "icons": {
     "128": "icon.png"
   },
@@ -11,11 +11,13 @@
   },
   "permissions": [
     "declarativeNetRequest",
-    "cookies"
+    "cookies",
+    "tabs"
   ],
   "host_permissions": [
-      "https://cryptoast.fr/*",
-      "https://api.coingecko.com/*"
+    "https://cryptoast.fr/*",
+    "https://api.coingecko.com/*",
+    "https://api.openai.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -38,7 +40,7 @@
       "exclude_matches": [
         "*://cryptoast.fr/wp-admin/*",
         "*://cryptoast.fr/journal/*"
-    ],    
+      ],    
       "css": ["styles.css"],
       "js": ["theme.js", "content.js", "coinDetect.js", "progressBar.js", "btcPrice.js", "searchBox.js", "imgEnhance.js", "buyButtons.js", "cookieEaster.js", "lightBox.js"]
     }
