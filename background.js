@@ -1,7 +1,22 @@
-const OPENAI_API_KEY =
-  "";
+let OPENAI_API_KEY = '';
+
+chrome.storage.local.get(['openaiApiKey'], (result) => {
+  OPENAI_API_KEY = result.openaiApiKey || '';
+});
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'setApiKey') {
+    OPENAI_API_KEY = message.apiKey;
+    chrome.storage.local.set({ openaiApiKey: OPENAI_API_KEY });
+    sendResponse({ success: true });
+    return true;
+  }
+
+  if (message.action === 'getApiKey') {
+    sendResponse({ apiKey: OPENAI_API_KEY });
+    return true;
+  }
+
   if (message.action === "checkCookie") {
     chrome.cookies.get(
       {
@@ -18,7 +33,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     );
     return true;
   }
+
   if (message.action === "checkErrors") {
+    if (!OPENAI_API_KEY) {
+      chrome.tabs.sendMessage(sender.tab.id, {
+        action: "apiResponse",
+        result: "Cliquez sur le logo de l'extension et ajoutez votre clé API en bas.",
+      });
+      return true;
+    }
+
     checkErrors(sender.tab.id)
       .then((result) => {
         chrome.tabs.sendMessage(sender.tab.id, {
@@ -33,7 +57,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           result: "Une erreur est survenue lors de la vérification.",
         });
       });
-    return true; // Keep the message channel open for the asynchronous response
+    return true;
   }
 });
 
@@ -47,7 +71,7 @@ async function checkErrors(tabId) {
   2. Montre le texte ou passage concerné.
   3. Donne une brève explication de l'erreur.
   
-  Ne réécris pas tout l'article corrigé. Retourne uniquement la liste des erreurs en utilisant du code HTML valide, sans inclure les balises de code ou les délimiteurs de bloc comme \`\\\`\\\`\\\`html\`. Ta réponse doit être prête à être affichée directement dans une div HTML sans modification. Sois intransigeant, aucune erreur ne doit t'échapper, mais reste focalisé uniquement sur les erreurs réelles et significatives. Voici l'article : ${articleContent}`;
+  Ne réécris pas tout l'article corrigé. Retourne uniquement la liste des erreurs en utilisant du code HTML valide, sans inclure les balises de code ou les délimiteurs de bloc comme \`\`\`html\`. Ta réponse doit être prête à être affichée directement dans une div HTML sans modification. Sois intransigeant, aucune erreur ne doit t'échapper, mais reste focalisé uniquement sur les erreurs réelles et significatives. Voici l'article : ${articleContent}`;
 
   const requestBody = {
     model: "gpt-4o",

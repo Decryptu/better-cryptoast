@@ -1,42 +1,43 @@
 <!DOCTYPE html>
-<html>
-<meta charset="UTF-8">
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptoast Extension</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-        
+
         * {
             font-family: 'Inter', sans-serif !important;
+            box-sizing: border-box;
         }
+
         html, body {
             width: 20rem;
             height: auto;
             margin: 0;
             padding: 0;
             background: #FFFFFF;
-            box-sizing: border-box;
         }
 
-        .popup-h1{
-            font-weight: 800;
-            font-size: 1.3rem;
-            text-align: center;
-            margin-top: 1rem;
-            color: #121826;
+        body {
+            padding: 1rem;
         }
-          
-        #searchForm {
-            padding: 10px 20px;
-            margin: 0px;
+
+        .section {
             margin-bottom: 2rem;
         }
 
-        .searchContainer:active {
-            border: 1px solid #E9983D;
+        .popup-h1 {
+            font-weight: 800;
+            font-size: 1.3rem;
+            text-align: center;
+            color: #121826;
+            margin: 0 0 1rem 0;
         }
 
-        .searchContainer:hover {
-            border: 1px solid #E9983D;
+        #searchForm {
+            margin: 0;
         }
 
         .searchContainer {
@@ -49,6 +50,11 @@
             transition: border-color 0.3s;
         }
 
+        .searchContainer:hover,
+        .searchContainer:active {
+            border-color: #E9983D;
+        }
+
         .searchContainer svg {
             margin: 0 10px;
         }
@@ -58,20 +64,59 @@
             border: none;
             font-size: 16px;
             outline: none;
+            background: transparent;
         }
 
         #searchInput:focus {
             outline: none;
         }
 
-        #searchInput:focus + .searchContainer{
-            border-color: #8A8A8A;
+        .input-container {
+            position: relative;
+            margin-bottom: 1rem;
         }
 
-        #buyBitcoin {
+        .input-container input {
+            display: flex;
+            align-items: center;
+            background-color: #FFFFFF;
+            border: 1px solid #E6E6E6;
+            border-radius: 0.5rem;
+            height: 40px;
+            width: 100%;
+            transition: border-color 0.3s;
+            padding: 0 30px 0 10px;
+            font-size: 16px;
+        }
+
+        .input-container:hover input,
+        .input-container:active input,
+        .input-container input:focus {
+            border-color: #E9983D;
+            outline: none;
+        }
+
+        .btc-container::after,
+        .usd-container::after {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .btc-container::after {
+            content: "₿";
+        }
+
+        .usd-container::after {
+            content: "$";
+        }
+
+        #saveApiKey {
             display: block;
+            width: 100%;
             padding: 12px;
-            margin: 0px 20px 20px 20px;
             background-color: #F7931A;
             color: white;
             border: none;
@@ -83,45 +128,42 @@
             transition: opacity 0.3s ease-in-out;
         }
 
-        #buyBitcoin:hover{
-            opacity: 75%;
+        #saveApiKey:hover {
+            opacity: 0.75;
         }
 
-        /* halving */
         .countdown {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 0.4rem;
-            width: -webkit-fill-available;
-            max-width: 100%;
-            padding: 10px 20px 0px 20px;
-          }
-          
-          .time-segment {
+            margin-bottom: 0.5rem;
+        }
+
+        .time-segment {
             border: 1px solid #E6E6E6;
             background-color: #fff;
             padding: 0.5rem;
             text-align: center;
             position: relative;
             border-radius: 0.5rem;
-          }
-          
-          .time-segment .number {
+        }
+
+        .time-segment .number {
             font-size: 1.6rem;
             font-weight: bold;
             display: flex;
             justify-content: center;
-        } 
-          
-          .time-segment .time-unit {
+        }
+
+        .time-segment .time-unit {
             font-size: 0.6rem;
             display: block;
             text-align: center;
             color: gray;
-          }
-          
-          .time-segment::after {
+        }
+
+        .time-segment::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -130,130 +172,81 @@
             height: 5px;
             background-color: #E9983D;
             border-radius: 0 0 0.5rem 0.5rem;
-          }  
-          .eta{
-            justify-content: center;
-            align-items: center;
+        }
+
+        .eta {
+            text-align: center;
             font-size: 0.8rem;
-            display: flex;
-            margin-bottom: 2rem;
-          }
-          /* btc price */
-          .converter {
-            padding: 5px 20px 10px 20px;
-            margin: 0px;
-            margin-bottom: 2rem;
+            margin: 0;
         }
-          #bitcoin-price{
-            margin-bottom: 2rem;
-            justify-content: center;
-            align-items: center;
+
+        #bitcoin-price {
             font-size: 1.8rem;
-            display: flex;
             color: #E9983D;
-            margin-top: 0rem;
-            padding-top: 0rem;
-          }
-          .input-container {
-            position: relative;
-            margin: 10px 0;
-            max-width: 100%;
-            box-sizing: border-box;
+            text-align: center;
+            margin: 1rem 0;
         }
-        
-        .input-container input {
-          display: flex;
-          align-items: center;
-          background-color: #FFFFFF;
-          border: 1px solid #E6E6E6;
-          border-radius: 0.5rem;
-          height: 40px;
-          width: 100%;
-          transition: border-color 0.3s;
-          padding-right: 30px;
-          padding-left: 10px;
-          max-width: 100%;
-          box-sizing: border-box;
-      }
-
-      .input-container:hover input,
-      .input-container:active input {
-          border: 1px solid #E9983D;
-      }
-
-      .input-container input:focus {
-        outline: none;
-        border: 1px solid #E9983D;
-    }    
-        
-      .btc-container::after {
-        content: "₿";
-        position: absolute;
-        right: 10px; 
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-    }
-    
-    .usd-container::after {
-        content: "$";
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-    }
-
     </style>
-  </head>
-  <body>
-    <h1 class="popup-h1">Chercher sur Cryptoast✨</h1>
-    <form id="searchForm">
-      <div class="searchContainer">
-        <svg class="with-icon_icon__MHUeb" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24">
-          <path d="M11 17.25a6.25 6.25 0 110-12.5 6.25 6.25 0 010 12.5z"></path>
-          <path d="M16 16l4.5 4.5"></path>
-        </svg>
-        <input type="text" id="searchInput" placeholder="Ethereum..." autocomplete="off">
-      </div>
-    </form>
-    <h1 class="popup-h1">Convertisseur BTC ↔ USD</h1>
-<div class="converter">
-  <div class="input-container btc-container">
-    <input type="text" id="btcInput" placeholder="BTC">
-</div>
-<div class="input-container usd-container">
-    <input type="text" id="usdInput" placeholder="USD">
-</div>
-</div>
-    <!--
-    <h1 class="popup-h1">Prix du BTC</h1>
-        <p id="bitcoin-price">Loading Bitcoin price...</p>
-    -->
-    <h1 class="popup-h1">Bitcoin halving countdown</h1>
-    <div id="countdown" class="countdown">
-      <div class="time-segment">
-    <span class="number" id="days"></span>
-    <span class="time-unit">jours</span>
-  </div>
-  <span>:</span>
-  <div class="time-segment">
-    <span class="number" id="hours"></span>
-    <span class="time-unit">heures</span>
-  </div>
-  <span>:</span>
-  <div class="time-segment">
-    <span class="number" id="minutes"></span>
-    <span class="time-unit">minutes</span>
-  </div>
-  <span>:</span>
-  <div class="time-segment">
-    <span class="number" id="seconds"></span>
-    <span class="time-unit">secondes</span>
-  </div>
+</head>
+<body>
+    <div class="section">
+        <h1 class="popup-h1">Chercher sur Cryptoast✨</h1>
+        <form id="searchForm">
+            <div class="searchContainer">
+                <svg class="with-icon_icon__MHUeb" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                    <path d="M11 17.25a6.25 6.25 0 110-12.5 6.25 6.25 0 010 12.5z"></path>
+                    <path d="M16 16l4.5 4.5"></path>
+                </svg>
+                <input type="text" id="searchInput" placeholder="Ethereum..." autocomplete="off">
+            </div>
+        </form>
     </div>
-    <p class="eta"><span style="color:gray;">ETA: </span><span id="eta-time">Chargement...</span></p>
-    <a id="buyBitcoin" href="https://cryptoast.fr/go-binance/" target="_blank">Acheter du BTC ₿</a>
-  </body>
-  <script src="popup.js"></script>
+
+    <div class="section">
+        <h1 class="popup-h1">Convertisseur BTC ↔ USD</h1>
+        <div class="input-container btc-container">
+            <input type="text" id="btcInput" placeholder="BTC">
+        </div>
+        <div class="input-container usd-container">
+            <input type="text" id="usdInput" placeholder="USD">
+        </div>
+        <div id="bitcoin-price"></div>
+    </div>
+
+    <div class="section">
+        <h1 class="popup-h1">Bitcoin halving countdown</h1>
+        <div id="countdown" class="countdown">
+            <div class="time-segment">
+                <span class="number" id="days"></span>
+                <span class="time-unit">jours</span>
+            </div>
+            <span>:</span>
+            <div class="time-segment">
+                <span class="number" id="hours"></span>
+                <span class="time-unit">heures</span>
+            </div>
+            <span>:</span>
+            <div class="time-segment">
+                <span class="number" id="minutes"></span>
+                <span class="time-unit">minutes</span>
+            </div>
+            <span>:</span>
+            <div class="time-segment">
+                <span class="number" id="seconds"></span>
+                <span class="time-unit">secondes</span>
+            </div>
+        </div>
+        <p class="eta"><span style="color:gray;">ETA: </span><span id="eta-time">Chargement...</span></p>
+    </div>
+
+    <div class="section">
+        <h1 class="popup-h1">OpenAI API Key</h1>
+        <div class="input-container">
+            <input type="password" id="apiKeyInput" placeholder="Enter your OpenAI API key">
+        </div>
+        <button id="saveApiKey">Save API Key</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
 </html>

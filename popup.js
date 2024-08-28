@@ -1,8 +1,8 @@
-document.getElementById('searchForm').addEventListener('submit', function(event) {
+document.getElementById('searchForm').addEventListener('submit', (event) => {
     event.preventDefault();
   
-    var searchQuery = document.getElementById('searchInput').value;
-    var url = 'https://cryptoast.fr/?s=' + encodeURIComponent(searchQuery);
+    const searchQuery = document.getElementById('searchInput').value;
+    const url = `https://cryptoast.fr/?s=${encodeURIComponent(searchQuery)}`;
   
     // Open the URL in a new tab
     chrome.tabs.create({ url: url });
@@ -101,8 +101,8 @@ function fetchBTCPrice() {
 
 // Update the USD input based on the BTC input
 function updateUSDValue() {
-    const btcValue = parseFloat(document.getElementById('btcInput').value);
-    if (!isNaN(btcValue)) {
+    const btcValue = Number.parseFloat(document.getElementById('btcInput').value);
+    if (!Number.isNaN(btcValue)) {
         const usdValue = btcToUsdRate * btcValue;
         document.getElementById('usdInput').value = usdValue.toFixed(2);
     }
@@ -110,8 +110,8 @@ function updateUSDValue() {
 
 // Update the BTC input based on the USD input
 function updateBTCValue() {
-    const usdValue = parseFloat(document.getElementById('usdInput').value);
-    if (!isNaN(usdValue)) {
+    const usdValue = Number.parseFloat(document.getElementById('usdInput').value);
+    if (!Number.isNaN(usdValue)) {
         const btcValue = usdValue / btcToUsdRate;
         document.getElementById('btcInput').value = btcValue.toFixed(8);  // BTC can have up to 8 decimals
     }
@@ -129,3 +129,23 @@ document.getElementById('usdInput').addEventListener('input', filterInput);
 
 // Fetch the BTC price on popup open
 fetchBTCPrice();
+
+// Add this to the end of popup.js
+
+document.getElementById('saveApiKey').addEventListener('click', () => {
+    const apiKey = document.getElementById('apiKeyInput').value;
+    chrome.runtime.sendMessage({ action: 'setApiKey', apiKey }, (response) => {
+      if (response.success) {
+        alert('API key saved successfully!');
+      } else {
+        alert('Failed to save API key. Please try again.');
+      }
+    });
+  });
+  
+  // Load saved API key when popup opens
+  chrome.runtime.sendMessage({ action: 'getApiKey' }, (response) => {
+    if (response.apiKey) {
+      document.getElementById('apiKeyInput').value = response.apiKey;
+    }
+  });
