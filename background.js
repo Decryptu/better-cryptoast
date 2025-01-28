@@ -64,14 +64,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 async function checkErrors(tabId) {
   console.log("Checking errors for tab:", tabId);
   const articleContent = await getArticleContent(tabId);
-  const prompt = `Voici le contenu d'un article au format HTML. Je veux que tu vérifies uniquement s'il y a des fautes d'orthographe, de grammaire, de syntaxe, ou des erreurs évidentes dans le texte visible. Ignore complètement les balises HTML et les erreurs liées à la structure HTML, ignore également le contenu des boutons et des shortcodes, ainsi que toute suggestion de reformulation ou d'amélioration du style. Ne signale que les erreurs qui constituent des fautes ou des problèmes évidents. Ne cite jamais une erreur sans être 100% certain qu'elle existe. En cas de doute, ignore le passage concerné. Il est préférable de manquer une erreur que d'en inventer une.
+  const prompt = `Voici le contenu d'un article au format HTML. Je veux que tu vérifies uniquement s'il y a des fautes d'orthographe, de grammaire, de syntaxe, ou des erreurs évidentes dans le texte visible. Ignore complètement les balises HTML et les erreurs liées à la structure HTML, ignore également le contenu des boutons et des shortcodes, ainsi que toute suggestion de reformulation ou d'amélioration du style. Ne signale que les erreurs qui constituent des fautes ou des problèmes évidents. Ne propose de reformulation pour des choses anecdtotiques, concentre toi sur les fautes.
 
   Si tu trouves des erreurs, crée une liste HTML détaillant chaque erreur, une par une, de manière concise. Pour chaque erreur :
   1. Indique le type d'erreur (orthographe, grammaire, syntaxe, mise en forme).
   2. Montre le texte ou passage concerné.
   3. Donne une brève explication de l'erreur.
   
-  Ne réécris pas tout l'article corrigé. Retourne uniquement la liste des erreurs en utilisant du code HTML valide, sans inclure les balises de code ou les délimiteurs de bloc comme \`\`\`html\`. Ta réponse doit être prête à être affichée directement dans une div HTML sans modification. Sois intransigeant, aucune erreur ne doit t'échapper, mais reste focalisé uniquement sur les erreurs réelles et significatives. Ne te force pas à trouver des problèmes - un article sans erreur est un résultat valide et positif.  Si tu ne trouves aucune erreur RÉELLE, réponds simplement "Tout semble ok.". Voici l'article : ${articleContent}`;
+  Ne réécris pas tout l'article corrigé. Retourne uniquement la liste des erreurs en utilisant du code HTML valide, sans inclure les balises de code ou les délimiteurs de bloc comme \`\`\`html\`. Ta réponse doit être prête à être affichée directement dans une div HTML sans modification. Si aucune erreur certaine n'est trouvée, réponds simplement "Tout semble ok."
+  
+  Voici l'article : ${articleContent}`;
 
   const requestBody = {
     model: "gpt-4o",

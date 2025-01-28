@@ -2,7 +2,7 @@
 	"manifest_version": 3,
 	"name": "Better Cryptoast",
 	"description": "This extension enhances the CSS of Cryptoast.fr, bug fixes, dark & light theme auto detect...",
-	"version": "2.0.3",
+	"version": "2.0.4",
 	"icons": {
 		"128": "icon.png"
 	},

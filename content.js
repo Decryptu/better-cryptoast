@@ -38,9 +38,9 @@ observerForHeader.observe(document.body, {childList: true, subtree: true});
 //remove NBSP
 function removeNBSP() {
     const elements = document.querySelectorAll('.last-news-card-date.ms-1');
-    elements.forEach(element => {
-        element.innerHTML = element.innerHTML.replace(/&nbsp;/g, ' ');  // replace with a space
-    });
+    for (const element of elements) {
+        element.innerHTML = element.innerHTML.replace(/ /g, ' ');  // replace with a space
+    }
 }
 
 // Call the function
@@ -49,7 +49,7 @@ removeNBSP();
 // fix broken emote
 function replaceQuestionMarks() {
     const paragraphs = document.querySelectorAll('.article-section p');
-    paragraphs.forEach(p => {
+    for (const p of paragraphs) {
         // Replace in paragraph itself
         if (p.childNodes.length > 0 && p.childNodes[0].nodeValue && p.childNodes[0].nodeValue.startsWith("? ")) {
             p.childNodes[0].nodeValue = p.childNodes[0].nodeValue.replace('? ', '👉🏻 ');
@@ -57,25 +57,23 @@ function replaceQuestionMarks() {
 
         // Replace in <a> tags within the paragraph
         const anchorTags = p.querySelectorAll('a');
-        anchorTags.forEach(a => {
+        for (const a of anchorTags) {
             if (a.childNodes.length > 0 && a.childNodes[0].nodeValue && a.childNodes[0].nodeValue.startsWith("? ")) {
                 a.childNodes[0].nodeValue = a.childNodes[0].nodeValue.replace('? ', '👉🏻 ');
             }
-        });
-    });
+        }
+    }
 }
-
 // Run the replacement function immediately on page load
 replaceQuestionMarks();
 
 const observerForEmote = new MutationObserver((mutations) => {
-    mutations.forEach(mutation => {
+    for (const mutation of mutations) {
         if (mutation.addedNodes.length) {
             replaceQuestionMarks();
         }
-    });
+    }
 });
-
 const config = {
     childList: true,
     subtree: true
@@ -95,10 +93,10 @@ function isTargetPage(url) {
     const pricesGridElements = document.querySelectorAll("#body #prices-grid");
     let elementsRemoved = 0;
   
-    pricesGridElements.forEach((element) => {
+    for (const element of pricesGridElements) {
       element.remove();
       elementsRemoved++;
-    });
+    }
   
     return elementsRemoved;  // Return the number of removed elements
   }
