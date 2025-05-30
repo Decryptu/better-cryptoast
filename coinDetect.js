@@ -1,3 +1,4 @@
+// coinDetect.js
 console.log(
   "Enhanced article info extractor and edit button script is starting"
 );
@@ -101,69 +102,7 @@ function getPostIdFromLinks() {
   return null;
 }
 
-function injectButtons() {
-  const articleAsideElement = document.querySelector(".article-aside");
-  if (!articleAsideElement) {
-    console.error("Article aside element not found.");
-    return;
-  }
-
-  if (document.querySelector(".buttons-container")) {
-    console.log("Buttons already exist.");
-    return;
-  }
-
-  const buttonsDiv = document.createElement("div");
-  buttonsDiv.className = "coin-info buttons-container";
-  buttonsDiv.style.display = "flex";
-  buttonsDiv.style.justifyContent = "space-between";
-
-  const editButton = createButton(
-    "Modifier cet article",
-    "edit-article-button",
-    handleEditClick
-  );
-  const checkButton = createButton(
-    "Vérifier erreurs",
-    "check-errors-button",
-    handleCheckClick
-  );
-
-  buttonsDiv.appendChild(editButton);
-  buttonsDiv.appendChild(checkButton);
-  articleAsideElement.prepend(buttonsDiv);
-  console.log("Edit and Check buttons injected into the sidebar.");
-}
-
-function createButton(text, className, clickHandler) {
-  const button = document.createElement("button");
-  button.textContent = text;
-  button.className = className;
-  button.style.width = "48%";
-  button.addEventListener("click", clickHandler);
-  return button;
-}
-
-function handleEditClick() {
-  const postId = getPostIdFromLinks();
-  if (postId) {
-    const editUrl = `${window.location.origin}/wp-admin/post.php?post=${postId}&action=edit`;
-    window.location.href = editUrl;
-  } else {
-    console.log("No post ID found.");
-  }
-}
-
-function handleCheckClick() {
-  console.log("Check errors button clicked");
-  showLoadingPopup();
-  chrome.runtime.sendMessage({ action: "checkErrors" });
-}
-
-function showLoadingPopup() {
-  const popup = createPopup("Analyse en cours...", true);
-  document.body.appendChild(popup);
-}
+// REMOVED DUPLICATE injectButtons() function - it's now only in content.js
 
 function createPopup(content) {
   const popup = document.createElement("div");
@@ -288,8 +227,8 @@ function setupArticleContentObserver() {
 }
 
 function initializeExtension() {
-  console.log("Initializing enhanced article info extractor and buttons...");
-  injectButtons();
+  console.log("Initializing enhanced article info extractor...");
+  // REMOVED injectButtons() call - it's now handled in content.js
   handleArticleInfo();
   setupArticleContentObserver();
 }

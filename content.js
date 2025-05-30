@@ -120,110 +120,7 @@ if (isTargetPage(window.location.href)) {
     domObserver.observe(bodyElement, observerConfig);
 }
 
-// coinDetect.js
-console.log(
-    "Enhanced article info extractor and edit button script is starting"
-);
-
-const processedKeywords = new Set();
-let lastProcessedSchema = "";
-
-function extractArticleInfo() {
-    const schemaScript = document.querySelector(
-        'script[type="application/ld+json"].yoast-schema-graph'
-    );
-    if (schemaScript) {
-        const currentSchema = schemaScript.textContent;
-        if (currentSchema === lastProcessedSchema) {
-            console.log(
-                "Schema has not changed since last check. Skipping reprocessing."
-            );
-            return null;
-        }
-        lastProcessedSchema = currentSchema;
-
-        try {
-            const schemaData = JSON.parse(currentSchema);
-            const article = schemaData["@graph"].find(
-                (item) => item["@type"] === "NewsArticle"
-            );
-            if (article) {
-                return {
-                    keywords: article.keywords || [],
-                    wordCount: article.wordCount || 0,
-                };
-            }
-        } catch (error) {
-            console.error("Error parsing schema data:", error);
-        }
-    }
-    return null;
-}
-
-function injectArticleInfo(articleInfo) {
-    if (!articleInfo) return;
-
-    const articleAsideElement = document.querySelector(".article-aside");
-    if (!articleAsideElement) {
-        console.error("Article aside element not found.");
-        return;
-    }
-
-    let infoDiv = document.querySelector(".article-info");
-    if (!infoDiv) {
-        infoDiv = document.createElement("div");
-        infoDiv.className = "coin-info article-info";
-        const buttonsContainer = document.querySelector(".buttons-container");
-        if (buttonsContainer) {
-            articleAsideElement.insertBefore(infoDiv, buttonsContainer.nextSibling);
-        } else {
-            articleAsideElement.prepend(infoDiv);
-        }
-    }
-
-    const newKeywords = articleInfo.keywords.filter(
-        (keyword) => !processedKeywords.has(keyword)
-    );
-    for (const keyword of newKeywords) {
-        processedKeywords.add(keyword);
-    }
-
-    const keywordsContent = articleInfo.keywords
-        .map((keyword) => `<span class="keyword-tag">${keyword}</span>`)
-        .join("");
-
-    infoDiv.innerHTML = `
-        <div class="info-details">
-            <div class="keywords-section">
-                <span class="keyword-title">Nombre de mots</span>
-                <div class="keyword-list">
-                    <span class="keyword-tag word-count">${articleInfo.wordCount}</span>
-                </div>
-            </div>
-            <div class="keywords-section">
-                <span class="keyword-title">Tags de l'article</span>
-                <div class="keyword-list">${keywordsContent}</div>
-            </div>
-        </div>
-    `;
-
-    console.log("Article info injected into the sidebar:", articleInfo);
-}
-
-function getPostIdFromLinks() {
-    const links = document.getElementsByTagName("link");
-    for (let i = 0; i < links.length; i++) {
-        const href = links[i].getAttribute("href");
-        if (href?.includes("/wp-json/wp/v2/posts/")) {
-            return href.split("/wp-json/wp/v2/posts/")[1];
-        }
-        if (href?.includes("shortlink")) {
-            return href.split("p=")[1];
-        }
-    }
-    return null;
-}
-
+// Button injection and handling functions
 function injectButtons() {
     const articleAsideElement = document.querySelector(".article-aside");
     if (!articleAsideElement) {
@@ -252,17 +149,17 @@ function injectButtons() {
         "check-errors-button",
         handleCheckClick
     );
-    const apostropheButton = createButton(
-        "Détecter apostrophes",
+    const gptDetectorButton = createButton(
+        "GPT Detector",
         "apostrophe-check-button",
         handleApostropheClick
     );
 
     buttonsDiv.appendChild(editButton);
     buttonsDiv.appendChild(checkButton);
-    buttonsDiv.appendChild(apostropheButton);
+    buttonsDiv.appendChild(gptDetectorButton);
     articleAsideElement.prepend(buttonsDiv);
-    console.log("Edit, Check, and Apostrophe buttons injected into the sidebar.");
+    console.log("Edit, Check, and GPT Detector buttons injected into the sidebar.");
 }
 
 function createButton(text, className, clickHandler) {
@@ -275,6 +172,20 @@ function createButton(text, className, clickHandler) {
     button.style.lineHeight = "1.2";
     button.addEventListener("click", clickHandler);
     return button;
+}
+
+function getPostIdFromLinks() {
+    const links = document.getElementsByTagName("link");
+    for (let i = 0; i < links.length; i++) {
+        const href = links[i].getAttribute("href");
+        if (href?.includes("/wp-json/wp/v2/posts/")) {
+            return href.split("/wp-json/wp/v2/posts/")[1];
+        }
+        if (href?.includes("shortlink")) {
+            return href.split("p=")[1];
+        }
+    }
+    return null;
 }
 
 function handleEditClick() {
@@ -384,86 +295,21 @@ function handleApiResponse(result) {
     }, 100);
 }
 
-function handleArticleInfo() {
-    console.log("Checking for article info...");
-    const articleInfo = extractArticleInfo();
-    if (articleInfo) {
-        console.log("Article info found:", articleInfo);
-        injectArticleInfo(articleInfo);
-    } else {
-        console.log("No new article info found or unable to parse schema data.");
-    }
-}
-
-function setupArticleContentObserver() {
-    const articleContentNode = document.querySelector(".article-content");
-    if (!articleContentNode) {
-        console.log("Article content node not found. Observer not set up.");
-        return;
-    }
-
-    console.log("Setting up article content observer for article info...");
-
-    const observerConfig = { childList: true, subtree: true };
-    const articleMutationObserver = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
-            if (mutation.type === "childList") {
-                console.log(
-                    "Detected a change in the article content. Checking for article info..."
-                );
-                handleArticleInfo();
-            }
-        }
-    });
-
-    articleMutationObserver.observe(articleContentNode, observerConfig);
-    console.log("Article content observer for article info set up successfully.");
-}
-
-function initializeExtension() {
-    console.log("Initializing enhanced article info extractor and buttons...");
+// Initialize buttons when content loads
+function initializeButtons() {
+    console.log("Initializing buttons...");
     injectButtons();
-    handleArticleInfo();
-    setupArticleContentObserver();
 }
 
 if (document.readyState === "complete") {
-    initializeExtension();
+    initializeButtons();
 } else {
-    window.addEventListener("load", initializeExtension);
+    window.addEventListener("load", initializeButtons);
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "getArticleContent") {
-        const articleSection = document.querySelector("section.article-section");
-        if (articleSection) {
-            const clonedSection = articleSection.cloneNode(true);
-            removeUnwantedElements(clonedSection);
-            sendResponse({ content: clonedSection.innerHTML });
-        } else {
-            sendResponse({ content: "" });
-        }
-    } else if (request.action === "apiResponse") {
+    if (request.action === "apiResponse") {
         handleApiResponse(request.result);
     }
     return true;
 });
-
-function removeUnwantedElements(element) {
-    const scripts = element.querySelectorAll("script");
-    for (const script of scripts) {
-        script.remove();
-    }
-
-    const styles = element.querySelectorAll("style");
-    for (const style of styles) {
-        style.remove();
-    }
-
-    const authorModule = element.querySelector(".article-author-module");
-    if (authorModule) {
-        authorModule.remove();
-    }
-
-    return element;
-}

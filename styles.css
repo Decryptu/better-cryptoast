@@ -2183,8 +2183,7 @@ form input[type="image"][alt="Search"] {
     background-color: #3070c0;
 }
 /* Article Info Styles end*/
-
-/* Apostrophe highlighting styles */
+/* GPT Detector Button Styling */
 .apostrophe-check-button {
   background-color: #E63946 !important;
   border-radius: 8px !important;
@@ -2193,7 +2192,8 @@ form input[type="image"][alt="Search"] {
   font-weight: bold !important;
 }
 
-.apostrophe-curved {
+/* Text Element Highlights */
+.gpt-apostrophe-curved {
   background-color: #ff6b6b !important;
   color: white !important;
   padding: 1px 2px !important;
@@ -2202,7 +2202,7 @@ form input[type="image"][alt="Search"] {
   box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
 }
 
-.apostrophe-straight {
+.gpt-apostrophe-straight {
   background-color: #51cf66 !important;
   color: white !important;
   padding: 1px 2px !important;
@@ -2211,7 +2211,56 @@ form input[type="image"][alt="Search"] {
   box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
 }
 
-/* Button styling adjustments */
+.gpt-en-dash {
+  background-color: #ff4757 !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  font-weight: bold !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  border: 1px solid #c0392b !important;
+}
+
+.gpt-hyphen {
+  background-color: #2ed573 !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  font-weight: bold !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  border: 1px solid #27ae60 !important;
+}
+
+/* Data Attribute Highlights */
+.gpt-data-attribute {
+  position: relative !important;
+  border: 2px dashed #ff9ff3 !important;
+  background-color: rgba(255, 159, 243, 0.1) !important;
+  border-radius: 4px !important;
+  padding: 2px !important;
+  margin: 1px !important;
+}
+
+.gpt-data-indicator {
+  position: absolute !important;
+  top: -10px !important;
+  right: -10px !important;
+  background-color: #ff6b6b !important;
+  color: white !important;
+  border-radius: 50% !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 10px !important;
+  font-weight: bold !important;
+  z-index: 100 !important;
+  cursor: help !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+}
+
+/* Button Container Styling */
 .buttons-container {
   display: flex !important;
   flex-direction: column !important;
@@ -2227,11 +2276,42 @@ form input[type="image"][alt="Search"] {
   text-align: center !important;
 }
 
-.apostrophe-check-button small {
-  display: block;
-  font-size: 10px;
-  margin-top: 2px;
-  opacity: 0.9;
+/* Animation for data attribute detection */
+@keyframes gptDetected {
+  0% { 
+    border-color: #ff9ff3; 
+    background-color: rgba(255, 159, 243, 0.1); 
+  }
+  50% { 
+    border-color: #ff6b6b; 
+    background-color: rgba(255, 107, 107, 0.2); 
+  }
+  100% { 
+    border-color: #ff9ff3; 
+    background-color: rgba(255, 159, 243, 0.1); 
+  }
 }
 
+.gpt-data-attribute {
+  animation: gptDetected 2s ease-in-out infinite !important;
+}
+
+/* Tooltip-like styling for better visibility */
+.gpt-data-indicator:hover::after {
+  content: attr(title) !important;
+  position: absolute !important;
+  bottom: 25px !important;
+  right: 0 !important;
+  background-color: #333 !important;
+  color: white !important;
+  padding: 5px 8px !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  white-space: nowrap !important;
+  z-index: 1000 !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  width: max-content !important;
+  min-width: 150px !important;
+}
 }
