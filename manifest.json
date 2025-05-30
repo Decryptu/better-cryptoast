@@ -50,7 +50,8 @@
 				"imgEnhance.js",
 				"buyButtons.js",
 				"cookieEaster.js",
-				"lightBox.js"
+				"lightBox.js",
+				"apostropheDetect.js"
 			]
 		}
 	]

@@ -2184,4 +2184,54 @@ form input[type="image"][alt="Search"] {
 }
 /* Article Info Styles end*/
 
+/* Apostrophe highlighting styles */
+.apostrophe-check-button {
+  background-color: #E63946 !important;
+  border-radius: 8px !important;
+  color: white !important;
+  border: none !important;
+  font-weight: bold !important;
+}
+
+.apostrophe-curved {
+  background-color: #ff6b6b !important;
+  color: white !important;
+  padding: 1px 2px !important;
+  border-radius: 2px !important;
+  font-weight: bold !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+}
+
+.apostrophe-straight {
+  background-color: #51cf66 !important;
+  color: white !important;
+  padding: 1px 2px !important;
+  border-radius: 2px !important;
+  font-weight: bold !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+}
+
+/* Button styling adjustments */
+.buttons-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.edit-article-button,
+.check-errors-button,
+.apostrophe-check-button {
+  font-size: 12px !important;
+  padding: 8px !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+}
+
+.apostrophe-check-button small {
+  display: block;
+  font-size: 10px;
+  margin-top: 2px;
+  opacity: 0.9;
+}
+
 }

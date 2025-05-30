@@ -318,10 +318,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 function removeUnwantedElements(element) {
   const scripts = element.querySelectorAll("script");
-  scripts.forEach((script) => script.remove());
+  for (const script of scripts) {
+    script.remove();
+  }
 
   const styles = element.querySelectorAll("style");
-  styles.forEach((style) => style.remove());
+  for (const style of styles) {
+    style.remove();
+  }
 
   const authorModule = element.querySelector(".article-author-module");
   if (authorModule) {
