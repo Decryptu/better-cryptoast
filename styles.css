@@ -2182,8 +2182,11 @@ form input[type="image"][alt="Search"] {
 .close-popup-button:hover {
     background-color: #3070c0;
 }
-/* Article Info Styles end*/
-/* GPT Detector Button Styling */
+/* ===================================
+   GPT DETECTOR STYLES
+   =================================== */
+
+/* Button Styling */
 .apostrophe-check-button {
   background-color: #E63946 !important;
   border-radius: 8px !important;
@@ -2192,7 +2195,25 @@ form input[type="image"][alt="Search"] {
   font-weight: bold !important;
 }
 
-/* Text Element Highlights */
+.buttons-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.edit-article-button,
+.check-errors-button,
+.apostrophe-check-button {
+  font-size: 12px !important;
+  padding: 8px !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+}
+
+/* ===================================
+   APOSTROPHES & BASIC PUNCTUATION
+   =================================== */
+
 .gpt-apostrophe-curved {
   background-color: #ff6b6b !important;
   color: white !important;
@@ -2211,16 +2232,6 @@ form input[type="image"][alt="Search"] {
   box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
 }
 
-.gpt-en-dash {
-  background-color: #ff4757 !important;
-  color: white !important;
-  padding: 1px 3px !important;
-  border-radius: 2px !important;
-  font-weight: bold !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
-  border: 1px solid #c0392b !important;
-}
-
 .gpt-hyphen {
   background-color: #2ed573 !important;
   color: white !important;
@@ -2231,7 +2242,314 @@ form input[type="image"][alt="Search"] {
   border: 1px solid #27ae60 !important;
 }
 
-/* Data Attribute Highlights */
+.gpt-en-dash {
+  background-color: #ff4757 !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  font-weight: bold !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  border: 1px solid #c0392b !important;
+}
+
+.gpt-em-dash {
+  background-color: #e67e22 !important;
+  color: white !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: bold !important;
+  border: 1px solid #d35400 !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+}
+
+.gpt-em-dash::before {
+  content: "EM" !important;
+  font-size: 8px !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #d35400 !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+.gpt-two-em-dash {
+  background-color: #8e44ad !important;
+  color: white !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-weight: bold !important;
+  border: 2px solid #7d3c98 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+}
+
+.gpt-two-em-dash::before {
+  content: "2EM" !important;
+  font-size: 8px !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #7d3c98 !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+/* ===================================
+   SPACES (STRONG GPT INDICATORS)
+   =================================== */
+
+.gpt-narrow-nbsp {
+  background-color: #e74c3c !important;
+  color: white !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: bold !important;
+  border: 2px solid #c0392b !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+}
+
+.gpt-narrow-nbsp::before {
+  content: "NNBSP" !important;
+  font-size: 8px !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #c0392b !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+.gpt-nbsp {
+  background-color: #f39c12 !important;
+  color: white !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: bold !important;
+  border: 1px solid #e67e22 !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+}
+
+.gpt-nbsp::before {
+  content: "NBSP" !important;
+  font-size: 8px !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #e67e22 !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+.gpt-thin-space {
+  background-color: #1abc9c !important;
+  color: white !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: bold !important;
+  border: 1px solid #16a085 !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+}
+
+.gpt-thin-space::before {
+  content: "THIN" !important;
+  font-size: 8px !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #16a085 !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+.gpt-punctuation-space {
+  background-color: #9b59b6 !important;
+  color: white !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: bold !important;
+  border: 1px solid #8e44ad !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+}
+
+.gpt-punctuation-space::before {
+  content: "PUNC" !important;
+  font-size: 8px !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #8e44ad !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+.gpt-figure-space {
+  background-color: #e91e63 !important;
+  color: white !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: bold !important;
+  border: 1px solid #c2185b !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+}
+
+.gpt-figure-space::before {
+  content: "FIG" !important;
+  font-size: 8px !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #c2185b !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+.gpt-six-per-em-space {
+  background-color: #795548 !important;
+  color: white !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: bold !important;
+  border: 1px solid #5d4037 !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+}
+
+.gpt-six-per-em-space::before {
+  content: "6EM" !important;
+  font-size: 8px !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #5d4037 !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+/* ===================================
+   SUPERSCRIPTS & SPECIAL CHARACTERS
+   =================================== */
+
+.gpt-superscript-letter {
+  background-color: #e74c3c !important;
+  color: white !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: bold !important;
+  border: 2px solid #c0392b !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+}
+
+.gpt-superscript-letter::before {
+  content: "SUP" !important;
+  font-size: 7px !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #c0392b !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+.gpt-superscript-number {
+  background-color: #f39c12 !important;
+  color: white !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: bold !important;
+  border: 1px solid #e67e22 !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+}
+
+.gpt-superscript-number::before {
+  content: "SUB" !important;
+  font-size: 7px !important;
+  position: absolute !important;
+  top: -14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #e67e22 !important;
+  color: white !important;
+  padding: 1px 3px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+.gpt-object-replacement {
+  background-color: #dc143c !important;
+  color: white !important;
+  padding: 3px 6px !important;
+  border-radius: 4px !important;
+  font-weight: bold !important;
+  border: 3px solid #b22222 !important;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4) !important;
+  position: relative !important;
+}
+
+.gpt-object-replacement::before {
+  content: "OBJ" !important;
+  font-size: 8px !important;
+  position: absolute !important;
+  top: -16px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #b22222 !important;
+  color: white !important;
+  padding: 1px 4px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  font-weight: bold !important;
+}
+
+/* ===================================
+   DATA ATTRIBUTES
+   =================================== */
+
 .gpt-data-attribute {
   position: relative !important;
   border: 2px dashed #ff9ff3 !important;
@@ -2260,43 +2578,6 @@ form input[type="image"][alt="Search"] {
   box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
 }
 
-/* Button Container Styling */
-.buttons-container {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
-}
-
-.edit-article-button,
-.check-errors-button,
-.apostrophe-check-button {
-  font-size: 12px !important;
-  padding: 8px !important;
-  line-height: 1.2 !important;
-  text-align: center !important;
-}
-
-/* Animation for data attribute detection */
-@keyframes gptDetected {
-  0% { 
-    border-color: #ff9ff3; 
-    background-color: rgba(255, 159, 243, 0.1); 
-  }
-  50% { 
-    border-color: #ff6b6b; 
-    background-color: rgba(255, 107, 107, 0.2); 
-  }
-  100% { 
-    border-color: #ff9ff3; 
-    background-color: rgba(255, 159, 243, 0.1); 
-  }
-}
-
-.gpt-data-attribute {
-  animation: gptDetected 2s ease-in-out infinite !important;
-}
-
-/* Tooltip-like styling for better visibility */
 .gpt-data-indicator:hover::after {
   content: attr(title) !important;
   position: absolute !important;
@@ -2313,5 +2594,84 @@ form input[type="image"][alt="Search"] {
   word-wrap: break-word !important;
   width: max-content !important;
   min-width: 150px !important;
+}
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+@keyframes urgent-gpt {
+  0% { 
+    border-color: #dc143c;
+    transform: scale(1);
+  }
+  25% { 
+    border-color: #ff0000;
+    transform: scale(1.05);
+  }
+  50% { 
+    border-color: #dc143c;
+    transform: scale(1.1);
+  }
+  75% { 
+    border-color: #ff0000;
+    transform: scale(1.05);
+  }
+  100% { 
+    border-color: #dc143c;
+    transform: scale(1);
+  }
+}
+
+@keyframes spaceDetected {
+  0% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes gptDetected {
+  0% { 
+    border-color: #ff9ff3; 
+    background-color: rgba(255, 159, 243, 0.1); 
+  }
+  50% { 
+    border-color: #ff6b6b; 
+    background-color: rgba(255, 107, 107, 0.2); 
+  }
+  100% { 
+    border-color: #ff9ff3; 
+    background-color: rgba(255, 159, 243, 0.1); 
+  }
+}
+
+/* Animation Assignments */
+.gpt-narrow-nbsp,
+.gpt-object-replacement,
+.gpt-superscript-letter,
+.gpt-two-em-dash {
+  animation: urgent-gpt 2s ease-in-out infinite !important;
+}
+
+.gpt-nbsp,
+.gpt-thin-space,
+.gpt-punctuation-space,
+.gpt-figure-space,
+.gpt-six-per-em-space,
+.gpt-em-dash,
+.gpt-superscript-number {
+  animation: spaceDetected 1.5s ease-in-out !important;
+}
+
+.gpt-data-attribute {
+  animation: gptDetected 2s ease-in-out infinite !important;
 }
 }
