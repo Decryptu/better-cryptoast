@@ -2215,7 +2215,7 @@ form input[type="image"][alt="Search"] {
    =================================== */
 
 .gpt-apostrophe-curved {
-  background-color: #ff6b6b !important;
+  background-color: #e67e22 !important;
   color: white !important;
   padding: 1px 2px !important;
   border-radius: 2px !important;
@@ -2243,22 +2243,22 @@ form input[type="image"][alt="Search"] {
 }
 
 .gpt-en-dash {
-  background-color: #ff4757 !important;
+  background-color: #e67e22 !important;
   color: white !important;
   padding: 1px 3px !important;
   border-radius: 2px !important;
   font-weight: bold !important;
   box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
-  border: 1px solid #c0392b !important;
+  border: 1px solid #d35400 !important;
 }
 
 .gpt-em-dash {
-  background-color: #e67e22 !important;
+  background-color: #ff4757 !important;
   color: white !important;
   padding: 2px 4px !important;
   border-radius: 3px !important;
   font-weight: bold !important;
-  border: 1px solid #d35400 !important;
+  border: 1px solid #c0392b !important;
   box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
   position: relative !important;
 }
@@ -2270,7 +2270,7 @@ form input[type="image"][alt="Search"] {
   top: -14px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  background-color: #d35400 !important;
+  background-color: #c0392b !important;
   color: white !important;
   padding: 1px 3px !important;
   border-radius: 2px !important;
