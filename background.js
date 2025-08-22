@@ -98,12 +98,12 @@ async function checkErrors(tabId) {
   2. Montre le texte ou passage concerné.
   3. Donne une brève explication de l'erreur.
   
-  Retourne uniquement la liste des erreurs en utilisant du code HTML valide, sans inclure les balises de code ou les délimiteurs de bloc comme \`\`\`html\`. Si tu ne trouves aucune faute, tu réponds "Tout semble ok.".
+  Retourne uniquement la liste des erreurs en utilisant du code HTML valide, sans inclure les balises de code ou les délimiteurs de bloc comme \`\`\`html\`. Si tu ne trouves aucune faute, tu réponds "Tout semble ok". Ne fais aucun commentaire sur les passages qui n'ont pas de problèmes, ne parle pas pour ne rien dire, tu ne parles que si tu trouves quelque chose qui doit être modifié. Et focus seulement sur les vrais erreurs, pas sur des suggestions ou des choses mineurs, on recherche de vrais erreurs. Fais vite.".
   
   Voici l'article : ${cleanedContent}`;
 
   const requestBody = {
-    model: "gpt-4.1",
+    model: "gpt-5-mini",
     messages: [
       { role: "system", content: "Tu es un correcteur de Français." },
       { role: "user", content: prompt }
