@@ -103,7 +103,7 @@ async function checkErrors(tabId) {
   Voici l'article : ${cleanedContent}`;
 
   const requestBody = {
-    model: "gpt-5-mini",
+    model: "gpt-4o",
     messages: [
       { role: "system", content: "Tu es un correcteur de Français." },
       { role: "user", content: prompt }
